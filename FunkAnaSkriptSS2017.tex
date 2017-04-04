@@ -1,27 +1,32 @@
-\documentclass[ngerman]{article}
-\usepackage{scrlayer-scrpage}
+\documentclass[ngerman]{report}
+%pdf language settings
 \usepackage[german]{babel}
-\usepackage{amsmath}
-\usepackage{amssymb}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} %provides a better way for westeuropean characters and such 
+\setlength{\parindent}{0cm} %noindent for all paragraphs
+%pdf page settings
+\usepackage[a4paper,top=30mm,bottom=40mm,inner=25mm,outer=35mm]{geometry} 
+\usepackage{scrlayer-scrpage} %Headers and footers
+%math environments
+\usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{amsfonts}
 \usepackage{amsmath}
-\usepackage{centernot}
-\usepackage{marvosym}
-\usepackage{paralist}
-\usepackage{amsthm}
-
-\usepackage[nothm]{thmbox}
-
+\usepackage[nothm]{thmbox} %Decorate theorem statements
+%more features for environments and other stuff
+\usepackage{centernot} %nicer looking not
+\usepackage{marvosym} %some symbols
+\usepackage{paralist} %Adds more function to listing environments
+%Headers and Footnotes
 \pagestyle{headings}
+\ihead{Funktionalanalysis - Vorlesungsmitschrift}
 
+%mathematical environments
 \newtheorem{definition}[section]{Definition}
 \newtheorem{bem}[section]{Bemerkung}
 \newtheorem{bsp}[section]{Beispiel}
 
-\ihead{Funktionalanalysis - Vorlesungsmitschrift}
-
+%mathematical Macros
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
@@ -29,14 +34,10 @@
 
 \newcommand{\hA}{\mathfrak{A}}
 \newcommand{\hL}{\mathcal{L}}
-%\renewcommand{\def}[2]{\begin{definition}[#1]#2\end{definition}}
-
-
-%\newcommand{\limfty}{\underset{n\rightarrow\infty \; }{\lim}}
 
 \begin{document}
 
-\section{Grundlagen}
+\chapter{Grundlagen}
 \textbf{Bekannt aus Analysis I-III}
 \begin{enumerate}[-]
 \item 
