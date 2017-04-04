@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc} %provides a better way for westeuropean characters and such 
 \setlength{\parindent}{0cm} %noindent for all paragraphs
+%Alternativ: \parindent0pt?
 %pdf page settings
 \usepackage[a4paper,top=30mm,bottom=40mm,inner=25mm,outer=35mm]{geometry} 
 \usepackage{scrlayer-scrpage} %Headers and footers
@@ -22,18 +23,23 @@
 \ihead{Funktionalanalysis - Vorlesungsmitschrift}
 
 %mathematical environments
+\theoremstyle{definition}%Lässt den Text innerhalb nicht mehr kursiv erscheinen
 \newtheorem{definition}[section]{Definition}
 \newtheorem{bem}[section]{Bemerkung}
 \newtheorem{bsp}[section]{Beispiel}
 
 %mathematical Macros
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\N}{\mathbb{N}}
 \newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\K}{\mathbb{K}}
 
 \newcommand{\hA}{\mathfrak{A}}
 \newcommand{\hL}{\mathcal{L}}
+\newcommand{\nL}{\text{L}}
+\newcommand{\ess}{\text{ess}}
 
 \begin{document}
 
@@ -69,25 +75,40 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 \item 
 $N:=\{x\in X: |||x|||=0$ bildet einen Unterraum von $X$.
 \item 
-$X/N$ ist normierter Raum über $||x+N|| := |||x|||$
+$X/N$ ist ein normierter Raum über(?) $||x+N|| := |||x|||$
 \item 
-X ist vollständiger seminormierter Raum $\Rightarrow$ $X/N$ ist ein Banachraum 
+X ist ein vollständiger seminormierter Raum $\Rightarrow$ $X/N$ ist ein Banachraum 
 \end{enumerate}
 \end{bem}
 
 \begin{bsp}[wichtige Vektorräume]
 Sei $(\Omega,\hA,\mu)$ ein Maßraum
 \begin{enumerate}[(a)]
-\item $\hL^p(\Omega,\mu) = \{f:\Omega \rightarrow \C$ messbar, $\int_\Omega |f|^p d\mu < \infty \}$ ist ein seminormierter Raum mit $|||f|||_p := (\int_\Omega |f|^p d\mu )^{\frac{1}{p}}$
+\item $p\in[1,\infty)\; \hL^p(\Omega,\mu) = \{f:\Omega \rightarrow \C$ messbar, $\int_\Omega |f|^p d\mu < \infty \}$ ist ein seminormierter Raum mit $|||f|||_p := (\int_\Omega |f|^p d\mu )^{\frac{1}{p}}$.\\
+$\text{L}^p(\Omega,\mu)$ ist ein vollständiger normierter Raum ($\nearrow$ Ana III).
 
+\item $\hL^\infty(\Omega,\mu) := \{f:\Omega \rightarrow \C \text{ messbar und essentiell beschränkt} \}$ ist ebenfalls seminormiert mit $|||f|||_\infty := \underset{x\in\Omega}{\ess \sup} |f(x)|$.\\
+$\text{L}^\infty(\Omega,\mu)$ ist ein vollständiger normierter Raum.
+
+\item $p\in [1,\infty],\, |\cdot|$ sei Zählmaß auf $\N$ und der Maßraum sei gegeben durch $(\N, P(\N), |\cdot|)$.\\
+$\ell^p := \hL^p(\N, |\cdot|)$ heißt Folgenraum und ist ein normierter unendlichdimensionaler Raum.
+
+\item $\Omega \subseteq \R$ messbar, $\lambda^n$ Lebesgue-Maß auf $\R^n$. $\nL^p(\Omega) :=
+\nL^p(\Omega,\lambda^n)$ heißt Lebesgue-Raum.
+
+\item Sei $(\Omega, \tau)$ ein topologischer Raum. $BC(\Omega) := \{ f: \Omega \rightarrow \C\;|\;f \text{ stetig und beschränkt} \}$ versehen mit der Suprenumsnorm ist ein Banachraum.
 \end{enumerate}
 \end{bsp}
 
 
 \section*{Etwaige Begriffe}
 \begin{enumerate}
-\item
-\textbf{Hausdorfsch, Hausdorffeigenschaft} -  Joa... Kugeln und so.
+\item \textbf{Hausdorfsch, Hausdorffeigenschaft} -  Joa... Kugeln und so.
+\item \textbf{essentiell beschränkt} - Eine Funktion $f: \Omega \rightarrow \R$ heißt essentiell beschränkt, falls 
+$$\underset{x\in\Omega}{\ess \sup} |f(x)| := \underset{{\mu(N) = 0}}{ \inf_{N \in \hA} }  \sup_{x\in \Omega\backslash N} < \infty$$
+oder auch: f ist fast überall beschränkt. Ein Beispiel ist $f(x) : = x\cdot \chi_\Q(x)$ und $\mu = \lambda$, da $f$ nur auf $\Q$ nicht null ist, und $\Q$ ist Lesbesgue-Nullmenge. 
+\item \textbf{topologischer Raum} $(X,\tau)$ - Ein Raum, dessen offene Mengen durch $\tau$ gegeben sind, wobei die offenen Mengen die bekannten Eigenschaften behalten sollen.
+
 
 \end{enumerate}
 
