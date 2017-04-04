@@ -1,30 +1,94 @@
-\documentclass[ngerman]{report}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{babel}
-\usepackage[babel,german=guillemets]{csquotes}
-\usepackage[a4paper,top=30mm,bottom=40mm,inner=25mm,outer=35mm]{geometry}
-\usepackage{graphicx}
-\usepackage{layout}
-\usepackage{color}
+\documentclass[ngerman]{article}
+\usepackage{scrlayer-scrpage}
+\usepackage[german]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
-\usepackage{multicol}
-\usepackage{tikz}
-\usepackage{tikz-qtree}
-\usetikzlibrary{trees}
-\usepackage{multirow}
-\usepackage{array}
-\usepackage{pdfpages}
-\usepackage{longtable}
-\usepackage{hyperref}
-\usepackage{paralist}
-\usepackage{units}
-\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
 \usepackage{amsthm}
-\usepackage[retainorgcmds]{IEEEtrantools}
-\usepackage{tikz}
-\newcommand{\mtwos}[1]{\begin{displaymath} #1 \end{displaymath}}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{centernot}
+\usepackage{marvosym}
+\usepackage{paralist}
+\usepackage{amsthm}
+
+\usepackage[nothm]{thmbox}
+
+\pagestyle{headings}
+
+\newtheorem{definition}[section]{Definition}
+\newtheorem{bem}[section]{Bemerkung}
+\newtheorem{bsp}[section]{Beispiel}
+
+\ihead{Funktionalanalysis - Vorlesungsmitschrift}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+
+\newcommand{\hA}{\mathfrak{A}}
+\newcommand{\hL}{\mathcal{L}}
+%\renewcommand{\def}[2]{\begin{definition}[#1]#2\end{definition}}
+
+
+%\newcommand{\limfty}{\underset{n\rightarrow\infty \; }{\lim}}
 
 \begin{document}
+
+\section{Grundlagen}
+\textbf{Bekannt aus Analysis I-III}
+\begin{enumerate}[-]
+\item 
+Banachraum: vollständiger normierter Vektorraum (wir schreiben $(X, ||\cdot ||_X$)
+
+\item 
+Hilbertraum: vollständiger Skalarproduktvektorraum mit $||\cdot || = \sqrt{(\cdot , \cdot )_X}$
+\item
+Cauchy-Folge: $(x_n),\,  \forall \epsilon > 0\; \exists n \in \N : \forall m \geq n : ||x_m-x_n||<\epsilon$
+\item 
+vollständiger metrischer Raum, Topologie.
+\end{enumerate}
+
+\begin{definition}[Halbnorm, Seminorm]
+Sei $X$ ein $\K-Vektorraum$, wobei $\K = \R$ oder $\K = \C$. 
+Für $x,y\in X$, $\lambda \in \K$ ist eine Halbnorm oder Seminorm eine Abbildung
+$|||\cdot |||:X \rightarrow \R$, die die folgenden Eigenschaften erfüllt:
+\begin{enumerate}[(i)]
+\item $|||x|||\geq 0$
+\item $|||\lambda x||| = |\lambda|\cdot |||x|||$
+\item $|||x+y||| \leq |||x||| + |||y|||$
+\end{enumerate}
+\end{definition}
+
+Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet, wenn das Argument verschwindet.
+
+\begin{bem}
+\begin{enumerate}[(a)]
+\item 
+$N:=\{x\in X: |||x|||=0$ bildet einen Unterraum von $X$.
+\item 
+$X/N$ ist normierter Raum über $||x+N|| := |||x|||$
+\item 
+X ist vollständiger seminormierter Raum $\Rightarrow$ $X/N$ ist ein Banachraum 
+\end{enumerate}
+\end{bem}
+
+\begin{bsp}[wichtige Vektorräume]
+Sei $(\Omega,\hA,\mu)$ ein Maßraum
+\begin{enumerate}[(a)]
+\item $\hL^p(\Omega,\mu) = \{f:\Omega \rightarrow \C$ messbar, $\int_\Omega |f|^p d\mu < \infty \}$ ist ein seminormierter Raum mit $|||f|||_p := (\int_\Omega |f|^p d\mu )^{\frac{1}{p}}$
+
+\end{enumerate}
+\end{bsp}
+
+
+\section*{Etwaige Begriffe}
+\begin{enumerate}
+\item
+\textbf{Hausdorfsch, Hausdorffeigenschaft} -  Joa... Kugeln und so.
+
+\end{enumerate}
+
+
 \end{document}
