@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc} %provides a better way for westeuropean characters and such 
 \setlength{\parindent}{0cm} %noindent for all paragraphs
-	%%Alternativ: \parindent0pt? %DS: geht dann glaube ich nicht für ganze Dokument
+
 %pdf page settings
 \usepackage[a4paper,top=30mm,bottom=40mm,inner=25mm,outer=35mm]{geometry} 
 \usepackage{scrlayer-scrpage} %Headers and footers
@@ -22,11 +22,29 @@
 \pagestyle{headings}
 \ihead{Funktionalanalysis - Vorlesungsmitschrift}
 
+
+\newtheoremstyle{myStyle}% style, der die Überschrift nicht fett, sondern kursiv erscheinen lässt
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\normalfont}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\itshape}% name of head font
+  {.}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+  
 %mathematical environments
 \theoremstyle{definition}%Lässt den Text innerhalb nicht mehr kursiv erscheinen
 \newtheorem{definition}[section]{Definition}
-\newtheorem{bem}[section]{Bemerkung}
 \newtheorem{bsp}[section]{Beispiel}
+
+\theoremstyle{myStyle}
+\newtheorem{bem}[section]{Bemerkung}
+
+\theoremstyle{plain}%Text innen wird kursiv
+\newtheorem{thm}[subsection]{Satz}
+\newtheorem{lemma}[subsection]{Lemma}
+\newtheorem{cor}[subsection]{Korollar}
 
 %mathematical Macros
 \newcommand{\C}{\mathbb{C}}
@@ -36,13 +54,13 @@
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\K}{\mathbb{K}}
 
-\newcommand{\hA}{\mathfrak{A}}
+\newcommand{\hA}{\mathfrak{A}}%Script A , hA ~ hässliches A
 \newcommand{\hL}{\mathcal{L}}
 \newcommand{\tT}{\mathcal{T}} %topologisches T
-\newcommand{\nL}{\text{L}}
-\newcommand{\ess}{\text{ess}}
+\newcommand{\ess}{\textnormal{ess}}
+\newcommand{\supp}{\textnormal{supp}}
  
-\newcommand{\seminorm}[1]{|\hspace{-0.05em}|\hspace{-0.05em}| #1 |\hspace{-0.05em}|\hspace{-0.05em}|}
+\newcommand{\seminorm}[1]{||| #1 |||}
 \newcommand{\norm}[1]{\|#1\|}
 
 \begin{document}
@@ -53,12 +71,13 @@
 
 \begin{enumerate}[-]
 	\item Banachraum: vollständiger normierter Vektorraum (wir schreiben $(X,\norm{\cdot }_X$) 
-	\item Hilbertraum: vollständiger Skalarproduktvektorraum mit $\norm{\cdot } = \sqrt{(\cdot , \cdot )_X}$ 
+	\item Hilbertraum: vollständiger Skalarproduktvektorraum mit $\norm{\cdot } = \sqrt{(\cdot , \cdot )_X}$.  Wobei $(\cdot , \cdot )$ das Skalarprodukt bezeichnet.
 	\item Cauchy-Folge: 
 					$(x_n),\,  \forall \epsilon > 0\; \exists n \in \N : \forall m \geq n : \norm{x_m-x_n}<\epsilon$
 	\item vollständiger metrischer Raum, Topologie.
 \end{enumerate}
 
+%Definition der Seminorm
 \begin{definition}[Halbnorm, Seminorm]
 
 	Sei $X$ ein $\K-Vektorraum$, wobei $\K = \R$ oder $\K = \C$. 
@@ -70,38 +89,39 @@
 			\item $\seminorm{\lambda x} = |\lambda|\cdot \seminorm{x}$
 			\item $\seminorm{x+y} \leq \seminorm{x} + \seminorm{y}$
 		\end{enumerate}
-
 \end{definition}
 
 Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet, wenn das Argument verschwindet.
 
+%Der Kern einer Seminorm bildet einen Unterraum
 \begin{bem}
 	\begin{enumerate}[(a)]
-		\item $N:=\{x\in X: \seminorm{x}=0$ bildet einen Unterraum von $X$.
+		\item $N:=\{x\in X: \seminorm{x}=0\}$ bildet einen Unterraum von $X$.
 		\item $X/N$ ist ein normierter Raum über(?) $\norm{x+N} := \seminorm{x}$
 		\item X ist ein vollständiger seminormierter Raum $\Rightarrow$ $X/N$ ist ein Banachraum 
 	\end{enumerate}
 \end{bem}
 
+%Beispiele wichtiger Vektorräume
 \begin{bsp}[wichtige Vektorräume]
 	Sei $(\Omega,\hA,\mu)$ ein Maßraum
 		\begin{enumerate}[(a)]
 			\item $p\in[1,\infty)\; \hL^p(\Omega,\mu) = \{f:\Omega \rightarrow \C$ messbar, 
 						$\int_\Omega |f|^p d\mu < \infty \}$ ist ein seminormierter Raum mit 
 						$\seminorm{f}_p := (\int_\Omega |f|^p d\mu )^{\frac{1}{p}}$.\\
-						$\text{L}^p(\Omega,\mu)$ ist ein vollständiger normierter Raum ($\nearrow$ Ana III).
+						$L^p(\Omega,\mu)$ ist ein vollständiger normierter Raum ($\nearrow$ Ana III).
 
 			\item $\hL^\infty(\Omega,\mu) := \{f:\Omega \rightarrow \C 
 						\text{ messbar und essentiell beschränkt} \}$ ist ebenfalls seminormiert mit 
 						$\seminorm{f}_\infty := \underset{x\in\Omega}{\ess \sup} |f(x)|$.\\
-						$\text{L}^\infty(\Omega,\mu)$ ist ein vollständiger normierter Raum.
+						$L^\infty(\Omega,\mu)$ ist ein vollständiger normierter Raum.
 
-			\item $p\in [1,\infty],\, |\cdot|$ sei Zählmaß auf $\N$ und der Maßraum sei gegeben durch 
+			\item $p\in [1,\infty],\, |\cdot|$ sei das Zählmaß auf $\N$ und der Maßraum sei gegeben durch 
 						$(\N, P(\N), |\cdot|)$.\\
 						$\ell^p := \hL^p(\N, |\cdot|)$ heißt Folgenraum und ist ein normierter unendlichdimensionaler Raum.
 
 			\item $\Omega \subseteq \R$ messbar, $\lambda^n$ Lebesgue-Maß auf $\R^n$.
-						$\nL^p(\Omega) := \nL^p(\Omega,\lambda^n)$ heißt Lebesgue-Raum.
+						$L^p(\Omega) := L^p(\Omega,\lambda^n)$ heißt Lebesgue-Raum.
 
 			\item Sei $(\Omega, \tT)$ ein topologischer Raum. 
 						$BC(\Omega) := \{ f: \Omega \rightarrow \C\;|\;f 
@@ -110,10 +130,42 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 
 \end{bsp}
 
+%Trivia Fakten
+\begin{bem}[diverse Fakten]
+	Seien $p,q,r\in [1,\infty)$
+	\begin{enumerate}[(a)]
+		\item $L^p(\Omega,\mu)$ ist ein Banachraum, $L^2(\Omega,\mu)$ ist ein Hilbertraum mit $(f,g)_2 := \int_\Omega f \overline{g} d\mu$
+		
+		\item Falls $\mu(\Omega) < \infty,\, p\geq r \Rightarrow\; L^p(\Omega,\mu)\subseteq L^r(\Omega,\mu)$
+		
+		\item Wenn $p\geq r\Rightarrow\; L^p(\Omega,\mu)\cap L^\infty(\Omega,\mu)\subseteq L^p(\Omega,\mu)$
+		
+		\item $\frac{1}{p}+\frac{1}{q}=1,\,f\in L^p(\Omega,\mu),\,g\in L^q(\Omega,\mu)\Rightarrow\;fg\in 		 L^1(\Omega,\mu)$ mit $\norm{fg}_1\leq\norm{f}_p\norm{g}_q$ (Hölder-Ungleichung). Dies gilt auch für $p=1, q=\infty$ wobei \underline{hier} $\frac{1}{\infty}:=0$.
+		
+		\item Sei $\Omega\subseteq \R^n$ ein Gebiet. $C^k_0:=\{f:\Omega \rightarrow \C\,|\, \supp f$ kompakt und $f\in C^k(\Omega,\C)\}$ ist dicht in $L^p(\Omega)\;\forall p\in[1,\infty)$. Dies gilt nicht für $p=\infty$, da $f=\textnormal{const}$ oder $f=sign$ sich nicht durch Funktionen aus $C^k_0$ approximieren lassen.
+		
+		\item $BC(\Omega)$ ist bzgl. Folgenbildung abgeschlossen in $L^\infty (\Omega)$, aber nicht in $L^p(\Omega)$ für $p<\infty$.
+	\end{enumerate}
+\end{bem}
+
+
+
+\chapter{Lineare Operatoren}%Im Skript ist Lineare Operatoren nur I.2 und kein eigenes Kapitel?
+
+%Definition linearer Operator
+\begin{definition}[linearer Operator]
+	Seien $X,Y\; \K-$Vektorräume. Eine Abbildung $T:X\rightarrow Y$ heißt \textit{linearer Operator} wenn $$T(\lambda x+\mu y) = \lambda T(x) + \mu T(y)\;\forall \lambda,\mu \in \K,\,x,y\in X$$ wir schreiben $Tx$ statt $T(x)$.\\
+	Wenn $Y=\K$ dann heißt ein linearer Operator $T:X\rightarrow \K$\textit{ Funktional}.\\
+	Wenn $X,Y$ normierte $\K-$Vektorräume sind, heißt ein linearer Operator $T$ \textit{beschränkt}, wenn $T(U_1(0)) \subseteq Y$ beschränkt ist.
+\end{definition}
+
+
+
+
 
 \section*{Etwaige Begriffe}
 	\begin{enumerate}
-		\item \textbf{Hausdorfsch, Hausdorffeigenschaft} -  Joa... Kugeln und so.
+		\item \textbf{Hausdorffsch, Hausdorffeigenschaft} - Eine Menge heißt \textit{hausdorffsch}, wenn je zwei versch. Punkte stets disjunkte Umgebungen haben. Metrische Räume sind zum Beispiel hausdorffsch, da zwei versch. Punkte stets einen Abstand $> 0$ haben.
 
 		\item \textbf{essentiell beschränkt} - 
 					Eine Funktion $f: \Omega \rightarrow \R$ heißt essentiell beschränkt, falls 
@@ -126,3 +178,4 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 	\end{enumerate} 
 
 \end{document}
+%TODO: -Layout. -Eigene Kommentare innerhalb des Skripts?
