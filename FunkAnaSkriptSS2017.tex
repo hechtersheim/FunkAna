@@ -34,17 +34,19 @@
   {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
   
 %mathematical environments
+\theoremstyle{plain}%Text innen wird kursiv
+\newtheorem{thm}{Satz}[chapter]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{cor}[thm]{Korollar}
+
 \theoremstyle{definition}%Lässt den Text innerhalb nicht mehr kursiv erscheinen
-\newtheorem{definition}[section]{Definition}
-\newtheorem{bsp}[section]{Beispiel}
+\newtheorem{definition}[thm]{Definition}
+\newtheorem{bsp}[thm]{Beispiel}
 
 \theoremstyle{myStyle}
-\newtheorem{bem}[section]{Bemerkung}
+\newtheorem{bem}[thm]{Bemerkung}
 
-\theoremstyle{plain}%Text innen wird kursiv
-\newtheorem{thm}[subsection]{Satz}
-\newtheorem{lemma}[subsection]{Lemma}
-\newtheorem{cor}[subsection]{Korollar}
+%\renewcommand\thechapter{\Roman{chapter}}
 
 %mathematical Macros
 \newcommand{\C}{\mathbb{C}}
@@ -73,7 +75,8 @@
 \newcommand{\limes}[1][\infty]{\lim_{n \to #1}}
 
 \begin{document}
-\chapter{Grundlagen}
+\chapter{Funktionalanalysis}
+\section{Grundlagen}
 
 \paragraph{Bekannt aus Analysis I-III}
 
@@ -158,7 +161,7 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 
 
 
-\chapter{Lineare Operatoren}%Im Skript ist Lineare Operatoren nur I.2 und kein eigenes Kapitel?
+\section{Lineare Operatoren}%Im Skript ist Lineare Operatoren nur I.2 und kein eigenes Kapitel?
 
 %Definition linearer Operator
 	\begin{definition}[linearer Operator]
@@ -224,6 +227,9 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 		\end{itemize}
 	\end{proof}
 
+	\begin{bem}
+		
+	\end{bem}					
 \section*{Etwaige Begriffe}
 	\begin{enumerate}
 		\item \textbf{Hausdorffsch, Hausdorffeigenschaft} - Eine Menge heißt \textit{hausdorffsch}, wenn je zwei versch. Punkte stets disjunkte Umgebungen haben. Metrische Räume sind zum Beispiel hausdorffsch, da zwei versch. Punkte stets einen Abstand $> 0$ haben.
