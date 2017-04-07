@@ -64,7 +64,6 @@
 \newcommand{\norm}[1]{\|#1\|}
 
 \begin{document}
-%Test
 \chapter{Grundlagen}
 
 \paragraph{Bekannt aus Analysis I-III}
@@ -170,7 +169,7 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 		\item \textbf{essentiell beschränkt} - 
 					Eine Funktion $f: \Omega \rightarrow \R$ heißt essentiell beschränkt, falls 
 					$$\underset{x\in\Omega}{\ess \sup} |f(x)| := \underset{{\mu(N) = 0}}{ \inf_{N \in \hA} }  
-					\sup_{x\in \Omega\backslash N} < \infty$$
+					\sup_{x\in \Omega\backslash N} |f(x)| < \infty$$
 					oder auch: f ist fast überall beschränkt. 
 					Ein Beispiel ist $f(x) : = x\cdot \chi_\Q(x)$ und $\mu = \lambda$, da $f$ nur auf $\Q$ nicht null ist, und $\Q$ ist Lesbesgue-Nullmenge. 
 
@@ -179,5 +178,3 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 %Dies ist eine Testzeile
 \end{document}
 %TODO: -Layout. -Eigene Kommentare innerhalb des Skripts?
-
-%noch ein Test
