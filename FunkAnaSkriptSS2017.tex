@@ -49,7 +49,7 @@
 %mathematical Macros
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
-\newcommand{\pR}{\mathbb{R}_{\leq 0}} % R_0^+
+\newcommand{\pR}{\mathbb{R}_{\leq 0}} % R_0^+% muss das nicht \geq heißen?
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
@@ -167,13 +167,15 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 		wir schreiben $Tx$ statt $T(x)$.\\
 		Wenn $Y=\K$ dann heißt ein linearer Operator $T:X\rightarrow \K$\textit{ Funktional}.\\
 		Wenn $X,Y$ normierte $\K-$Vektorräume sind, heißt ein linearer Operator $T$ \textit{beschränkt}, wenn $T(U_1(0)) \subseteq Y$ beschränkt ist. 
-		$(\Leftrightarrow: \exists M \in \pR$, so dass $\norm{Tx}_Y \leq M$ $\forall x\in X$ mit $\norm{x}_X < 1$)
+		$(\Leftrightarrow \exists M \in \pR$, so dass $\norm{Tx}_Y \leq M$ $\forall x\in X$ mit $\norm{x}_X < 1$)
 	\end{definition}
+Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem beschränkten linearen Operator $T$ beschränkt sind. Denn $\exists R>0: M \subseteq  U_R(0)$, sodass $T(M) \subseteq T(U_R(0))=T(R\cdot U_1(0))=R\cdot T(U_1(0))$, und dies ist beschränkt.
 
 	\begin{bsp}
 		\begin{enumerate}[a)]
-			\item $X = \K^n$, $Y = \K^m$, $\{T: X\to Y: T \text{ linearer Operator}\} = \K^{n \times n}$
-			(beschränkt?)
+			\item $X = \K^n$, $Y = \K^m$, $\{T: X\to Y: T \text{ linearer Operator}\} = \K^{m \times n}.\; T\in\K^{n \times m}$ ist beschränkt. 
+			%(Betrachtung nur für den Fall $\K\in\{\R,\C\}$) Wir stellen fest: 
+			$$\norm{T}_\infty = \max_{1\leq i \leq m} \sum^n_{j=1} |t_{ij}| < \infty,\; t_{ij} \text{ sind die Einträge der Matrix }T.$$ Da auf einem endlichdimensionalen Vektorraum alle Normen äquivalent sind, ist T beschränkt.
 			\item $T: \lL{1} \to \K, \; Tf := \intl{f}.$ 
 				Es gilt $|Tf| = |\intl{f}| \leq \intl{|f|} = \norm{f}_1.$
 				Also $|Tf| < 1 \; \forall f \in \lL{1}: \norm{f}_1 < 1 \df T$ beschränkt
