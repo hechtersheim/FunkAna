@@ -230,7 +230,8 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 
 		\item \textbf{essentiell beschränkt} - 
 					Eine Funktion $f: \Omega \rightarrow \R$ heißt essentiell beschränkt, falls 
-					$$\underset{x\in\Omega}{\ess \sup} |f(x)| := \underset{{\mu(N) = 0}}{ \inf_{N \in \hA} }  
+					%$$\underset{x\in\Omega}{\ess \sup} |f(x)| := \underset{{\mu(N) = 0}}{ \inf_{N \in \hA} } % großes \mu (N) = 0
+					$$\underset{x\in\Omega}{\ess \sup} |f(x)| := {\inf_{\underset{\mu(N) = 0}{N \in \hA}} }
 					\sup_{x\in \Omega\backslash N} |f(x)| < \infty$$
 					oder auch: f ist fast überall beschränkt. 
 					Ein Beispiel ist $f(x) : = x\cdot \chi_\Q(x)$ und $\mu = \lambda$, da $f$ nur auf $\Q$ nicht null ist, und $\Q$ ist Lesbesgue-Nullmenge. 
