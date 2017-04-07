@@ -49,6 +49,7 @@
 %mathematical Macros
 \newcommand{\C}{\mathbb{C}}
 \newcommand{\R}{\mathbb{R}}
+\newcommand{\pR}{\mathbb{R}_{\leq 0}} % R_0^+
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\N}{\mathbb{N}}
@@ -57,11 +58,19 @@
 \newcommand{\hA}{\mathfrak{A}}%Script A , hA ~ hässliches A
 \newcommand{\hL}{\mathcal{L}}
 \newcommand{\tT}{\mathcal{T}} %topologisches T
+\newcommand{\lL}[2][\Omega,\mu]{\text{L}^{#2}(#1)} %Lebesgue L für Matheumgebgung mit Omega, mu als Standard \lL[Raum,Maß]{Dimension}
 \newcommand{\ess}{\textnormal{ess}}
 \newcommand{\supp}{\textnormal{supp}}
  
 \newcommand{\seminorm}[1]{||| #1 |||}
 \newcommand{\norm}[1]{\|#1\|}
+\newcommand{\intl}[1]{\int_\Omega #1 d\mu} %"Standard"Lebesgue-Integral über Omega
+\newcommand{\df}{\Rightarrow} % "daraus folgt", also Implikation
+
+\newcommand{\aq}{\Leftarrow} % "äquivalent zu", also Äquivalenz
+\newcommand{\U}[2][1]{U_{#1}(#2)} %Umgebung um #2 mit Abstand #1 \U{r}{a}
+\newcommand{\EK}{\U{0}} %Umgebung bzw Einheitskugel um 0
+\newcommand{\limes}[1][\infty]{\lim_{n \to #1}}
 
 \begin{document}
 \chapter{Grundlagen}
@@ -152,15 +161,68 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 \chapter{Lineare Operatoren}%Im Skript ist Lineare Operatoren nur I.2 und kein eigenes Kapitel?
 
 %Definition linearer Operator
-\begin{definition}[linearer Operator]
-	Seien $X,Y\; \K-$Vektorräume. Eine Abbildung $T:X\rightarrow Y$ heißt \textit{linearer Operator} wenn $$T(\lambda x+\mu y) = \lambda T(x) + \mu T(y)\;\forall \lambda,\mu \in \K,\,x,y\in X$$ wir schreiben $Tx$ statt $T(x)$.\\
-	Wenn $Y=\K$ dann heißt ein linearer Operator $T:X\rightarrow \K$\textit{ Funktional}.\\
-	Wenn $X,Y$ normierte $\K-$Vektorräume sind, heißt ein linearer Operator $T$ \textit{beschränkt}, wenn $T(U_1(0)) \subseteq Y$ beschränkt ist.
-\end{definition}
+	\begin{definition}[linearer Operator]
+		Seien $X,Y\; \K-$Vektorräume. Eine Abbildung $T:X\rightarrow Y$ heißt \textit{linearer Operator} wenn 
+		$$T(\lambda x+\mu y) = \lambda T(x) + \mu T(y)\;\forall \lambda,\mu \in \K,\,x,y\in X$$ 
+		wir schreiben $Tx$ statt $T(x)$.\\
+		Wenn $Y=\K$ dann heißt ein linearer Operator $T:X\rightarrow \K$\textit{ Funktional}.\\
+		Wenn $X,Y$ normierte $\K-$Vektorräume sind, heißt ein linearer Operator $T$ \textit{beschränkt}, wenn $T(U_1(0)) \subseteq Y$ beschränkt ist. 
+		$(\Leftrightarrow: \exists M \in \pR$, so dass $\norm{Tx}_Y \subset M$ $\forall x\in X$ mit $\norm{x}_X < 1$)
+	\end{definition}
 
+	\begin{bsp}
+		\begin{enumerate}[a)]
+			\item $X = \K^n$, $Y = \K^m$, $\{T: X\to Y: T \text{ linearer Operator}\} = \K^{n \times n}$
+			(beschränkt?)
+			\item $T: \lL{1} \to \K, \; Tf = \intl{f}.$ 
+				Es gilt $|Tf| = |\intl{f}| \leq \intl{|f|} = \norm{f}_1.$
+				Also $|Tf| < 1 \; \forall f \in \lL{1}: \norm{f}_1 < 1 \df T$ beschränkt
+		\end{enumerate}
+	\end{bsp}
 
+	\begin{thm}
+		$X,Y$ normierte Räume. $T: X\to Y$ lineare Operator. Dann sind äquivalent:
+			\begin{enumerate}[(i)]
+				\item $T$ beschränkt,
+				\item $T$ ist lipschitz stetig,
+				\item $T$ ist gleichmäßig stetig,
+				\item $T$ ist stetig,
+				\item $T$ stetig in $0$,
+				\item $\exists x \in X: T$ stetig in $x$.
+			\end{enumerate}
+	\end{thm}
 
+%TODO: Über das Beweiskästchen streiten wir nochmal ;) DS (<- Mein Namenskürzel)
 
+	\begin{proof}
+		\begin{itemize}[]
+			\item $"(i) \df (ii)":$ 
+				Sei $M > 0$, so dass $\norm{Tx}_Y \leq M \; \forall x \in U_1(0)$. Es gilt $T0 = 0$.
+				Weiterhin gilt für $x \in X\backslash \{0\}$. 
+				$$\norm{Tx}_Y = \norm{\: 2 \: \norm{x}_X \: T\left(\frac{x}{2 \norm{x}_X}\right)}
+			  =	2 \: \norm{x}_X\norm{T\underbrace{\left(\frac{x}{2 \norm{x}_X}\right)}_{\in \EK}}_Y
+				\leq 2 M \norm{x}_X.$$
+				Also gilt $\norm{Tx}_Y \leq 2M \norm{x}_X \; \forall x \in \norm{x}_X$ 
+				und daraus folgt die Lipschitz Stetigkeit wegen 
+				$$ \norm{Tx_1 - Tx_2} = \norm{ T(x_1 - x_2)} \leq 2 M \norm{x_1 - x_2}_X \; \forall x_1, x_2\in X$$ 
+											
+			\item $"(ii) \df (iii) \df (iv) \df (v) \df (vi)":$ 
+				Der Beweis dieser Implikationskette ist Gegenstand der Grundvorlesungen \footnote{Damit meinen wir stets Sätze, die in Analysis\slash LA I,II oder Höhere Analysis bewiesen wurden.}.
+				
+			\item $"(vi) \df (v)":$ 
+				Sei $x \in X$, so dass $T$ stetig in $x$ ist. Sei $(x_n)$ Nullfolge in $X$
+				$$\df \limes (X + X_n) = X \df \limes T(X+X_n) = Tx 
+				\df \text{(stetig in 0}:)\limes T x_n = 0 = T\:0$$ 
+
+			\item $"(v) \df (i)":$ Beweis durch Widerspruch:
+				Angenommen $T$ ist unbeschränkt $\df \forall n \in \N \; \exists x_n \in \EK$, so dass
+				$\norm{Tx_n}_Y \geq n.$ ($\df x_n \not = 0 \; \forall n\in\N$). 
+				Dann gilt $\frac{x_n}{n} \overset{n\to\infty}{\longrightarrow} 0$,
+				aber $\norm{T\frac{x_n}{n}}_Y = \frac{1}{n} \norm{T x_n}_Y \geq \frac{1}{n} \cdot n = 1$
+				Das hieße aber $T$ ist unstetig in 0. 
+
+		\end{itemize}
+	\end{proof}
 
 \section*{Etwaige Begriffe}
 	\begin{enumerate}
@@ -175,6 +237,6 @@ Eine Norm efüllt zusätzlich noch die Bedingung, dass sie nur dann verschwindet
 
 		\item \textbf{topologischer Raum} $(X,\tT)$ - Ein Raum, dessen offene Mengen durch $\tT$ gegeben sind, wobei die offenen Mengen die bekannten Eigenschaften behalten sollen.
 	\end{enumerate} 
-%Dies ist eine Testzeile
+
 \end{document}
 %TODO: -Layout. -Eigene Kommentare innerhalb des Skripts?
