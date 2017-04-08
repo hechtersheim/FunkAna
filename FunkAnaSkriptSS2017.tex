@@ -18,6 +18,7 @@
 \usepackage{centernot} %nicer looking not
 \usepackage{marvosym} %some symbols
 \usepackage{paralist} %Adds more function to listing environments
+\usepackage{xstring} %If then 
 %Headers and Footnotes
 \pagestyle{headings}
 \ihead{Funktionalanalysis - Vorlesungsmitschrift}
@@ -72,12 +73,23 @@
 \newcommand{\intl}[1]{\int_\Omega #1 d\mu} %"Standard"Lebesgue-Integral über Omega
 \newcommand{\df}{\Rightarrow} % "daraus folgt", also Implikation
 
-\newcommand{\aq}{\Leftarrow} % "äquivalent zu", also Äquivalenz
+\newcommand{\aq}{\Leftrightarrow} % "äquivalent zu", also Äquivalenz
 \newcommand{\U}[2][1]{U_{#1}(#2)} %Umgebung um #2 mit Abstand #1 \U{r}{a}
 \newcommand{\EK}{\U{0}} %Umgebung bzw Einheitskugel um 0
 \newcommand{\limes}[1][\infty]{\lim_{n \to #1}}
 
 \newcommand{\inv}[1]{#1^{-1}}
+\newcommand{\supT}[1][a]{
+	\IfEqCase{#1}{
+	{A}{\sup_{x \in \overline{\EK}}} 
+	{R}{\sup_{x \in \partial\EK}}
+	{a}{\sup_{x \in \EK}}
+	}
+} %sup_EK für die Operatornorm bzw mit Argumet auch Rand oder Abschluss von EK möglich
+\newcommand{\disp}{\displaystyle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 \chapter{Funktionalanalysis}
 \section{Grundlagen}
@@ -88,7 +100,7 @@
 	\item Banachraum: vollständiger normierter Vektorraum (wir schreiben $(X,\norm{\cdot }_X$) 
 	\item Hilbertraum: vollständiger Skalarproduktvektorraum mit $\norm{\cdot } = \sqrt{(\cdot , \cdot )_X}$.  Wobei $(\cdot , \cdot )$ das Skalarprodukt bezeichnet.
 	\item Cauchy-Folge: 
-					$(x_n),\,  \forall \epsilon > 0\; \exists n \in \N : \forall m \geq n : \norm{x_m-x_n}<\epsilon$
+					$(x_n),\,  \forall \varepsilon > 0\; \exists n \in \N : \forall m \geq n : \norm{x_m-x_n}<\varepsilon$
 	\item vollständiger metrischer Raum, Topologie.
 \end{enumerate}
 
@@ -255,7 +267,7 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 	
 	\begin{thm}[Operatornormen]
 		$X,Y$ normierte Räume. $\BS$ normierter Raum mit folgendener Norm
-		 $\norm{T} := \displaystyle \sup_{x \in \EK}\norm{Tx}_Y$.
+		 $\norm{T} := \disp \sup_{x \in \EK}\norm{Tx}_Y$.
 	\end{thm}
 	\begin{proof}
 		\begin{itemize}[]
@@ -268,14 +280,66 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 				= |\lambda| \sup_{x \in \EK} \norm{Tx} = |\lambda| \norm{ T}.$
 			
 			\item (Dreiecksungleichug:) Seien $T_1, T_2 \in\BS$. Dann 
-				$\displaystyle \norm{T_1 + T_2} = \sup_{x \in \EK}(\norm{T_1x + T_2x}_Y)
+				$\disp \norm{T_1 + T_2} = \sup_{x \in \EK}(\norm{T_1x + T_2x}_Y)
 				\leq \sup_{x \in \EK}(\norm{T_-4x}_Y + \norm{T_2x}_Y)
 				\leq \sup_{x_1,x_2  \in \EK}(\norm{T_1x_1}_Y + \norm{T_2x_2}_Y)
 				\leq \sup_{x_1 \in \EK}\norm{T_1x_1}_Y + \sup_{x_2 \in \EK}\norm{T_1x_2}_Y
 				= \norm{T_1} + \norm{T_2}$
-	\end{itemize}
+		\end{itemize}
 	\end{proof}
 		
+	\begin{bem}
+		Es gilt 
+		$\disp \norm{T} = \supT[A]\norm{Tx}_Y = \supT[R] \norm{Tx}_Y
+		= \sup_{\overset{x \in X}{x \not = 0}} \frac{\norm{Tx}_Y}{\norm{x}_X}$
+		($\nearrow$ Übung).
+	\end{bem}
+
+	\begin{thm}
+		$X$ normierter Raum, $Y$ Banachraum. Dann ist $\BS$ Banachraum.
+	\end{thm}
+		\begin{proof}
+			Sei $(T_n)$ $CF$ in $\BS$, d.h. 
+			$\forall \; \varepsilon \exists \; N\in \N \forall n,m > N: \norm{T_n - T_m} < \varepsilon$.		
+			Also $\norm{T_nx - T_mx}_Y \leq \norm{T_n - T_m} \cdot \norm{x} < \varepsilon \cdot \norm{x} \; \forall x\in X$. 
+			Daraus folgt mit der Vollständigkeit von Y, dass $(Tx)$ in $Y$ für alle $x\in X$ konvergiert.
+			Wir setzen nun $\disp T: X\to Y,\; Tx := \limes T_nx$. Dann folgt der Satz durch folgendes  (Warum genau? Wieso kann es nicht noch andere Operatoren geben?):
+				\begin{enumerate}[a)]
+					\item $T$ ist ein linearer Operator.
+					\item $T$ ist beschränkt.
+					\item $\disp \limes \norm{T_n - T_m} = 0$
+				\end{enumerate}
+				\begin{itemize}[]
+					\item Zu a): 
+						$\disp T(\lambda x_1 + \mu x_2) = \limes T_n(\lambda x_1 + \mu x_2) 
+						= \limes (\lambda T_n x_1 + \mu T_n x_2) = \lambda \limes T_nx_1 + \mu \limes T_n x_2
+						= \lambda T x_1 + \mu T x_2$
+					\item zu b):
+						Wegen $\norm{T_n - T_m} \geq (\norm{T_n} - \norm{T_m})$ gilt $\norm{T_n}$ ist $CF$ in $\R$
+						, also beschränkt: $\disp M := \sup_{n\in\N} \norm{T_n} < \infty$. 
+						Für $x\in\EK$ gilt $\disp \norm{Tx}_Y = \limes \norm{T_n} \cdot \norm{x}_X \leq M$.
+					\item zu c):
+						Sei $\varepsilon > 0 \df \exists N\in\N \; \forall m,n > N: \norm{T_n - T_m} < \frac{\varepsilon}{2}.$
+						Für $x\in \EK$ gilt somit (wegen $\disp m \to \infty$) 
+						$\disp \norm{(T-T_n)x} = \lim_{m\to \infty} \norm{(T_m - T_n)x} \leq \frac{\varepsilon}{2}$
+						$\disp \df \norm{T - T_n} = \supT \norm{(T-T_n)x} \leq \frac{\varepsilon}{2} < \varepsilon \; \forall n \geq N$
+						
+				\end{itemize}
+		\end{proof}
+
+	\begin{cor}
+		$X$ normierter Raum $\df$ $X'$ Banachraum.
+	\end{cor}
+
+	\begin{bem}
+		\begin{enumerate}[a)]
+			\item $T\in \BS$, $S \in \B(Y,Z) \df ST \in \B(X,Z)$ und 
+				$\norm{ST} \leq \norm{S} \cdot \norm{T}$	
+			\item $id\in \B(X,X)$, $\norm{id} = 1$.
+			\item Aus punktweise Konvergenz $T_nx \to Tx$ folgt
+			i.A. \underline{nicht} $\disp \limes T_n = T$ (d.h. $\limes \norm{T_n - T} = 0$).
+		\end{enumerate}
+	\end{bem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, Beweisen, oder erwähnen möchte.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
