@@ -302,12 +302,12 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 			Sei $(T_n)$ $CF$ in $\BS$, d.h. 
 			$\forall \; \varepsilon \exists \; N\in \N \forall n,m > N: \norm{T_n - T_m} < \varepsilon$.		
 			Also $\norm{T_nx - T_mx}_Y \leq \norm{T_n - T_m} \cdot \norm{x} < \varepsilon \cdot \norm{x} \; \forall x\in X$. 
-			Daraus folgt mit der Vollständigkeit von Y, dass $(Tx)$ in $Y$ für alle $x\in X$ konvergiert.
-			Wir setzen nun $\disp T: X\to Y,\; Tx := \limes T_nx$. Dann folgt der Satz durch folgendes  (Warum genau? Wieso kann es nicht noch andere Operatoren geben?):
+			Daraus folgt wegen der Vollständigkeit von Y, dass $(T_nx)$ in $Y$ für alle $x\in X$ konvergiert.
+			Wir setzen den Grenzwert auf $\disp T: X\to Y,\; Tx := \limes T_nx$. Die so definierte Abbildung, also dieser Grenzwert, erfüllt folgende Eigenschaften: 
 				\begin{enumerate}[a)]
 					\item $T$ ist ein linearer Operator.
 					\item $T$ ist beschränkt.
-					\item $\disp \limes \norm{T_n - T_m} = 0$
+					\item $\disp \limes \norm{T - T_n} = 0$
 				\end{enumerate}
 				\begin{itemize}[]
 					\item Zu a): 
@@ -317,14 +317,16 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 					\item zu b):
 						Wegen $\norm{T_n - T_m} \geq (\norm{T_n} - \norm{T_m})$ gilt $\norm{T_n}$ ist $CF$ in $\R$
 						, also beschränkt: $\disp M := \sup_{n\in\N} \norm{T_n} < \infty$. 
-						Für $x\in\EK$ gilt $\disp \norm{Tx}_Y = \limes \norm{T_n} \cdot \norm{x}_X \leq M$.
+						Für $x\in\EK$ gilt $\disp \norm{Tx}_Y = \limes \norm{T_nx}_Y 
+						\leq \limes \norm{T_n} \cdot \norm{x}_X \leq M\cdot \norm{x}_X \leq M$. (vgl. Def 1.5, $"\aq"$)
 					\item zu c):
 						Sei $\varepsilon > 0 \df \exists N\in\N \; \forall m,n > N: \norm{T_n - T_m} < \frac{\varepsilon}{2}.$
-						Für $x\in \EK$ gilt somit (wegen $\disp m \to \infty$) 
+						Für $x\in \EK$ gilt somit %(wegen $\disp m \to \infty$) 
 						$\disp \norm{(T-T_n)x} = \lim_{m\to \infty} \norm{(T_m - T_n)x} \leq \frac{\varepsilon}{2}$
 						$\disp \df \norm{T - T_n} = \supT \norm{(T-T_n)x} \leq \frac{\varepsilon}{2} < \varepsilon \; \forall n \geq N$
 						
 				\end{itemize}
+				Also ist $T\in \BS$ und aufgrund der Beliebigkeit der $CF$, folgt die Vollstüandigkeit.
 		\end{proof}
 
 	\begin{cor}
@@ -340,6 +342,7 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 			i.A. \underline{nicht} $\disp \limes T_n = T$ (d.h. $\limes \norm{T_n - T} = 0$).
 		\end{enumerate}
 	\end{bem}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, Beweisen, oder erwähnen möchte.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
