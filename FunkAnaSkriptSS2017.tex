@@ -19,6 +19,8 @@
 \usepackage{marvosym} %some symbols
 \usepackage{paralist} %Adds more function to listing environments
 \usepackage{xstring} %If then 
+
+\usepackage{marginnote} %allows to do some nice marinnotes
 %Headers and Footnotes
 \pagestyle{headings}
 \ihead{Funktionalanalysis - Vorlesungsmitschrift}
@@ -264,24 +266,25 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 			\item $Ker\; T$ abgeschlossen $\forall \; T\in \B(X,Y)$, da $T$ stetig und $Ker\:T = \inv{T}(\{0\})$, wobei $\{0\}$ abgeschlossen in $Y$.
 		\end{enumerate}
 	\end{bem}						
-	
+%%%%%%%%%%%	Satz 1.10
 	\begin{thm}[Operatornormen]
 		$X,Y$ normierte Räume. $\BS$ normierter Raum mit folgendener Norm
 		 $\norm{T} := \disp \sup_{x \in \EK}\norm{Tx}_Y$.
 	\end{thm}
 	\begin{proof}
 		\begin{itemize}[]
-			\item (Positivität:) $\norm{0} = 0$. Sei $\norm{T} = 0 \df Tx = 0 \; \forall \; x\in\EK$.
-				Sei $x\in X$ beliebig. $\df Tx = 2\norm{x}_X \; T \left(\frac{x}{2\norm{x}_X}\right) = 0$
-				$\df T = 0$. 
+				\item (\textit{Positivität:}) 
+					$\norm{0} = 0$. Sei $\norm{T} = 0 \df Tx = 0 \; \forall \; x\in\EK$.
+					Sei $x\in X$ beliebig. $\df Tx = 2\norm{x}_X \; T \left(\frac{x}{2\norm{x}_X}\right) = 0$
+					$\df T = 0$. 
 
-			\item (Homogenität:) Sei $\lambda \in \K$, $T\in \BS$. 
+			\item (\textit{Homogenität:}) Sei $\lambda \in \K$, $T\in \BS$. 
 				Dann $\norm{\lambda T} = \sup_{x \in \EK} \norm{ (\lambda T) x}_Y
 				= |\lambda| \sup_{x \in \EK} \norm{Tx} = |\lambda| \norm{ T}.$
 			
-			\item (Dreiecksungleichug:) Seien $T_1, T_2 \in\BS$. Dann 
+			\item (\textit{Dreiecksungleichug:}) Seien $T_1, T_2 \in\BS$. Dann 
 				$\disp \norm{T_1 + T_2} = \sup_{x \in \EK}(\norm{T_1x + T_2x}_Y)
-				\leq \sup_{x \in \EK}(\norm{T_-4x}_Y + \norm{T_2x}_Y)
+				\leq \sup_{x \in \EK}(\norm{T_1x}_Y + \norm{T_2x}_Y)
 				\leq \sup_{x_1,x_2  \in \EK}(\norm{T_1x_1}_Y + \norm{T_2x_2}_Y)
 				\leq \sup_{x_1 \in \EK}\norm{T_1x_1}_Y + \sup_{x_2 \in \EK}\norm{T_1x_2}_Y
 				= \norm{T_1} + \norm{T_2}$
@@ -294,39 +297,39 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 		= \sup_{\overset{x \in X}{x \not = 0}} \frac{\norm{Tx}_Y}{\norm{x}_X}$
 		($\nearrow$ Übung).
 	\end{bem}
-
+%%%%%%%%%%% Satz 1.12
 	\begin{thm}
 		$X$ normierter Raum, $Y$ Banachraum. Dann ist $\BS$ Banachraum.
 	\end{thm}
 		\begin{proof}
 			Sei $(T_n)$ $CF$ in $\BS$, d.h. 
-			$\forall \; \varepsilon \exists \; N\in \N \forall n,m > N: \norm{T_n - T_m} < \varepsilon$.		
+			$\forall \; \varepsilon > 0 \exists \; N\in \N \; \forall n,m > N: \norm{T_n - T_m} < \varepsilon$.		
 			Also $\norm{T_nx - T_mx}_Y \leq \norm{T_n - T_m} \cdot \norm{x} < \varepsilon \cdot \norm{x} \; \forall x\in X$. 
 			Daraus folgt wegen der Vollständigkeit von Y, dass $(T_nx)$ in $Y$ für alle $x\in X$ konvergiert.
 			Wir setzen den Grenzwert auf $\disp T: X\to Y,\; Tx := \limes T_nx$. Die so definierte Abbildung, also dieser Grenzwert, erfüllt folgende Eigenschaften: 
 				\begin{enumerate}[a)]
 					\item $T$ ist ein linearer Operator.
 					\item $T$ ist beschränkt.
-					\item $\disp \limes \norm{T - T_n} = 0$
+					\item $\disp \limes \norm{T - T_n} = 0$ (also Normkonvergenz bzw. gleichmäßige Konvergenz)
 				\end{enumerate}
 				\begin{itemize}[]
-					\item Zu a): 
+					\item \underline{Zu a):} 
 						$\disp T(\lambda x_1 + \mu x_2) = \limes T_n(\lambda x_1 + \mu x_2) 
 						= \limes (\lambda T_n x_1 + \mu T_n x_2) = \lambda \limes T_nx_1 + \mu \limes T_n x_2
 						= \lambda T x_1 + \mu T x_2$
-					\item zu b):
+					\item \underline{zu b):}
 						Wegen $\norm{T_n - T_m} \geq (\norm{T_n} - \norm{T_m})$ gilt $\norm{T_n}$ ist $CF$ in $\R$
 						, also beschränkt: $\disp M := \sup_{n\in\N} \norm{T_n} < \infty$. 
 						Für $x\in\EK$ gilt $\disp \norm{Tx}_Y = \limes \norm{T_nx}_Y 
 						\leq \limes \norm{T_n} \cdot \norm{x}_X \leq M\cdot \norm{x}_X \leq M$. (vgl. Def 1.5, $"\aq"$)
-					\item zu c):
+					\item \underline{zu c):}
 						Sei $\varepsilon > 0 \df \exists N\in\N \; \forall m,n > N: \norm{T_n - T_m} < \frac{\varepsilon}{2}.$
 						Für $x\in \EK$ gilt somit %(wegen $\disp m \to \infty$) 
-						$\disp \norm{(T-T_n)x} = \lim_{m\to \infty} \norm{(T_m - T_n)x} \leq \frac{\varepsilon}{2}$
-						$\disp \df \norm{T - T_n} = \supT \norm{(T-T_n)x} \leq \frac{\varepsilon}{2} < \varepsilon \; \forall n \geq N$
+						$$\disp \norm{(T-T_n)x} =\lim_{m\to \infty} \norm{(T_m - T_n)x} \leq \frac{\varepsilon}{2}
+						\disp \df \norm{T - T_n} = \supT \norm{(T-T_n)x} \leq \frac{\varepsilon}{2} < \varepsilon \; \forall n \geq N$$
 						
 				\end{itemize}
-				Also ist $T\in \BS$ und aufgrund der Beliebigkeit der $CF$, folgt die Vollstüandigkeit.
+				Also ist $T\in \BS$ und aufgrund der Beliebigkeit der $CF$, folgt die Vollständigkeit.
 		\end{proof}
 
 	\begin{cor}
