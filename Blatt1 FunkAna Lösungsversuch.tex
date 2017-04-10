@@ -143,7 +143,7 @@ Es seien $(X, \| \cdot \|_X)$ und $(Y, \| \cdot \|_Y)$ normierte Räume.
 $$dim(X) < \infty \text{ und } T:X\to Y \text{ linear}\df T \in \B(X,Y)$$
 \end{beh}
 \begin{proof}
-Da $dim(X) <\infty$ und $T$ linear ist, lässt sich $T$ eindeutig als Matrix darstellen. Dann sind aber die Bedingungen aus Bsp. 1.6 a) erfüllt, damit ist $T \in \B(X,Y)$.
+Da $dim(X) <\infty$ und $T$ linear ist, lässt sich $T$ eindeutig als Matrix darstellen. Dann sind aber die Bedingungen aus Bsp. 1.6 a) erfüllt. Damit ist $T \in \B(X,Y)$.
 \end{proof}
 
 \item
@@ -152,7 +152,7 @@ Da $dim(X) <\infty$ und $T$ linear ist, lässt sich $T$ eindeutig als Matrix dar
 $$dim(X)<\infty \text{ und } T\in\B(X,Y) \df \|T\|= \max_{x\in\overline{U_1(0)}}\|Tx\|_Y$$
 \end{beh}
 \begin{proof}
-Aus Aufgabe 2 ist bekannt, dass $\displaystyle\sup_{x\in U_1(0)} \|Tx\|_Y = \sup_{x\in\overline{U_1(0)}}\|Tx\|_Y$. Da $\overline{U_1(0)}$ kompakt \textit{(ist es kompakt? Es könnte ja sein, dass X nicht vollständig ist. Müsste aber, denn wir haben ja immernoch den Abschluss... oder?) } ist, und $T,\,\|\cdot\|_Y$ stetig dank Satz 1.7 und Komposition von stetigen Funktionen und stetige Funktionen auf kompakten Mengen ihr Maximum annehmen, ist die Behauptung bewiesen.
+Aus Aufgabe 2 ist bekannt, dass $\displaystyle\sup_{x\in U_1(0)} \|Tx\|_Y = \sup_{x\in\overline{U_1(0)}}\|Tx\|_Y$. Da $\overline{U_1(0)}$ kompakt \textit{(ist es kompakt? Es könnte ja sein, dass X nicht vollständig ist. Müsste aber, denn wir haben ja immernoch den Abschluss... oder?) } ist, und $T,\,\|\cdot\|_Y$ stetig dank Satz 1.7 und Komposition von stetigen Funktionen und da stetige Funktionen auf kompakten Mengen ihr Maximum annehmen, ist die Behauptung bewiesen.
 \end{proof}
 
 \item
@@ -163,6 +163,29 @@ Im allgemeinen ist die Aussagen von b) falsch.
 \begin{proof}
 Wir geben ein Beispiel für $T\in\B(X,Y)$ derart an, dass 
 $$\|T\| \not\in\left\lbrace\|Tx\|_Y|\,x\in\overline{U_1(0)}\right\rbrace.$$
+Sei  $$X=Y=\ell^p(\K)=:\ell^p \text{ (beschr. Folgenraum) und } T:\ell^p\to \ell^p,\;(x_n)\mapsto \left(\left(1-\frac{1}{n}\right)x_n\right)$$
+Mit der Norm $\displaystyle \|(x_n)\|=\left(\sum^\infty_{n=1} |x_n|^p\right)^{\frac{1}{p}}$\par
+Dann ist $\overline{U_1(0)} = \left\lbrace (x_n) \in \ell^p |\,\sum^\infty_{n=1} |x_n|^p \leq 1 \right\rbrace$\par
+$T$ ist ein beschränkter linearer Operator, denn:
+\begin{enumerate}[(i)]
+\item Seien $(x_n),(y_n)\in \ell^p,\,\alpha \in \K\df T(\alpha x_n + y_n) = \left(\left(1-\frac{1}{n}\right)(\alpha x_n + y_n) \right) = \alpha Tx_n + Ty_n$
+
+\item Sei $x_n \in \overline{U_1(0)}$
+\begin{equation*}
+\begin{split}
+ \df 
+ \|T(x_n)\|^p 
+ = \|\left(\left(1-\frac{1}{n}\right)x_n\right)\|^p 
+ & = \sum^\infty_{n=1} \left(\left(1-\frac{1}{n}\right)x_n\right)^p 
+ \\ & = \sum^\infty_{n=1} | x_n-\frac{x_n}{n}|^p 
+ \\ & \leq \sum^\infty_{n=1} |x_n|^p+|\frac{x_n}{n}|^p
+ \\ & \leq \sum^\infty_{n=1} 2|x_n|^p < \infty
+ \end{split}
+\end{equation*}
+
+
+\end{enumerate}
+Mit der Folge (von Folgen) $i_n$, die an der $n.$ Stelle eine 1 hat, und sonst nur Nullen, ist dann: $T(i_n) \longrightarrow 1$ für $n\longrightarrow \infty$. Dies ist mit Elementen aus $\overline{U_1(0)}$ nicht möglich (Warum?).
 
 \end{proof}
 
