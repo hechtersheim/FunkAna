@@ -100,7 +100,7 @@ Es ist äquivalent:
 	Es ist nun für hinreichend großes $k$ und geeignetes $n'\in\N$ mit der Dreiecksungleichung und der Eigenschaft der Teleskopsumme:
 	$$\|s_k\| =\| \sum^k_{n=0}u_n-u_{n-1}\|\leq \underbrace{\|u_1 - u_0 \| + \| u_2 - u_1\| + \dots }_{=:x_0}+ \underbrace{\|u_{N_2} - u_{N_1}\|}_{\leq x_1} + \underbrace{\|u_{N_3} - u_{N_2}\|}_{\leq x_2} + \dots + \underbrace{\|u_k-u_{N(n')}\|}_{\leq x_{n'}}$$
 	Bzw.:
-	$$\|s_k\| = \|\sum^k_{n=1} u_{N_n} - u_{N_n-1} \| \leq \sum^{n'}_{n=0} x_n\text{ mit } u_{N_0}:=u_{N_1}-u_0
+	$$\|s_k\| = \|\sum^k_{n=1} u_{N_n} - u_{N_{n-1}} \| \leq \sum^{n'}_{n=0} x_n\text{ mit } u_{N_0}:=u_0
 	$$
 	Es ergibt sich also: 
 	$$\|s_k\| \leq \sum^{n'}_{n=0}x_n \leq \sum^k_{n=0}x_n \df \lim_{k\to\infty} \|s_k\| \leq \sum^\infty_{n=0}x_n < \infty$$ 
