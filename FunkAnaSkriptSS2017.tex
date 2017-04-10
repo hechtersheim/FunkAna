@@ -335,11 +335,13 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 	\begin{cor}
 		$X$ normierter Raum $\df$ $X'$ Banachraum.
 	\end{cor}
-
+%%%%%%% Korollar 1.13
 	\begin{bem}
 		\begin{enumerate}[a)]
 			\item $T\in \BS$, $S \in \B(Y,Z) \df ST \in \B(X,Z)$ und 
-				$\norm{ST} \leq \norm{S} \cdot \norm{T}$	
+				$\norm{ST} \leq \norm{S} \cdot \norm{T}$ 
+				(gilt wegen $\norm{S(Tx)}_Z \leq \norm{S} \cdot \norm{Tx}_Y
+				\leq \norm{S} \cdot \norm{T} \cdot \norm{x}_X \leq M \norm{x}_X$ $\forall x\in X$ und der Linearität von $ST$.) 
 			\item $id\in \B(X,X)$, $\norm{id} = 1$.
 			\item Aus punktweise Konvergenz $T_nx \to Tx$ folgt
 			i.A. \underline{nicht} $\disp \limes T_n = T$ (d.h. $\limes \norm{T_n - T} = 0$).
@@ -347,7 +349,7 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 	\end{bem}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Zusätze. Alles was man noch definieren, erklären, Beweisen, oder erwähnen möchte.
+%Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section*{Etwaige Begriffe}
@@ -365,4 +367,4 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 	\end{enumerate} 
  
 \end{document}
-%TODO: -Layout. -Eigene Kommentare innerhalb des Skripts? -bis zum 07.04 aktualisieren!!!!!!!!!!!!!!!!!!!!!1
+%TODO: -Layout. -Eigene Kommentare innerhalb des Skripts? 
