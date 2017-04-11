@@ -107,7 +107,10 @@ Es ist äquivalent:
 	Und mit der Eigenschaft a) ist nun: $u_k = s_k \longrightarrow \alpha \in X$. Also konvergiert $u_k$ in $X$, damit ist $X$ ein Banachraum.\par
  b$\df$a:
  	Sei X ein Banachraum und $(u_n)$ eine Folge in $X$, so dass $\sum^\infty_{n=0}\|u_n\| < \infty$, dann ist dank der Dreiecksungleichung: $\| \sum^\infty_{n=0}u_n \| \leq  \sum^\infty_{n=0}\|u_n\| < \infty$.\\
- 	Dank der Vollständigkeit von $X$ können wir das Majorantenkriterium (der Beweis zu der Gültigkeit dieses Kriteriums, ist analog zum reellen Fall) anwenden, und somit konvergiert die Reihe $\sum^\infty_{n=0}u_n$.
+ 	Dank der Vollständigkeit von $X$ können wir das Majorantenkriterium (der Beweis zu der Gültigkeit dieses Kriteriums, ist analog zum reellen Fall) anwenden, und somit konvergiert die Reihe $\sum^\infty_{n=0}u_n$.\par
+ 	
+ 	Nachtrag:\\
+ 	Wesentlich eleganter geht dieser Beweis mithilfe des Cauchykriteriums für Reihen. Die Idee ist aber im Grunde die gleiche.
 \end{proof}
 
 \subsection{Aufgabe 2}
@@ -143,7 +146,13 @@ Es seien $(X, \| \cdot \|_X)$ und $(Y, \| \cdot \|_Y)$ normierte Räume.
 $$dim(X) < \infty \text{ und } T:X\to Y \text{ linear}\df T \in \B(X,Y)$$
 \end{beh}
 \begin{proof}
-Da $dim(X) <\infty$ und $T$ linear ist, lässt sich $T$ eindeutig als Matrix darstellen. Dann sind aber die Bedingungen aus Bsp. 1.6 a) erfüllt. Damit ist $T \in \B(X,Y)$.
+Da $dim(X) <\infty$ und $T$ linear ist, lässt sich $T$ eindeutig als Matrix darstellen. Dann sind aber die Bedingungen aus Bsp. 1.6 a) erfüllt. Damit ist $T \in \B(X,Y)$.\par
+Nachtrag:\\
+Der Beweis ist noch nicht ganz vollständig. Es ist noch zu zeigen, dass die Koordinatenfunktion in beide Richtungen (also $\phi:X\to Y$ und $\phi^{-1}:Y\to X$, für die Koordinatenfunktion $\phi$ zu einer Basis) stetig ist. 
+Dann kann man aber wirklich die Zeilensummennorm betrachten:
+$$\forall x\in \EK \text{ gilt } \|Tx\|\leq a\|Tx\|_{\infty} \leq a\|T\|_{\infty} \|x\| \leq a\|T\|_{\infty} < a\infty.$$
+Wobei $a\in\R^+$ die geeignet gewählte nur von der Norm abhängige Konstante ist, die von der Äquivalenz zu jeder anderen Norm entsteht.
+
 \end{proof}
 
 \item
@@ -152,7 +161,10 @@ Da $dim(X) <\infty$ und $T$ linear ist, lässt sich $T$ eindeutig als Matrix dar
 $$dim(X)<\infty \text{ und } T\in\B(X,Y) \df \|T\|= \max_{x\in\overline{U_1(0)}}\|Tx\|_Y$$
 \end{beh}
 \begin{proof}
-Aus Aufgabe 2 ist bekannt, dass $\displaystyle\sup_{x\in U_1(0)} \|Tx\|_Y = \sup_{x\in\overline{U_1(0)}}\|Tx\|_Y$. Da $\overline{U_1(0)}$ kompakt \textit{(ist es kompakt? Es könnte ja sein, dass X nicht vollständig ist. Müsste aber, denn wir haben ja immernoch den Abschluss... oder?) } ist, und $T,\,\|\cdot\|_Y$ stetig dank Satz 1.7 und Komposition von stetigen Funktionen und da stetige Funktionen auf kompakten Mengen ihr Maximum annehmen, ist die Behauptung bewiesen.
+Aus Aufgabe 2 ist bekannt, dass $\displaystyle\sup_{x\in U_1(0)} \|Tx\|_Y = \sup_{x\in\overline{U_1(0)}}\|Tx\|_Y$. Da $\overline{U_1(0)}$ kompakt \textit{(ist es kompakt? Es könnte ja sein, dass X nicht vollständig ist. Müsste aber, denn wir haben ja immernoch den Abschluss... oder?) } ist, und $T,\,\|\cdot\|_Y$ stetig dank Satz 1.7 und Komposition von stetigen Funktionen und da stetige Funktionen auf kompakten Mengen ihr Maximum annehmen, ist die Behauptung bewiesen.\par
+Nachtrag:\\
+Tatsächlich ist $\overline{\EK}$ in einem endlich dimensionalen Vektorraum über $\R,\C$ stets kompakt. Angeblich gilt sogar \textit{(habe ich das richtig mitbekommen??)}: 
+$$\overline{\EK}\subset X \text{ kompakt } \Leftrightarrow dim(X) < \infty$$
 \end{proof}
 
 \item
@@ -185,7 +197,9 @@ $T$ ist ein beschränkter linearer Operator, denn:
 
 
 \end{enumerate}
-Mit der Folge (von Folgen) $i_n$, die an der $n.$ Stelle eine 1 hat, und sonst nur Nullen, ist dann: $T(i_n) \longrightarrow 1$ für $n\longrightarrow \infty$. Dies ist mit Elementen aus $\overline{U_1(0)}$ nicht möglich (Warum?).
+Mit der Folge (von Folgen) $i_n$, die an der $n.$ Stelle eine 1 hat, und sonst nur Nullen, ist dann: $T(i_n) \longrightarrow 1$ für $n\longrightarrow \infty$. Dies ist mit Elementen aus $\overline{U_1(0)}$ nicht möglich (Warum?).\par
+Nachtrag:\\
+Geschickter ist es den Folgenraum $M\subset \ell^p$ einzuschränken, so dass für jedes Element aus $M$ gilt, dass nur endlich viele Folgenglieder ungleich null sind. Der Rest folgt flott.
 
 \end{proof}
 
