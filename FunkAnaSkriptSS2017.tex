@@ -332,10 +332,11 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 				Also ist $T\in \BS$ und aufgrund der Beliebigkeit der $CF$, folgt die Vollständigkeit.
 		\end{proof}
 
+%%%%%%% Korollar 1.13
 	\begin{cor}
 		$X$ normierter Raum $\df$ $X'$ Banachraum.
 	\end{cor}
-%%%%%%% Korollar 1.13
+%%%%%%% Bemerkung 1.14
 	\begin{bem}
 		\begin{enumerate}[a)]
 			\item $T\in \BS$, $S \in \B(Y,Z) \df ST \in \B(X,Z)$ und 
@@ -345,6 +346,30 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 			\item $id\in \B(X,X)$, $\norm{id} = 1$.
 			\item Aus punktweise Konvergenz $T_nx \to Tx$ folgt
 			i.A. \underline{nicht} $\disp \limes T_n = T$ (d.h. $\limes \norm{T_n - T} = 0$).
+				\begin{description} \item[Bsp:] 
+					$X = \ell^p, p\in [1,\infty)$, $T_n:\ell^p \to \ell^p, \; T_n(x_k) = (x_1,\dots,x_n,0,0,\dots)$ 
+					wobei $(x_k) = (x_1,\dots,x_n,\dots).$ Man kann zeigen, dass $T_n \in \B(x)$ $\forall n\in\N$ 
+					($\nearrow$ Übung).\par
+					Sei $(x_k)\in \ell^p$, $\forall \epsilon > 0 \; \exists N\in\N: (\sum_{k=N+1}^\infty |x_k|^p)^{1\backslash p} < \epsilon.$\ $\norm{T_n(x_k) - x_n}_X = (\sum_{k=N+1}^\infty |x_k|^p)^{1\backslash p} \; \forall n\geq N$.
+					Also $\forall x \in X$ $\norm{T_n - x}_X \to 0 \; (n\to \infty).$ Frage: $\norm{T_n - T}_X \to 0$ ?
+					Nein! Sei $(x_k^n) = (0,\dots,0,\overset{\text{n+1 Stelle}}{1},0,\dots)$,  
+					$\norm{T_n(x_k^n) - x}_X = \norm{(0,\dots,0,-1,0,\dots)})_Y = 1$ 
+					$\disp \norm{T_n - T} \overset{Def}{=} \supT \norm{(T_n - T)x}_X \geq 
+					\norm{(T_n - T)(\frac{1}{2} (x_k^n)} =\frac{1}{2}\cdot 1$ ($T = idx$) $\forall n\in\N$ 
+					$\df \norm{T_n - T} \not\to 0\; (n\to\infty)$
+				\end{description}
+
+		\item $T\in \BS$ und $T$ bijektiv. Dann ist $\inv{T}$ i.A. \underline{nicht beschränkt}.
+			\begin{description} 
+				\item[Bsp.]	$X\in C[0,1], Y= \{f\in C^1([0,1]): f(0) = 0\}$ mit $\disp \norm{x}_X = \sup_{t\in[0,1]}|x(t)|$ und $\norm{\cdot}_X = \norm{\cdot}_Y$ und $T: X\to Y,\; (Tx)(t) = \int_0^t x(s)ds$.
+				\begin{itemize}
+					\item $\inv{T}=S: Y\to X, Sy = y'$. (Zeige $ST = id_x$ und $TS = id_Y$)
+					\item $\inv{T}\not\in\B(Y,X)$ (Sei $y_n(t) = t^n\in Y$, $(\inv{T}y_n)(t) = n\cdot t^{n-1}$
+					$\df \norm{y_n}_Y =1 \; \forall n\in \N$, $\norm{\inv{T}y}_X =n \; \forall n\in\N \df \inv{T}$ kann nicht beschränkt sein. 
+					($\norm{\inv{T}\frac{1}{2} y_n}_X = \frac{1}{2} \cdot n$ mit $\norm{\frac{1}{2} y_n} = \frac{1}{2})$
+				\end{itemize}
+			\end{description}
+
 		\end{enumerate}
 	\end{bem}
 
@@ -364,6 +389,7 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 					Ein Beispiel ist $f(x) : = x\cdot \chi_\Q(x)$ und $\mu = \lambda$, da $f$ nur auf $\Q$ nicht null ist, und $\Q$ ist Lesbesgue-Nullmenge. 
 
 		\item \textbf{topologischer Raum} $(X,\tT)$ - Ein Raum, dessen offene Mengen durch $\tT$ gegeben sind, wobei die offenen Mengen die bekannten Eigenschaften behalten sollen.
+			
 	\end{enumerate} 
  
 \end{document}
