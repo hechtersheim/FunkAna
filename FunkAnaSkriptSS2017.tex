@@ -73,8 +73,13 @@
 \newcommand{\seminorm}[1]{||| #1 |||}
 \newcommand{\norm}[1]{\|#1\|}
 \newcommand{\intl}[1]{\int_\Omega #1 d\mu} %"Standard"Lebesgue-Integral über Omega
-\newcommand{\df}{\Rightarrow} % "daraus folgt", also Implikation
-
+\newcommand{\df}[1][]{% "daraus folgt", also Implikation
+	%\IfEqCase{#1}{
+	%	{a}{\Rightarrow}
+	%	{o}{\overset{\df}{#2}}
+	%} 
+	\overset{#1}{\Rightarrow}
+}
 \newcommand{\aq}{\Leftrightarrow} % "äquivalent zu", also Äquivalenz
 \newcommand{\U}[2][1]{U_{#1}(#2)} %Umgebung um #2 mit Abstand #1 \U{r}{a}
 \newcommand{\EK}{\U{0}} %Umgebung bzw Einheitskugel um 0
@@ -89,6 +94,7 @@
 	}
 } %sup_EK für die Operatornorm bzw mit Argumet auch Rand oder Abschluss von EK möglich
 \newcommand{\disp}{\displaystyle}
+\newcommand{\qmarks}[1]{$"\text{#1}"$}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -368,11 +374,101 @@ Aus der Definition erkennt man, dass Bilder beschränkter Mengen $M$ unter einem
 					$\df \norm{y_n}_Y =1 \; \forall n\in \N$, $\norm{\inv{T}y}_X =n \; \forall n\in\N \df \inv{T}$ kann nicht beschränkt sein. 
 					($\norm{\inv{T}\frac{1}{2} y_n}_X = \frac{1}{2} \cdot n$ mit $\norm{\frac{1}{2} y_n} = \frac{1}{2})$
 				\end{itemize}
+				Bem: $Y$ ist nicht vollständig.
 			\end{description}
-
 		\end{enumerate}
 	\end{bem}
 
+	\begin{thm}
+		Sei $X,Y$ normierte $\K-VR$, $T\in \BS$. Dann sind äquivalent:
+			\begin{enumerate}[(i)]
+				\item $T$ ist injektiv und $\inv{T} \in\B(im(T), X)$ normierter UVR von $Y$.
+				\item $\exists \: m > 0: \norm{Tx}_Y \geq m\norm{x}_X \; \forall x\in X$.
+			\end{enumerate}
+	\end{thm}
+	\begin{proof}
+		\begin{itemize}[]
+			\item $"(i)\df (ii)"$: $\exists \: M>0, \norm{\inv{T}y} \leq M\norm{y} \; \forall y\in imT.$
+				Sei $x\in X$ $\exists y\in imT: x = \inv{T}y \df \norm{x}_Y \leq M \norm{Tx}_Y 
+				\df \norm{Tx}_Y \geq \frac{1}{M} \norm{x}_X = m\norm{x}_X$
+			\item $"(ii) \df (i)"$: Sei $x\in X: Tx = 0$.
+				Aus $\norm{Tx} \geq m \norm{x}$ folgt $x = 0$ und damit ist $T injektiv$.
+				Sei $y\in imT \; \exists x\in X: Tx = y$ und $\inv{T}y = x $
+				$\df[(ii)] \norm{\inv{T}y} = \norm{x} \leq \frac{1}{m} \norm{Tx}_Y = \frac{1}{m} \norm{y}_Y,$
+				also $\exists\: M = \frac{1}{m}$, $\norm{\inv{T}y}_X \leq M\norm{y}_Y \; \forall v\in imT$
+				$\df \inv{T} \in \B(imT,X)$
+		\end{itemize}
+	\end{proof}
+Die Negation dieser Aussage halten wir explizit fest mit folgendem 
+	\begin{cor}
+		$T \in \BS$ ($X,Y$ normierte $\K-VR$. Dann sind äquivalent:
+			\begin{enumerate}[(i)]
+				\item $T$ besitzt \underline{keine} stetige Inverser 
+					$\inv{T} : imT\to X.$
+				\item $\exists$ Folge $(x_n)$ in $X$, so dass $\norm{x_n} = 1 \; \forall n\in \N$
+					und $\disp \limes \norm{T x_n} = 0$
+			\end{enumerate}
+	\end{cor}
+
+	\begin{definition}
+		$X-\K-VR$ mit Norm $\norm{\cdot}_1,\norm{\cdot}_2$. Dann heißt $\norm{\cdot}_1$ 
+			\begin{enumerate}[(a)]
+				\item \qmarks{stärker} als $\norm{\cdot}_2$, falls gilt
+					$\disp \limes \norm{x_n - x}_1 = 0 \df \limes \norm{x_n - x}_2$
+				\item \qmarks{schwächer} als $\norm{\cdot}_2$, falls $\norm{\cdot}_2$ stärker ist als $\norm{\cdot}_1$.
+				\item \qmarks{äquivalent} falls $\norm{\cdot}_1$ stärker und schwächer ist als $\norm{\cdot}_2$
+			\end{enumerate}
+	\end{definition}
+
+	\begin{thm}
+		$X$ $\K-VR$ mit Norm $\norm{\cdot}_1$,$\norm{\cdot}_2$. Dann gilt 
+			\begin{enumerate}[(a)]
+				\item $\norm{\cdot}_1$ ist stärker als $\norm{\cdot}_2$ 
+					$\aq \exists \: M > 0: \norm{x}_2 \leq M \norm{x}_1 \; \forall x\in X$
+				\item $\norm{\cdot}_1$ ist schwächer als $\norm{\cdot}_2$ 
+					$\aq \exists \: M > 0: \norm{x}_1 \leq M \norm{x}_2 \; \forall x\in X$
+				\item $\norm{\cdot}_1$ ist äquivalent zu $\norm{\cdot}_2$ 
+					$\aq \exists \: m,M > 0: m\norm{x}_1 \leq \norm{x}_2 \leq M \norm{x}_1 \; \forall x\in X$
+			\end{enumerate}
+	\end{thm}
+	\begin{proof}
+		\begin{enumerate}[zu (a):]
+	 		\item \qmarks{$\df$} $id : (X,\norm{\cdot}_1) \to (X,\norm{\cdot}_2)$ ist stetig wegen Vor.
+				$\df[S.1.15]$ und weil $id$ linear, $id$ beschränkt, 
+				$id\in \B((X,\norm{\cdot}_1), (X,\norm{\cdot}_2)$ d.h. 
+				$\exists M > 0: \norm{id(X)}_2 \leq M \norm{x}_1 \; \forall x\in X$.\par
+			\qmarks{$\Leftarrow$}	Wissen $\exists M>0: \norm{x}_2 \leq M\norm{x}_1 \; \forall x\in X$.
+			Sei $\norm{x_n - x}_1 \to 0 \df \norm{x_n - x}_2 \leq M\norm{x_n - x}_1 \to 0 \; (n\to\infty)$
+			$\df \norm{\cdot}_1$ stärker als $\norm{\cdot}_2$.
+	 	\end{enumerate}
+	\end{proof}
+
+	\begin{definition}
+		\marginpar{(sonst auch Homöomorphismus)}.
+		Zwei normierte $\K-VR$ $X,Y$ heißen \qmarks{topologisch isomorph}, falls es ein Isomorphismus 
+		$T: X\to Y$ mit $T\in \BS$ und $\inv{T}\in\B(Y,X)$. Dann heißt $T$ topologischer Isomorphismus,
+	\end{definition}
+
+	\begin{thm}
+		$X, Y$ topologisch isomorph $\aq$ $\exists m,M > 0: T\in \BS$ und injektiv
+		$: m\norm{x}_X \leq \norm{Tx}_Y \leq M \norm{x}_X \; \forall x\in X$
+	\end{thm}
+	\begin{proof}
+		Klar wegen Satz 1.17 und Satz 1.15.
+	\end{proof}
+	
+	\begin{bem}
+		\begin{enumerate}
+			\item Falls, $m=M=1$, dann nenn wir $T$ \qmarks{Isometrie}.
+			\item Falls $\dim X = \dim Y = n\in \N$: $X,Y$ topologisch isomorph und topologischer Isomorphismus = lineare Bijektion.
+		\end{enumerate}
+	\end{bem}
+
+	\begin{thm}[Fortsetzung von stetigen Operatoren]
+		$X,Y$ normierte $\K-VR$, $Y$ ein Banachraum, $Z\subset X$, $Z$ dichter UVR.
+		$T\in \B(Z,Y)$. Dann existiert eindeutiger Operator $\tilde{T} \in \BS$, so dass
+		$T|_Z = T$.
+	\end{thm}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
