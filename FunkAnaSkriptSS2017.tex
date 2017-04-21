@@ -532,7 +532,24 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 					oder auch: f ist fast überall beschränkt. 
 					Ein Beispiel ist $f(x) : = x\cdot \chi_\Q(x)$ und $\mu = \lambda$, da $f$ nur auf $\Q$ nicht null ist, und $\Q$ ist Lesbesgue-Nullmenge. 
 
-		\item \textbf{topologischer Raum} $(X,\tT)$ - Ein Raum, dessen offene Mengen durch $\tT$ gegeben sind, wobei die offenen Mengen die bekannten Eigenschaften behalten sollen.
+		\item \textbf{topologischer Raum} $(X,\tT)$ - Sei $X$ eine Menge und $\tT\subseteq P(X)$. Die Elemente von $\tT$ sind die \textit{offenen Mengen}. $\tT$ definiert eine \textit{Topologie}, wenn folgende Eigenschaften erfüllt sind:
+\begin{enumerate}[(i)]
+\item $\emptyset,\,X\in \tT$
+
+\item $A_i\in\tT$ für $i\in I$, $\N \supset I$ endlich $\df$ $\cap_{i\in I} A_i\in\tT$
+
+\item $A_i\in\tT$ für $i\in I$, $I$ bel. Indexmenge $\df$ $\cup_{i\in I}A_i \in \tT$
+\end{enumerate}
+$(X,\tT)$ ist der \textit{topologische Raum}.\par
+Ein Beispiel, für einen topologischen Raum sind die metrischen Räume $(X,d)$: $d$ induziert dann eine Topologie auf $X$, die offenen Mengen sind nämlich durch $d$ eindeutig bestimmt.\par
+Sei $M:=\{1,2\},\dots$
+\begin{enumerate}[]
+\item $\tT: = \{\emptyset,M\}$. Die triviale Topologie, nur $\emptyset$ und $M$ sind offen.
+
+\item $\tT:=P(M)$. Die diskrete Topologie, alle Mengen sind offen. Die diskrete Metrik induziert genau diese Topologie.
+
+\item $\tT:=\{\emptyset,\{1\},\{1,2\}\}.$ M ist hier nicht hausdorffsch, denn egal welche Umgebung man um 2 betrachtet, man kann nicht erreichen, dass 1 nicht in der gleichen ist.
+\end{enumerate}
 			
 	\end{enumerate} 
  
