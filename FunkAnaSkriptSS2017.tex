@@ -444,7 +444,7 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 	\end{proof}
 
 	\begin{definition}
-		\marginpar{(sonst auch Homöomorphismus)}.
+		\marginpar{\scriptsize (sonst auch Homöomorphismus)?}.
 		Zwei normierte $\K-VR$ $X,Y$ heißen \qmarks{topologisch isomorph}, falls es ein Isomorphismus 
 		$T: X\to Y$ mit $T\in \BS$ und $\inv{T}\in\B(Y,X)$. Dann heißt $T$ topologischer Isomorphismus,
 	\end{definition}
@@ -466,9 +466,57 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 
 	\begin{thm}[Fortsetzung von stetigen Operatoren]
 		$X,Y$ normierte $\K-VR$, $Y$ ein Banachraum, $Z\subset X$, $Z$ dichter UVR.
-		$T\in \B(Z,Y)$. Dann existiert eindeutiger Operator $\tilde{T} \in \BS$, so dass
+		$T\in \B(Z,Y)$. Dann existiert ein eindeutiger Operator $\tilde{T} \in \BS$, so dass
 		$T|_Z = T$.
 	\end{thm}
+	\begin{proof}
+	\end{proof}
+
+	\begin{thm}
+		Ist $T$ normerhaltend (in $\R^n$ die unitären Matrizen). Ist $\tilde{T}$ ebenfalls normerhaltend.
+	\end{thm}
+		\begin{proof}
+		\end{proof}
+
+	\begin{bsp}[Konstruktion eines unbeschränkten Funktionals]
+	\end{bsp}
+
+	\begin{thm}[Neumanansche Reihe] 
+		$X$ Banachraum. Sei $T\in \B(X)$. Dann sind äquivalent: 
+			\begin{enumerate}[i)]
+				\item Die Reihe $\disp \sum_{i=0}^\infty T^k = I_X + T^1 + T^2 + \dots$ ist konvergent bzgl. der Operatornorm.
+				\item $\disp \limes \norm{T^n} = 0$
+				\item $\exists N\in \N: \norm{T^N} < 1$
+				\item $\disp \limes \sup \sqrt[n]{\norm{T^n}} < 1$
+			\end{enumerate}
+		In diesem Fall besitzt $(I-T)$ eine beschränkte ??.\\
+		Dies erfüllt $\inv{(I-T)} = \sum_{k=0}^\infty T^k$.
+		\marginpar{\scriptsize wenn $\norm{T} \leq 1$ haben wir gewonnen, aber $\norm{T}$ kann groß sein (nilpotente Matrizen)}
+	\end{thm}
+		\begin{proof}
+			\begin{itemize}[]
+				\item $" i)\df ii) \df iii)"$: \qmarks{klar}
+				\item $iii) \df iv)"$: Sei $n\in\N \df \exists \ell\in\N, k\in \{q_0,\dots,N-1\}$, 
+					s.d. $n = \ell \cdot N + k$ $\df \ell \leq \frac{n}{N}$
+					$\df \norm{T^n} = \norm{(T^n)^\ell T^k} \leq \norm{T^N}^\ell \cdot \norm{T^k}$\par
+					Sei $M := \max\{1,\norm{T},\norm{T^2},\dots,\norm{T^{N-1}}\}$
+					$\df \norm{T^n} \leq M\norm{T^N}^\ell$ \par
+					$\df \sqrt[n]{\norm{T^n}} = \sqrt[n]{\norm{T^N}^\ell}\sqrt[n]{M}$
+					$\leq \sqrt[n]{\norm{T^N} \frac{n}{N}} \cdot \sqrt[n]{M}$ 
+					$ = \underbrace{\sqrt[N]{\norm{T^N}}}_{< 1} \cdot 
+						\underbrace{\sqrt[n]{M}}_{\overset{\to 1}{\text{für } n\to\infty}} 
+						\cdot \sqrt[n]{\frac{1}{\norm{T^N}}}$ \par
+					$\disp \df \limes \sup \sqrt[n]{\norm{T^n}} < 1$   ($\nearrow$ Wurzelkriterium)
+			\end{itemize}
+		\end{proof}
+		
+	\begin{bem}
+		\marginpar{Nummerierung noch entfernen}
+		\begin{enumerate}
+			\item Wenn $\norm{T} < 1$, dann konv. die Neumannsche Reihe.
+			\item $\disp \limes\sup\sqrt[n]{\norm{T^n}} <1$ ist nur hinreiechend für Invertierbarkeit von $I-T$, nehme sonst beispielsweise $T = 2I$.
+		\end{enumerate}
+	\end{bem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
