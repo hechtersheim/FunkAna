@@ -463,7 +463,7 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 			\item Falls $\dim X = \dim Y = n\in \N$: $X,Y$ topologisch isomorph und topologischer Isomorphismus = lineare Bijektion.
 		\end{enumerate}
 	\end{bem}
-
+%% Satz 1.22
 	\begin{thm}[Fortsetzung von stetigen Operatoren]
 		$X,Y$ normierte $\K-VR$, $Y$ ein Banachraum, $Z\subset X$, $Z$ dichter UVR.
 		$T\in \B(Z,Y)$. Dann existiert ein eindeutiger Operator $\tilde{T} \in \BS$, so dass
@@ -471,23 +471,39 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 	\end{thm}
 	\begin{proof}
 	\end{proof}
-
+%% Satz 1.23
 	\begin{thm}
-		Ist $T$ normerhaltend (in $\R^n$ die unitären Matrizen). Ist $\tilde{T}$ ebenfalls normerhaltend.
+					Ist $T$ normerhaltend (in $\R^n$ die unitären Matrizen $\norm{Tx} = \norm{x}$), so ist $\tilde{T}$ ebenfalls normerhaltend.
 	\end{thm}
 		\begin{proof}
 		\end{proof}
 
 	\begin{bsp}[Konstruktion eines unbeschränkten Funktionals]
+		Sei $X= \ell^1$ ({Raum der absolut konvergenten Folgen})\par
+		Betrachte: $x = (1, \frac{1}{4}, \frac{1}{9},\dots)$, 
+		$\norm{x_0} = \sum_{n=1}^\infty |\frac{1}{n^2}| = \frac{\pi^2}{6} $,
+		Einheitsvektor $e_k = (\delta_{nk})_{n\in\N}$\par
+		$\nearrow$ Erzeugnis: \underline{endliche} linear Kombination der Einheitsvektoren 
+		$\df \text{span} \{e_k\}_{k_\N} = \{(x_1,x_2,\dots,0,\dots)\}$ (Folgen, die irgendwann zu $0$ werden.)\par
+		Die Familie $B := (x_0,e_1,e_2,e_3,\dots)$ ist linear unabhängig.
+		$\df B_i$ lässt sich zu Basis $B = (b_i)_{i\in I}$ mit $\N_0 \subset I$ und $b_0 = x_0, b_i = e_i \; \forall i\in \N$ erweitern (überabzählbar).\par
+		Sei $x\in x- \ell^1 \df \exists$ eindeutige Darstellung 
+		$x = \alpha_0 x_0 +\sum_{\overset{n\in\N}{blub}} \alpha_n e_n + \sum_{i\in I\backslash N_0}$. 
+		Definiere das Funktional: $f" \ell^1 \to \K$ mit $\alpha_0 x_0 +\sum_{\overset{n\in\N}{blub}} \alpha_n e_n + \sum_{i\in I\backslash N_0} \to \alpha_0$\par
+	Wir zeigen: $Ker f$ nicht abeschlossen.\par
+		Betrachte Folge $(x_n)_{n\in\N}$ mit $x_n \sum_{k=1}^n \frac{1}{k^l}$		 
+		$\df x_n\in Ker f \; \forall n\in\N$, da $x_n\in span\{e_k\}_{k\in\N}$. 
+		Es gilt jedoch $x_n \to x_0 \not\in Ker f$, da $f(x_0) = 1$
 	\end{bsp}
 
+%% Satz 1.25 Neumansche Reihe
 	\begin{thm}[Neumanansche Reihe] 
 		$X$ Banachraum. Sei $T\in \B(X)$. Dann sind äquivalent: 
 			\begin{enumerate}[i)]
 				\item Die Reihe $\disp \sum_{i=0}^\infty T^k = I_X + T^1 + T^2 + \dots$ ist konvergent bzgl. der Operatornorm.
 				\item $\disp \limes \norm{T^n} = 0$
 				\item $\exists N\in \N: \norm{T^N} < 1$
-				\item $\disp \limes \sup \sqrt[n]{\norm{T^n}} < 1$
+				\item $\disp \limes \sup \sqrt[n]{\norm{T^n}} < 1$. Definiere das Funktional
 			\end{enumerate}
 		In diesem Fall besitzt $(I-T)$ eine beschränkte ??.\\
 		Dies erfüllt $\inv{(I-T)} = \sum_{k=0}^\infty T^k$.
@@ -509,7 +525,7 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 					$\disp \df \limes \sup \sqrt[n]{\norm{T^n}} < 1$   ($\nearrow$ Wurzelkriterium)
 			\end{itemize}
 		\end{proof}
-		
+
 	\begin{bem}
 		\marginpar{Nummerierung noch entfernen}
 		\begin{enumerate}
