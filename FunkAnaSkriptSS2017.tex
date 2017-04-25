@@ -65,6 +65,11 @@
 \newcommand{\tT}{\mathcal{T}} %topologisches T
 \newcommand{\B}{\mathcal{B}} %Raum der beschränkten Funktion
 \newcommand{\BS}[1][X,Y]{\mathcal{B}(#1)} %"standardraum" der beschränkten Funktion
+%Für (mind.) ein Beweis notwendig:
+\newcommand{\dX}{\hat{X}}%Dach X
+\newcommand{\dd}{\hat{d}}%Dach d
+\newcommand{\olx}{\overline{x}} %OverLine x
+\newcommand{\oly}{\overline{y}}
 
 \newcommand{\lL}[2][\Omega,\mu]{\text{L}^{#2}(#1)} %Lebesgue L für Matheumgebgung mit Omega, mu als Standard \lL[Raum,Maß]{Dimension}
 \newcommand{\ess}{\textnormal{ess}}
@@ -533,13 +538,126 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 			\item $\disp \limes\sup\sqrt[n]{\norm{T^n}} <1$ ist nur hinreiechend für Invertierbarkeit von $I-T$, nehme sonst beispielsweise $T = 2I$.
 		\end{enumerate}
 	\end{bem}
+\begin{bsp}[Fredholmsche Integralgleichung]
+Sei $k\in C([a,b]^2)$.
+Der Fredholmsche Integraloperator $$K:C([a,b])\to C([a,b]),\; (Kx)(s):=\int^b_a K(s,t)x(t)dt$$ ist stetig, wenn x stetig ist.
+Die Fredholmsche Integralgleichung lautet: $$(I-K)x=y,\quad y\in C([a,b]).$$
+Und es gilt: $\displaystyle \|Kx\|_\infty \leq \max_{s\in[a,b]} \int^b_a |K(s,t)|dt\cdot\|x\|_\infty$.\\
+Wenn nun $\displaystyle \max_{s\in[a,b]} \int^b_a |K(s,t)|dt<1$, dann gilt für alle $ y\in C([a,b]):$
+Die Fredholmsche Integralgleichung $(I-K)x=y$ hat genau eine Lösung $x\in C([a,b])$. Diese hängt stetig von $y\in C[a,b]$ ab.
+\end{bsp}
+
+\section{Metrische und topologische Räume, Satz von Baire}
+
+\begin{bem}[Erinnerung]
+\begin{enumerate}[-]
+\item $(X,d)$ metrischer Raum mit Metrik $d$.
+
+\item Kompaktheit, Satz von Bolzano-Weierstraß
+\end{enumerate}
+\end{bem}
+
+\begin{lemma}
+Sei $(X,d)$ ein metrischer Raum. Dann gilt die Vierecksungleichung:
+$$|d(x,y)-d(x_1,y_1)| \leq d(x,x_1) +d(y,y_1)\quad \forall x,x_1,y,y_1\in X$$
+\end{lemma}
+\begin{proof}
+$d(x_1,y_1) \leq d(x_1,x)+d(x,y_1) \leq d(x_1,x)+d(x,y)+d(y,y_1)$\\$\df d(x_1,y_1)-d(x,y) \leq d(x,x_1)+d(y,y_1)$. Analog: $d(x,y)-d(x_1,y_1) \leq d(x,x_1)+d(y,y_1)$\par
+$\df |d(x,y) - d(x_1,y_1)| \leq d(x,x_1) +d(y,y_1)$
+\end{proof}
+
+\begin{bem}[Rekapitulieren Sie folgende Begriffe]
+$U_r(x)$ Kugel mit Radius $r$,	$\overline{M}$ Abschluss,	$\mathring{M}$ Innere,	$\partial M$ Rand,	Kompakt,	offene Überdeckung.
+\end{bem}
+
+\begin{definition} %Abstandserhaltung, Einbettung und Isometrie
+Seien $(X,d_X),(Y,d_Y)$ metrische Räume. Eine Abbildung $f:X\to Y$ heißt
+\begin{enumerate}[(a)]
+\item \textit{abstandserhaltend} falls $d_X(x,y)=d_Y(f(x),f(y))$ (Bsp.: orthogonale Matrix).
+\item \textit{Isometrie} falls abstandserhaltend und surjektiv.
+\end{enumerate}
+Eine \textit{abstandserhaltende}  Abbildung heißt auch \textit{Einbettung}. Eine \textit{Einbettung} heißt \textit{dicht}, falls $f(X)$ dicht in Y ist.\par
+Notation: Wir schreiben $X\subset Y$, falls X in Y eingebettet ist.
+\end{definition}
+
+\begin{thm}%Der große Vervollständigungssatz
+Jeder metrische Raum $(X,d)$ lässt sich in einen bis auf Isometrie eindeutig bestimmten vollständigen metrischen Raum $(\dX,\dd)$ dicht einbetten. $(\dX,\dd)$ heißt Vervollständigung von $(X,d)$.
+\end{thm}
+\begin{proof}
+\begin{enumerate}[(1)]
+\item Konstruktion von $\dX$\par
+Sei $CF(X)$ die Menge aller Cauchyfolgen in X. Seien $\overline{x}:=(x_n),\;\overline{y}:=(y_n) \in CF(X)$.\par 
+Wir betrachten den \glqq Abstand\grqq  $$ d(\overline{x},\overline{y}):=\lim_{n\to\infty} d_X(x_n,y_n),$$ der dank Lemma 1.29 wohldefiniert ist.\par 
+Nun betrachten wir die Relation $\sim\, \subseteq CF(X) \times CF(X)$ mit
+$$\overline{x} \sim \overline{y} :\Leftrightarrow d(\olx,\oly) = 0$$
+$\glqq \sim \grqq$ ist tatsächlich eine Äquivalenzrelation und unterteilt $CF(X)$ in Äquivalenzklassen. Sei $[x]$ die Äquivalenzklasse des Repräsentanten $\olx$ und $\dX$ die Menge aller Äquivalenzklassen.\par 
+Für $\olx,\olx'\in [x]\in \dX,\;\oly,\oly'\in [y]\in\dX$ gilt: 
+\begin{equation*}
+\begin{split}
+& 0=d(\olx,\olx') = \lim_{n\to \infty} d_X((x_n),(x_n'))\\
+& 0=d(\oly,\oly') = \lim_{n\to \infty} d_X((y_n),(y_n')).
+\end{split}
+\end{equation*}
+Wegen $d_x(x_n,y_n') \leq d_X(x_n',x_n')+d_X(x_n,y_n)+d_X(y_n,y_n')$\\
+$d_x(x_n,y_n) \leq d_X(x_n,x_n')+d_X(x_n',y_n')+d_X(y_n',y_n)$ ist
+$$\lim_{n\to\infty} d_X(x_n',y_n')\leq \lim_{n\to\infty} d_X(x_n,y_n) \leq \lim_{n\to\infty} d_X(x_n',y_n')\df d(\olx,\oly)=d(\olx',\oly')$$
+und wir können 	wohldefinieren: $\dd([x],[y]):=d(\olx,\oly)\df \dd$ ist Metrik auf $\dX$.
+
+\item Konstruktion einer dichten Einbettung $f:X\to \dX$\par
+Für $x\in X$ sei $f(x):=[(x,x,x,\dots)]$.\\
+Es gilt für $x,y\in X$: $\dd(f(x),f(y)) = \lim_{n\to\infty}d_X(x,y)=d_X(x,y)$.\par 
+Wir zeigen nun, dass $f(X)$ dicht in $\dX$ liegt. Sei $[x]\in\dX,\;\olx=(x_n)$, da nun $(x_n)$ eine Cauchyfolge in $X$ ist, ist:
+$$\forall \varepsilon >0\; \exists N\in\N : d(x_n,x_m)< \varepsilon \;\;\forall n,m \geq N$$
+Wir betrachten nun $\olx_N := (x_N,x_N,x_N,\dots)$ $$\df \dd(f(x_N),[x])=\lim_{n\to\infty} d_X(x_N,x_n)\leq \varepsilon$$ 
+Damit ist $f(x_N)\to [x]$ für $\varepsilon \to 0$ (oder $N\to\infty$?).
+
+\item Vollständigkeit von $\dX$\par
+Sei $([x]_j)$ eine Cauchyfolge in $\dX$. Zu jedem $[x]_j\in \dX\;\exists y_j \in X$ so dass $\dd([x]_j,f(y_j)<\frac{1}{j}$, da f(X) dicht in $\dX$ ist.
+$$\df d_X(y_j,y_k) = \dd(f(y_j),f(y_k))\leq \dd(f(y_j),[x]_j)+\dd([x]_j,[x]_k)+\dd([x]_k,f(y_k))<\frac{1}{j}+\dd([x]_j,[x]_k) + \frac{1}{k}$$
+$\df (y_j)$ ist eine Cauchyfolge in $X$, $y := (y_j)\in CF(X) \df\;[y]\in\dX$ ist der Kandidat für den Grenzwert der Cauchyfolge.
+$$\dd([x]_j,[y])\leq \dd([x]_j,f(y_j))+\dd(f(y_j),[y])<\frac{1}{j}+\lim_{k\to\infty}d_X(y_j,y_k)\df \lim_{j\to\infty} \dd([x]_j,[y])=0$$
+das heißt $[x]_j\to[y]$ für $j\to\infty$
+
+\item Eindeutigkeit von $\dX$ im folgenden Sinne: ist $\tilde{X}$ eine weitere Vervollständigung von $X$, so sind $\dX,\tilde{X}$ isometrisch zueinander.\par 
+Sei also $(H,d_H)$ ein vollständiger metrischer Raum mit $X\subseteq H$,
+$d_H(x,y)=d_X(x,y)$ $\forall x,y\in X$ und $\overline{X} = H$.\par
+Unser Ziel ist es, eine Isometrie $g:\dX\to H$ zu bauen.\\
+Sei $[x]\in\dX,$ $\olx=(x_n)\in[x]\in\dX$, da $H$ vollständig ist $\exists h\in H$ so dass $\lim_{n\to\infty}d_H(x_n,h)=0$\par 
+Wir betrachten $g:\dX\to H$,  $[x]\mapsto h$ wie oben.\par 
+$g$ ist surjektiv, da für $h\in H \df \exists \olx = (x_n)\in CF(X)$ so dass $\lim_{n\to\infty}d_H(x_n,h)=0$, also $g([x])=h$\\
+$g$ ist abstandserhaltend, da für $[x],[y]\in \dX$ gilt
+$$\dd([x],[y])=\lim_{n\to\infty} d_X(x_n,y_n) = \lim_{n\to\infty} d_H(x_n,y_n)=d_H(g([x]),g([y])).$$
+\end{enumerate}
+\end{proof}
+
+\begin{definition}%Durchmesser
+Sei $(X,d)$ ein metrischer Raum, $M\subseteq X,\,M\not= \emptyset$.
+Wir definieren den Durchmesser von M durch
+$$\delta(M):= \sup\left\lbrace d(x,y):x,y\in M\right\rbrace.$$
+\end{definition}
+
+Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips aus $\R$.
+\begin{thm}[Cantorscher Durchschnittssatz]
+Sei $(X,d)$ ein metrischer Raum, der vollständig ist. $(F_n)$ eine Folge von abgeschlossen Teilmengen mit $F_n \not = \emptyset\;\, \forall n\in\N$, $F_1\supseteq F_2\supseteq \dots$ und $\displaystyle \lim_{n\to\infty} \delta(F_n)=0$\par 
+$$\df \exists! x_0\in X: \underset{n\in\N}{\cap}F_n = \{x_0\}$$
+\end{thm}
+\begin{proof}
+klar!
+\end{proof}
+
+
+
+
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section*{Etwaige Begriffe}
 	\begin{enumerate}
-		\item \textbf{Hausdorffsch, Hausdorffeigenschaft} - Eine Menge heißt \textit{hausdorffsch}, wenn je zwei versch. Punkte stets disjunkte Umgebungen haben. Metrische Räume sind zum Beispiel hausdorffsch, da zwei versch. Punkte stets einen Abstand $> 0$ haben.
+		\item \textbf{Hausdorffsch, Hausdorffeigenschaft} - Eine Menge heißt \textit{hausdorffsch}, wenn je zwei versch. Punkte stets disjunkte Umgebungen haben. Metrische Räume sind zum Beispiel hausdorffsch, da zwei versch. Punkte stets einen Abstand $> 0$ haben. Für ein Gegenbeispiel $\nearrow$ topologischer Raum
 
 		\item \textbf{essentiell beschränkt} - 
 					$(\Omega, \hA,\mu)$ sei ein Maßraum. Eine Funktion $f: \Omega \rightarrow \R$ heißt essentiell beschränkt, falls 
@@ -557,7 +675,7 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 \item $A_i\in\tT$ für $i\in I$, $I$ bel. Indexmenge $\df$ $\cup_{i\in I}A_i \in \tT$
 \end{enumerate}
 $(X,\tT)$ ist der \textit{topologische Raum}.\par
-Ein Beispiel, für einen topologischen Raum sind die metrischen Räume $(X,d)$: $d$ induziert dann eine Topologie auf $X$, die offenen Mengen sind nämlich durch $d$ eindeutig bestimmt.\par
+Ein Beispiel, für einen topologischen Raum sind die metrischen Räume $(X,d)$: $d$ induziert dann eine Topologie auf $X$, die offenen Mengen sind nämlich durch $d$ bestimmt.\par
 Sei $M:=\{1,2\},\dots$
 \begin{enumerate}[]
 \item $\tT: = \{\emptyset,M\}$. Die triviale Topologie, nur $\emptyset$ und $M$ sind offen.
