@@ -16,7 +16,7 @@
 \usepackage[nothm]{thmbox} %Decorate theorem statements
 %more features for environments and other stuff
 \usepackage{centernot} %nicer looking not
-\usepackage{marvosym} %some symbols
+\usepackage{marvosym} %some 
 \usepackage{paralist} %Adds more function to listing environments
 \usepackage{xstring} %If then 
 
@@ -76,6 +76,7 @@
 \newcommand{\lL}[2][\Omega,\mu]{\text{L}^{#2}(#1)} %Lebesgue L für Matheumgebgung mit Omega, mu als Standard \lL[Raum,Maß]{Dimension}
 \newcommand{\ess}{\textnormal{ess}}
 \newcommand{\supp}{\textnormal{supp}}
+\newcommand{\aufspan}{\textnormal{span}}
  
 \newcommand{\seminorm}[1]{||| #1 |||}
 \newcommand{\norm}[1]{\|#1\|}
@@ -663,77 +664,6 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 	Angenommen $\exists y\in \cap_{n\in\N} F_n$, mit $x_0 \not= y$
 	$$\df 0 < d(x_0,y) \leq d(x_0,x_n) + d(x_n,y_0) \leq 2\delta(F_n)\overset{n\to\infty}{\longrightarrow} 0 \text{  Widerspruch!}$$
 \end{proof}
-%%
- 	TODO V6
-%% 1.1.40
-	\begin{thm}
-		
-	\end{thm}
-
-	\begin{proof}
-		\begin{itemize}[]
-			\item $\afs (v) \df (i) \afs$ Sei $(U_i)_{i\in I}$ offene Überdeckung von $X$.
-			Angenommen $\not\exists$ endliche Teilüberdeckung. Definiere induktiv Kugeln $K_n$ $n\in\N$, wie folgt
-			Da $X$ präkompakt, gibt es zu $\varepsilon = 1$ endliche viele Kugeln $U_1(x_0,j)$ mit 
-			$X \subset \cap_{j=0}^{m_1} U_1(x_{0,j}$.
-			Dann gilt: Mindestens eine dieser Kugeln ist nicht durch endliche viele Mengen aus $(U_i)_{i\in I}$ überdeckbar.\par
-			OBdA $U_1(x_{0,0})$, setze $x_0 := x_{0,0}$. \par
-			Konstruiere so eine Folge $(x_n)$, so dass $U_{\frac{1}{2^n}}(x_1)$ nicht druch dendliche viele Mengen aus $(U_i)_{i\in I}$ überdeckt werden kann. \par
-			Sei $y \in U_{\frac{1}{2^{n-1}}}(x_{n-1} \cap U_{\frac{1}{2^n}}(x_1) \neq \emptyset$ \par
-			Dann gilt $d(x_{n-1},x_n) \leq d(x_{n-1},y) + d(y,x_1) \leq \frac{1}{2^{n-1}} + \frac{1}{2^n} \leq \frac{1}{2^{n-2}}$ \par
-			Für $n \leq p \leq q$ gilt dann $d(x_p,x_q) \leq d(x_p,x_{p+1}) + \dots + d(x_{q-1},x_{q})
-			\leq \frac{1}{2^{p-1}} + \dots + \frac{1}{2^{q-2}} < \frac{1}{2^{n-2}}$
-			$\df (x_n)$ ist CF in $X$ $\df$ 
-			$\exists  \hat{x} \in X$ ($X$ vollständig), so dass $\limes d(x_n,\hat{x}) = 0$\par
-			Wegen $X = UU$ gilt $\exists i_0\in I: \hat{x}\in U_{i_0}$\par
-			Weil $U_{i_0}$ offen: $\exists r>0$, so dass $U_r(\hat{x} \subset U_{i_0}$\par
-			Sei  $n\in \N$, so dass $\frac{1}{2^n} < \frac{r}{2}$ und $d(\hat{x}, x_n) < \frac{r}{2}$\par
-			$\df U_{\frac{1}{2}} (x_n) \subset U_r(\hat{x}) \subset U_{i_0}$\par
-			Das ist ein Widerspruch dazu, dass $UU$ nicht durch endliche viele $U_i$ überdeckt werden kann.
-		\end{itemize}
-	\end{proof}
-
-	\begin{cor}
-		$(X,d)$ metrischer Raum
-			\begin{enumerate}[a)]
-				\item $(X,d)$ kompakt $\df$ $X$ vollständig
-				\item $M\subset X$, so dass jede Folge in M eine in M konvergente TF hat ("M folgenkomapkt")
-					$\Leftrightarrow$ $M \subset X$ kompakt ("M Überdeckungskompakt")
-				\item $M\subset X$ kompakt $\df$ $M$ beschränkt und abgeschlossen.
-				\item $X$ kompakt, $A \subset X$ abgeschlossen $\df$ $A$ kompakt.
-			\end{enumerate}
-	\end{cor}
-
-	\begin{definition}
-		$(X,d)$ metrischer Raum. $M\subset X$ heißt \qmarks{relativ kompakt}, wenn $Mstrich$ kompakt.
-	\end{definition}
-
-	\begin{definition}
-		$X$ vollständig, $M \subset X$ relativ kompakt. \par
-			$\Leftrightarrow$ jede Folge in $M$ besitzt eine in $X$ konvergente TF.
-	\end{definition}
-
-	\begin{thm}
-		$X$ metrischer Raum. $M,n \subset X$ seien relativ kompakt (bzw. präkompakt). Dann gilt 
-			\begin{enumerate}
-				\item $S\subset M$ $\df$ $S$ relativ kompakt (bzw. präkompakt)
-				\item $M\cup N$ relativ kompakt (bzw präkomp.)
-				\item $M,N$ präkompakt
-				\item Ist $(X,d)$ vollständig, so gilt $M$ relativ kompakt $\Leftrightarrow M$ präkompakt
-			\end{enumerate}
-	\end{thm}
-
-	\begin{proof}
-		\begin{itemize}
-			\item \qmarks{a) - c)}: mündlicher Beweis. TODO. folgt aus Definition.
-			\item d) $\df$ folgt aus c) \par
-				$\Leftarrow$ Sei $M$ präkompakt $\forall \varepsilon > 0 \exists p\in\N, \{x_1,\dots,x_p\} \subset X$ mit $M \subset \cup_{j=1}^p U_{\frac{\varepsilon}{2}}(x_j)overline$. 
-				Wegen $\overline{U_{\frac{\varepsilon}{2}}} = U_{{\varepsilon}}$ gilt
-				$\overline{M} \subset \cup_{j=1}^p \overline{U_{\frac{\varepsilon}{2}}} \subset \cup_{j=1}^p U_{varepsilon}$
-				$\df$ $\overline{M}$ präkompakt. Da $(\overline{M},d)$ vollständig ist $\overline{M}$ kompakt. (Satz 1.4.1) $\df$ $M$ relativ komapkt.
-
-		\end{itemize}
-	\end{proof}
 
 %Der Heuser beschreibt den folgenden Satz folgendermaßen: 
 %Es gibt wohl keinen Satz in der Funktionalanalysis, der glanzloser und gleichzeitig kraftvoller wäre als der Bairesche Kategoriensatz. Von seiner Glanzlosigkeit wird sich der Leser \textit{sofort} überzeugen können; für seine Kraft müssen wir ihn auf die folgenden Nummern vertrösten.
@@ -839,7 +769,7 @@ klar! (Ja, selbst ohne eine Behauptung)
 %Satz 1.41
 \begin{thm}
 	Sei $(X,d)$ ein metrischer Raum. Dann ist äquivalent:
-	\begin{enumerate}[(i)]
+	\begin{enumerate}[(1)]
 	\item $X$ kompakt.
 	
 	\item Jede abzählbare offene Überdeckung von $X$ enthält eine endliche Teilüberdeckung.
@@ -880,10 +810,76 @@ klar! (Ja, selbst ohne eine Behauptung)
 	Konstruiere so eine Folge $(x_n)$ in $X$. Dann gilt 
 	$$\forall n\in\N: d(x_{n+1},x_j) \geq \varepsilon_0\quad \forall j \in \{1,\dots,n\}$$
 	$\df (x_n)$ hat keine Cauchy-Teilfolge $\df (x_n)$ hat keine konvergente Teilfolge.
-\end{enumerate}
-\end{proof}
 
-	\begin{bem}
+			\item $(5) \df (1)$: Sei $(U_i)_{i\in I}$ eine offene Überdeckung von $X$.
+			Angenommen $\centernot\exists$ endliche Teilüberdeckung. Definiere induktiv Kugeln $K_n$, $n\in\N$, wie folgt:\\
+			Da $X$ präkompakt, gibt es zu $\varepsilon = 1$ endliche viele Kugeln $U_1(x_0,j)$ mit 
+			$X \subseteq \cap_{j=0}^{m_1} U_1(x_{0,j})$.
+			Dann gilt: Mindestens eine dieser Kugeln ist nicht durch endliche viele Mengen aus $(U_i)_{i\in I}$ überdeckbar.\par
+			OBdA $U_1(x_{0,0})$, setze $x_0 := x_{0,0}$. \par
+			Konstruiere so eine Folge $(x_n)$, so dass $U_{\frac{1}{2^n}}(x_1)$ nicht durch endlich viele Mengen aus $(U_i)_{i\in I}$ überdeckt werden kann. \par
+			Sei $y \in U_{\frac{1}{2^{n-1}}}(x_{n-1}) \cap U_{\frac{1}{2^n}}(x_1) \neq \emptyset$ \par
+			Dann gilt $d(x_{n-1},x_n) \leq d(x_{n-1},y) + d(y,x_1) \leq \frac{1}{2^{n-1}} + \frac{1}{2^n} \leq \frac{1}{2^{n-2}}$ \par
+			Für $n \leq p \leq q$ gilt dann $d(x_p,x_q) \leq d(x_p,x_{p+1}) + \dots + d(x_{q-1},x_{q})
+			\leq \frac{1}{2^{p-1}} + \dots + \frac{1}{2^{q-2}} < \frac{1}{2^{n-2}}$
+			$\df (x_n)$ ist eine Cauchyfolge in $X$ $\overset{X\text{ vollst.}}{\df}$ 
+			$\exists  \hat{x} \in X$, so dass $\limes d(x_n,\hat{x}) = 0$\par
+			Wegen $X = \cup_{i\in I} U_i$ gilt $\exists i_0\in I: \hat{x}\in U_{i_0}$\par
+			Weil $U_{i_0}$ offen: $\exists r>0$, so dass $U_r(\hat{x}) \subseteq U_{i_0}$\par
+			Sei  $n\in \N$, so dass $\frac{1}{2^n} < \frac{r}{2}$ und $d(\hat{x}, x_n) < \frac{r}{2}$\par
+			$\df U_{\frac{1}{2}} (x_n) \subseteq U_r(\hat{x}) \subseteq U_{i_0}$\par
+			Das ist ein Widerspruch dazu, dass $U_{\frac{1}{2^n}}(x_n)$ nicht durch endliche viele $U_i$ überdeckt werden kann.
+		\end{enumerate}
+	\end{proof}
+
+%Korollar 1.42
+	\begin{cor}
+		$(X,d)$ metrischer Raum
+			\begin{enumerate}[a)]
+				\item $(X,d)$ kompakt $\df$ $X$ vollständig
+				\item $M\subset X$, so dass jede Folge in M eine in M konvergente Teilfolge hat (\afs M folgenkomapkt\afs)
+					$\Leftrightarrow$ $M \subset X$ kompakt (\afs M Überdeckungskompakt\afs)
+				\item $M\subset X$ kompakt $\df$ $M$ beschränkt und abgeschlossen.
+				\item $X$ kompakt, $A \subset X$ abgeschlossen $\df$ $A$ kompakt.
+			\end{enumerate}
+	\end{cor}
+
+%Definition 1.43
+	\begin{definition}
+		$(X,d)$ metrischer Raum. $M\subset X$ heißt \qmarks{relativ kompakt}, wenn $\overline{M}$ kompakt ist.
+	\end{definition}
+
+%Definition 1.44
+	\begin{definition}
+		$(X,d)$ vollständiger metrischer Raum, $M \subset X$ relativ kompakt. \par
+			$\Leftrightarrow$ jede Folge in $M$ besitzt eine in $X$ konvergente Teilfolge.
+	\end{definition}
+
+%Satz 1.45
+	\begin{thm}
+		$(X,d)$ metrischer Raum. $M,n \subset X$ seien relativ kompakt (bzw. präkompakt). Dann gilt 
+			\begin{enumerate}
+				\item $S\subset M$ $\df$ $S$ relativ kompakt (bzw. präkompakt)
+				\item $M\cup N$ relativ kompakt (bzw präkomp.)
+				\item $M,N$ präkompakt
+				\item Ist $(X,d)$ vollständig, so gilt $M$ relativ kompakt $\Leftrightarrow M$ präkompakt
+			\end{enumerate}
+	\end{thm}
+
+	\begin{proof}
+		\begin{itemize}
+			\item \qmarks{a) - c)}: mündlicher Beweis. TODO. folgt aus Definition.
+			\item d) $\df$ folgt aus c) \par
+				$\Leftarrow$ Sei $M$ präkompakt $\forall \varepsilon > 0\; \exists p\in\N, \{x_1,\dots,x_p\} \subset X$ mit $M \subset \cup_{j=1}^p \overline{ U_{\frac{\varepsilon}{2}}(x_j)}$. 
+				Wegen $\overline{U_{\frac{\varepsilon}{2}}(x_j)} \subset U_{{\varepsilon}}(x_j)$ gilt
+				$\overline{M} \subset \cup_{j=1}^p \overline{U_{\frac{\varepsilon}{2}}(x_j)} \subset \cup_{j=1}^p U_{\varepsilon}(x_j)$
+				$\df$ $\overline{M}$ präkompakt. Da $(\overline{M},d)$ vollständig ist $\overline{M}$ kompakt. (Satz 1.41) $\df$ $M$ relativ kompakt.
+
+		\end{itemize}
+	\end{proof}
+
+%Bemerkung, Fakten 1.46
+	\begin{bem}[Fakten]
 		$(X,\norm{\cdot})$ normierter Raum.
 		\begin{enumerate}[a)]
 			\item Aussagen über metrischer Räume übertragen sich
@@ -896,11 +892,13 @@ klar! (Ja, selbst ohne eine Behauptung)
 				\end{enumerate}
 		\end{enumerate}
 	\end{bem}
-\newcommand{\xt}{x_\theta}
-	\begin{thm}
-		TODO(eigentlich LEMMA!!) $(X,\norm{\cdot}$ normierter Raum, $E\subset X$ abgeschlossen UVR mit $E \not = X$, $\theta\in (0,1)$. \par
-		Dann existiert ein $x_\theta \in X$ mit $\norm{\xt} = 1$ und $\norm{\xt - y} \geq \theta \; y\in E.$
-	\end{thm}
+\newcommand{\xt}{x_\theta}%Eigentlich eta glaube ich
+
+%Lemma 1.47 Lemma von Riesz
+	\begin{lemma}[Lemma von Riesz]%Lemmaumgebung gab es schon :O
+		\TODO: theta mit eta ersetzen, Beweis vervollständigen. $(X,\norm{\cdot})$ normierter Raum, $E\subset X$ abgeschlossener Unterraum mit $E \not = X$, $\theta\in (0,1)$. \par
+		Dann existiert ein $x_\theta \in X$ mit $\norm{\xt} = 1$ und $\norm{\xt - y} \geq \theta \; \forall y\in E.$
+	\end{lemma}
 	\begin{proof}
 		Sei $x_0 \in X\backslash E$. $\delta = \inf_{y\in E} \norm{x_0 - y}$ \par
 		E abgeschlossen $\df$ $\delta > 0$. Sei $(y_n)$ Folge in $E$ mit $\norm{x_0 - y_n} \to \delta$. Sei $\eta \in (0,1) \df \frac{\delta}{\eta} > \delta $\par
@@ -912,25 +910,25 @@ klar! (Ja, selbst ohne eine Behauptung)
 		$(X,\norm{\cdot})$ normierter Raum.
 			\begin{enumerate}
 				\item $\overline{U_1(0)}$ $\aq$ $dimX < \infty$
-				\item Jede beschränkt Folge besitzt konvergente Teilfolge $\aq$ $dim X \infty$
+				\item Jede beschränkt Folge besitzt konvergente Teilfolge $\aq$ $dim X< \infty$
 			\end{enumerate}
 	\end{cor}
 
 	\begin{proof}
-		a) Folgt aus Heine-Borel\par
-		$\Leftarrow$ \par
-		$\Rightarrow$ Angenommen, $dim X = \infty$. Wähle $x_0 \in X$ mit $\norm{x_0} = 1$. Nach Lemma von Riesz, wähle $x_1 \in X$, so dass $\norm{x_1 - y} \geq \frac{1}{2} \forall spann\{x_0\}$. \par
-		Konstruiere so Folge $(x_n)$ mit $\norm{x_n} = 1$ und $\norm{x_n - y} \geq \frac{1}{2} \forall y\in span\{x_0,\dots,x_{n-1}\} \forall n\in\N.$ \par
-		$\df \norm{x_n - x_m} \geq \frac{1}{2} \forall n,m \in \N$  mit $n \not = m$. 
-		$\df (x_n)$ hat keine konvergente TF. \par
+		a) \afs $\Leftarrow$ \afs Folgt aus Heine-Borel\par
+		 \par
+		$\Rightarrow$ Angenommen, $dim X = \infty$ (Nicht endlichdimensional). Wähle $x_0 \in X$ mit $\norm{x_0} = 1$. Nach Lemma von Riesz, wähle $x_1 \in X$, so dass $\norm{x_1 - y} \geq \frac{1}{2} \forall y \in \aufspan\{x_0\}$. \par
+		Konstruiere so Folge $(x_n)$ mit $\norm{x_n} = 1$ und $\norm{x_n - y} \geq \frac{1}{2} \forall y\in \aufspan\{x_0,\dots,x_{n-1}\}\; \forall n\in\N.$ \par
+		$\df \norm{x_n - x_m} \geq \frac{1}{2}\; \forall n,m \in \N$  mit $n \not = m$. 
+		$\df (x_n)$ hat keine konvergente Teilfolge. \par
 		b) genauso.
 	\end{proof}
 
 	\subsection{Skalarprodukträume}
 
 	Wiederholung: $X$ $\K-VR$. Ein \qmarks{Skalarprodukt} ist eine Abb $(\cdot,\cdot) \to \K$ mit (S1) $(\alpha x + \beta y, z) = \alpha (x,z) + \beta (y,z)$ $\forall x,y,z \in X, \alpha,\beta \in \K$
-	(S2) $(x,y) = (y,z)$
-	(S3) $(x,y) > 0 \forall x\in X\backslash{0}$.
+	(S2) $(x,y) = (y,x)$
+	(S3) $(x,x) > 0 \forall x\in X\backslash{0}$.
 
 	\begin{bem}
 		\begin{enumerate}
@@ -939,10 +937,10 @@ klar! (Ja, selbst ohne eine Behauptung)
 			\item $\norm{x} \cdot \norm{y} \geq |(x,y)| \; \forall x,y \in X$ (Cauchy-Schwartz-Ungleichung)
 			\item Für $x,y \in X$ mit $(x,y) = 0$ (x und y orthogonal, $x orh y$)
 			gilt $\norm{x + y}^2 = \norm{x}^2 + \norm{y}^2$ (Satz des Pythagoras)
-			\item Für $x,y \in X$ gilt die Para.. 
+			\item Für $x,y \in X$ gilt die Parallelogrammgleichung: 
 				$\norm{x + y} ^2 + \norm{x - y}^2 = 2 \norm{x}^2 + 2\norm{y}^2$
 			\item	Für $(x_n), (y_n)$ mit $(x_n) \to x$, $(y_n) \to y$ gilt 
-				$(x_n, y_n) \to (x,y)$, da $|(x_n, y_n) - (x,y)| \leq \norm{x_n}\cdot \norm{y_n - y} + \norm{x_n - x}\norm{y}$
+				$(x_n, y_n) \to (x,y)$, da $|(x_n, y_n) - (x,y)| \leq \norm{x_n}\cdot \norm{y_n - y} + \norm{x_n - x}\norm{y}$ (Stetigkeit des Skalarprodukts)
 		\end{enumerate}
 	\end{bem}
 
