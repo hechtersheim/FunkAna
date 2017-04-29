@@ -41,6 +41,7 @@
 \newtheorem{thm}{Satz}[chapter]
 \newtheorem{lemma}[thm]{Lemma}
 \newtheorem{cor}[thm]{Korollar}
+\newtheorem*{cor*}{Korollar}
 
 \theoremstyle{definition}%Lässt den Text innerhalb nicht mehr kursiv erscheinen
 \newtheorem{definition}[thm]{Definition}
@@ -48,6 +49,7 @@
 
 \theoremstyle{myStyle}
 \newtheorem{bem}[thm]{Bemerkung}
+\newtheorem*{mbem*}{Eigene Bemerkung}
 
 %\renewcommand\thechapter{\Roman{chapter}}
 
@@ -437,6 +439,7 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 				\item $\norm{\cdot}_1$ ist äquivalent zu $\norm{\cdot}_2$ 
 					$\aq \exists \: m,M > 0: m\norm{x}_1 \leq \norm{x}_2 \leq M \norm{x}_1 \; \forall x\in X$
 			\end{enumerate}
+	
 	\end{thm}
 	\begin{proof}
 		\begin{enumerate}[zu (a):]
@@ -484,7 +487,7 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 					Ist $T$ normerhaltend (in $\R^n$ die unitären Matrizen $\norm{Tx} = \norm{x}$), so ist $\tilde{T}$ ebenfalls normerhaltend.
 	\end{thm}
 		\begin{proof}
-						TODO: Kurze Begründung. Eigentlich Korollar?
+						TODO: Kurze Begründung. Eigentlich Korollar?%folgt glaube ich, direkt aus dem Beweis hierüber
 		\end{proof}
 
 	\begin{bsp}[Konstruktion eines unbeschränkten Funktionals]
@@ -574,7 +577,7 @@ $d(x_1,y_1) \leq d(x_1,x)+d(x,y_1) \leq d(x_1,x)+d(x,y)+d(y,y_1)$\\$\df d(x_1,y_
 $\df |d(x,y) - d(x_1,y_1)| \leq d(x,x_1) +d(y,y_1)$
 \end{proof}
 
-\begin{bem}[Rekapitulieren Sie folgende Begriffe]
+\begin{bem}Rekapitulieren Sie folgende Begriffe:
 $U_r(x)$ Kugel mit Radius $r$,	$\overline{M}$ Abschluss,	$\mathring{M}$ Innere,	$\partial M$ Rand,	Kompakt,	offene Überdeckung.
 \end{bem}
 
@@ -595,9 +598,9 @@ Jeder metrische Raum $(X,d)$ lässt sich in einen bis auf Isometrie eindeutig be
 \begin{enumerate}[(1)]
 \item Konstruktion von $\dX$\par
 Sei $CF(X)$ die Menge aller Cauchyfolgen in X. Seien $\overline{x}:=(x_n),\;\overline{y}:=(y_n) \in CF(X)$.\par 
-Wir betrachten den \glqq Abstand\grqq  $$ d(\overline{x},\overline{y}):=\lim_{n\to\infty} d_X(x_n,y_n),$$ der dank Lemma 1.29 wohldefiniert ist.\par 
-Nun betrachten wir die Relation $\sim\, \subseteq CF(X) \times CF(X)$ mit
-$$\overline{x} \sim \overline{y} :\Leftrightarrow d(\olx,\oly) = 0$$
+Wir betrachten den \glqq Abstand\grqq  $$ d(\overline{x},\overline{y}):=\lim_{n\to\infty} d_X(x_n,y_n),$$ der dank Lemma 1.29 wohldefiniert ist,
+und die Relation $\sim\, \subseteq CF(X) \times CF(X)$ mit
+$$\overline{x} \sim \overline{y} :\Leftrightarrow d(\olx,\oly) = 0.$$
 $\glqq \sim \grqq$ ist tatsächlich eine Äquivalenzrelation und unterteilt $CF(X)$ in Äquivalenzklassen. Sei $[x]$ die Äquivalenzklasse des Repräsentanten $\olx$ und $\dX$ die Menge aller Äquivalenzklassen.\par 
 Für $\olx,\olx'\in [x]\in \dX,\;\oly,\oly'\in [y]\in\dX$ gilt: 
 \begin{equation*}
@@ -622,7 +625,7 @@ Damit ist $f(x_N)\to [x]$ für $\varepsilon \to 0$ (oder $N\to\infty$?).
 \item Vollständigkeit von $\dX$\par
 Sei $([x]_j)$ eine Cauchyfolge in $\dX$. Zu jedem $[x]_j\in \dX\;\exists y_j \in X$ so dass $\dd([x]_j,f(y_j)<\frac{1}{j}$, da f(X) dicht in $\dX$ ist.
 $$\df d_X(y_j,y_k) = \dd(f(y_j),f(y_k))\leq \dd(f(y_j),[x]_j)+\dd([x]_j,[x]_k)+\dd([x]_k,f(y_k))<\frac{1}{j}+\dd([x]_j,[x]_k) + \frac{1}{k}$$
-$\df (y_j)$ ist eine Cauchyfolge in $X$, $y := (y_j)\in CF(X) \df\;[y]\in\dX$ ist der Kandidat für den Grenzwert der Cauchyfolge.
+$\df (y_j)$ ist eine Cauchyfolge in $X$, $y := (y_j)\in CF(X) \df\;[y]\in\dX$ ist der Kandidat für den Grenzwert der Cauchyfolge:
 $$\dd([x]_j,[y])\leq \dd([x]_j,f(y_j))+\dd(f(y_j),[y])<\frac{1}{j}+\lim_{k\to\infty}d_X(y_j,y_k)\df \lim_{j\to\infty} \dd([x]_j,[y])=0$$
 das heißt $[x]_j\to[y]$ für $j\to\infty$
 
@@ -639,23 +642,175 @@ $$\dd([x],[y])=\lim_{n\to\infty} d_X(x_n,y_n) = \lim_{n\to\infty} d_H(x_n,y_n)=d
 \end{proof}
 
 \begin{definition}%Durchmesser
-Sei $(X,d)$ ein metrischer Raum, $M\subseteq X,\,M\not= \emptyset$.
-Wir definieren den Durchmesser von M durch
-$$\delta(M):= \sup\left\lbrace d(x,y):x,y\in M\right\rbrace.$$
+	Sei $(X,d)$ ein metrischer Raum, $M\subseteq X,\,M\not= \emptyset$.
+	Wir definieren den Durchmesser von M durch
+	$$\delta(M):= \sup\left\lbrace d(x,y):x,y\in M\right\rbrace.$$
 \end{definition}
 
 Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips aus $\R$.
+%Satz 1.34
 \begin{thm}[Cantorscher Durchschnittssatz]
-Sei $(X,d)$ ein metrischer Raum, der vollständig ist. $(F_n)$ eine Folge von abgeschlossen Teilmengen mit $F_n \not = \emptyset\;\, \forall n\in\N$, $F_1\supseteq F_2\supseteq \dots$ und $\displaystyle \lim_{n\to\infty} \delta(F_n)=0$\par 
-$$\df \exists! x_0\in X: \underset{n\in\N}{\cap}F_n = \{x_0\}$$
+	Sei $(X,d)$ ein metrischer Raum, der vollständig ist. $(F_n)$ eine Folge von 		abgeschlossen Teilmengen mit $F_n \not = \emptyset\;\, \forall n\in\N$, 			$F_1\supseteq F_2\supseteq \dots$ und $\displaystyle \lim_{n\to\infty} \delta(F_n)=0$\par 
+	$$\df \exists! x_0\in X: \underset{n\in\N}{\cap}F_n = \{x_0\}$$
 \end{thm}
 \begin{proof}
-klar!
+	Für jedes $n\in\N$ wählen wir ein $x_n\in F_n$. Sei $\varepsilon > 0$ vorgegeben. 
+	Da $\displaystyle \lim_{n\to\infty} \delta(F_n)=0$ $\exists N\in\N:\delta(F_n)<\varepsilon$ $\forall n \geq N$
+	$$\df \forall n,m\geq N: d(x_n,x_m)<\varepsilon \text{ da } x_n,x_m\in F_N \text{ und } \delta(F_N)<\varepsilon$$
+	%$\df (x_n)$ ist eine Cauchyfolge und wegen der Vollständigkeit von $X$ gibt es ein $x_0\in X$ so dass $\limes d(x_n,x_0)=0$
+	$$\df (x_n) \text{ ist eine Cauchyfolge } \overset{ X \text{ vollst. }}{\df} \exists x_0\in X : \limes d(x_n,x_0) = 0$$
+	Weil $x_k\in F_n$  $\forall k \geq n$ und $F_n$ abgeschlossen ist, ist $$ x_0 \in F_n\df x_0 \in \cap_{n\in\N}F_n \df \cap_{n\in\N} F_n \not = \emptyset$$
+	Angenommen $\exists y\in \cap_{n\in\N} F_n$, mit $x_0 \not= y$
+	$$\df 0 < d(x_0,y) \leq d(x_0,x_n) + d(x_n,y_0) \leq 2\delta(F_n)\overset{n\to\infty}{\longrightarrow} 0 \text{  Widerspruch!}$$
 \end{proof}
 
+%Der Heuser beschreibt den folgenden Satz folgendermaßen: 
+%Es gibt wohl keinen Satz in der Funktionalanalysis, der glanzloser und gleichzeitig kraftvoller wäre als der Bairesche Kategoriensatz. Von seiner Glanzlosigkeit wird sich der Leser \textit{sofort} überzeugen können; für seine Kraft müssen wir ihn auf die folgenden Nummern vertrösten.
 
+%Satz 1.35
+\begin{thm}[Bairescher Kategoriensatz]
+	Sei $(X,d)$ ein vollständiger metrischer Raum, $\cup^\infty_{n=1} F_n = X$, wobei $F_n \subseteq X$ abgeschlossen für alle $n\in\N$.\par
+	Dann gilt: $$\exists n_0\in\N:\mathring F_{n_0} \not = \emptyset.$$ Es gibt also ein $F_{n_0}$ dessen Inneres nichtleer ist.
+\end{thm}
+\begin{proof}
+	Wir bemerken zuerst: $x\in\mathring M \Leftrightarrow \exists \varepsilon >0: \overline{U_\varepsilon (x)} \subseteq M$.\par 
+	Angenommen es gelte für alle $n\in\N$ $\mathring F_n = \emptyset$, also kein $F_n$ enthalte eine abgeschlossene Kugel.\par 
+	Sei $n\in\N$ beliebig, $r>0$ und $x_0\in X \df \overline{U_{\frac{r}{2}}(x_0)}\setminus F_n \not = \emptyset $\\
+	Seien nun $x_n \in \overline{U_{\frac{r}{2}}(x_0)}\setminus F_n = \emptyset$. 	
+	Da $F_n$ kein Inneres hat (offiziell: abgeschlossen?!), existiert ein $r_n \in (0,\frac{r}{2})$ mit $\overline{U_{r_n}(x_0)}\cap F_n = \emptyset$, 
+	und für ein $y\in \overline{U_{r_n}(x_n)}$ gilt:
+	$$d(y,x_0) \leq d(y,x_n) d(x_n, x_0) \leq r_n + \frac{r}{2} \leq r $$
+	So erhalten wir $\overline{U_{r_n}(x_n)} \subseteq \overline{U_r(x_0)}$.
+	Wir betrachten nun $\overline{U_1(x_0)}$ und nach obiger Überlegung
+	$$\exists r_1 > 0, x_1 \in X: \overline{U_{r_1} (x_1)} \subseteq \overline{U_1(x_0)} \text{ mit } r_1 \leq \frac{1}{2} \text{ und } \overline{U_{r_1}(x_1)} \cap F_1 = \emptyset$$
+	Ebenso
+	$$\exists r_2 > 0, x_2 \in X: \overline{U_{r_2} (x_2)} \subseteq \overline{U_{r_1}(x_1)} \text{ mit } r_2 \leq \frac{1}{4} \text{ und } \overline{U_{r_2}(x_2)} \cap F_2 = \emptyset$$
+	Sukzessive erhalten wir so eine Folge $\left( \overline{U_{r_n}(x_n)}\right)_{n\in\N}$ mit folgenden Eigenschaften:
+	\begin{enumerate}[(1)]
+		\item $\overline{U_{r_{n+1}} (x_{n+1})} \subseteq \overline{U_{r_n}(x_n)} \quad \forall n\in\N$
+		
+		\item $r_n \leq \frac{1}{2^n}\quad \forall n\in\N$
+		
+		\item $\overline{U_{r_n}(x_n)} \cap F_n = \emptyset\quad \forall n\in\N$
+	\end{enumerate}
+	Wegen $(1)$ und $$0 \leq \delta\left(\overline{U_{r_n}(x_n)}\right) = 2r_n \leq \frac{1}{2^{n-1}}\overset{n\to\infty}{\longrightarrow}0$$
+	sind wir in der Situation des Cantorschen Durchschnittsatzes und es gibt ein eindeutiges $\hat{x} \in X$ mit $\hat{x}\in \cap_{n\in\N} U_{r_n}(x_n)$.
+	Dann ist wegen $(3)$ $\hat{x} \not \in F_n\; \forall n\in\N \df \hat{x}\in X \setminus \cup_{n\in\N} F_n = \emptyset$ Widerspruch!
+\end{proof}
 
+%Einschubskorollar ohne Nummerierung
+\begin{cor*}
+Hier kommt ziemlich fancy Zeug, von wegen der Polynomraum kann nicht vollständig sein, rein. TODO Behauptung und Beweis erstellen.
+\end{cor*}
+\begin{proof}
+klar! (Ja, selbst ohne eine Behauptung)
+\end{proof}
 
+%Definition 1.36
+\begin{definition}
+	Sei $(X,d)$ ein metrischer Raum. $M\subseteq X$ heißt\dots
+	\begin{enumerate}[(a)]
+		\item \textit{nirgends dicht}, wenn $\mathring{\overline{M}} = \emptyset$.
+		
+		\item \textit{mager} oder \textit{von 1.Kategorie}, wenn $M$ eine abzählbare Vereinigung von nirgends dichten Mengen ist, also $M = \cup_{n\in\N} A_n$, $A_n$ nirgends dicht für alle $n\in\N$, gilt.
+		
+		\item \textit{von 2.Kategorie }oder\textit{ fett}, wenn $M$ nicht von 1.Kategorie ist.
+	\end{enumerate}
+\end{definition}\par\bigskip
+
+%Eigene Bemerkung ohne Nummerierung.
+\begin{mbem*}[Trivia am Rande] Direkt aus der Definition folgt, das jede nirgends dichte Menge insbesondere von 1.Kategorie ist. Andersrum gilt dies nicht, was das Beispiel $\Q\subset \R$ zeigt. Ein Beispiel für eine nirgends dichte Menge ist die Cantor-Menge.\\
+	 \qmarks{Anschaulich} bedeutet \textit{nirgends dicht}, wenn sie in keiner Teilmenge (mit nichtleeren Innerem) des gesamten Raumes dicht liegt. \par\bigskip
+\end{mbem*}
+	Mithilfe dieser Definition können wir den Baireschen Umformulieren zu $$(X,d) \text{ ist ein vollständiger metrischer Raum } \df X \text{ ist von 2.Kategorie}$$ 
+
+%Korollar 1.37
+\begin{cor}
+	$(X,d)$ sei ein vollständiger metrischer Raum, $U\subseteq X$ offen und nichtleer.\par
+	Dann ist $U$ von 2.Kategorie.
+\end{cor} 
+\begin{proof}[Eigener Beweis]
+	Da $U$ offen ist, gibt es ein $\varepsilon>0$, so dass für $x\in U,\;\overline{U_\varepsilon(x)}\subseteq U$ ist. Nun können wir den Baireschen Kategoriensatz auf $\overline{U_\varepsilon(x)}$ anwenden.
+\end{proof}
+
+%Korollar 1.38
+\begin{cor}
+	$(X,d)$ sei ein vollständiger metrischer Raum.\par 
+	Dann gilt: 
+	$$ M\subseteq X \text{ mager } \df X\setminus M \text{ ist dicht in} X.$$
+\end{cor}
+\begin{proof}
+	Sei $M\subseteq X$ mager, angenommen $X\setminus M$ sei nicht dicht, also
+	$X\setminus \overline{(X\setminus M)}\not= \emptyset$\par 
+	$\df O:=X\setminus \overline{(X\setminus M)}$ ist offen und nichtleer.\par 
+	$\df O \subseteq M$ ist von 1. Kategorie, Widerspruch zu Korollar 1.37!
+\end{proof}
+
+%Korollar 1.39
+\begin{cor}
+	$(X,d)$ sei ein vollständiger metrischer Raum. Für $n\in\N$ sei $B_n \subseteq X$ so dass $X\setminus B_n$ mager. $B:=\cap_{n\in\N}  B_n$
+	$$\df \overline{B} = X$$
+\end{cor}
+\begin{proof}
+	$X\setminus\overline{B} = X\cap (\cap_{n\in\N} B_n)^c = X \cap (\cap_{n\in\N} B_n^c)$ ist wegen Korollar dicht in $X$.
+\end{proof}
+
+%Definition 1.40
+\begin{definition}
+	Der metrische Raum $(X,d)$ heißt \dots
+	\begin{enumerate}[(a)]
+	\item \textit{kompakt}, wenn für alle offenen Überdeckungen $(U_i)_{i\in I}$ von $X$ ein endliches $I'\subseteq I$ existiert, so dass $X = \cup_{i\in I'} U_i$
+	
+	\item \textit{präkompakt}, wenn $\forall \varepsilon > 0$ eine endliche Menge $M = \{x_1,\dots, x_n\}$ existiert, so dass $X = \cup^n_{i=1} U_\varepsilon (x_i)$. M heißt auch $\varepsilon$-Netz von $X$.
+\end{enumerate}		
+\end{definition}
+
+%Satz 1.41
+\begin{thm}
+	Sei $(X,d)$ ein metrischer Raum. Dann ist äquivalent:
+	\begin{enumerate}[(i)]
+	\item $X$ kompakt.
+	
+	\item Jede abzählbare offene Überdeckung von $X$ enthält eine endliche Teilüberdeckung.
+	
+	\item Ist $(A_n)$ eine Folge von abgeschlossenen Teilmengen von $X$ mit $A_n \supseteq A_{n+1} \not = \emptyset\; \forall n\in\N$. Dann gilt: $\cap_{n\in\N}A_n \not = \emptyset$.
+	
+	\item Jede Folge in $X$ besitzt eine konvergente Teilfolge.
+	
+	\item $X$ ist vollständig und präkompakt.
+	\end{enumerate}
+\end{thm}
+\begin{proof}
+\begin{enumerate}[]
+	\item $(1) \df (2)$: Man nimmt nur weniger mögliche Vereinigungen.
+	
+	\item $(2) \df (3)$: Angenommen $\cap_{n\in\N}{A_n} = \emptyset,\;A_n = \overline{A_n},\;\emptyset \not = A_{n+1} \subseteq A_n$ $\forall n\in\N$\par
+	$$\df U_n := X\setminus A_n \text{ offen und }\cup_{n\in\N} U_n = X$$
+	\begin{equation*}
+	\begin{split}
+		\overset{(2)}{\df} \exists n_1,\dots,n_m\in\N : X = \cup^m_{i=1} U_{n_i} & = \cup^m_{i=1} (X\setminus A_{n_i}) 
+		\\ & = X \setminus (\cap^m_{i=1} A_{n_i})
+		\\ & = X \setminus A_k\qquad \text{ für } k := \max \{n_1,\dots,n_m\}
+		\\ & \df A_k = \emptyset \text{ Widerspruch!}
+	\end{split}
+	\end{equation*}
+	
+	\item $(3) \df (4)$: Sei $(x_n)$ eine Folge in  $X$. Für $n\in\N$ sei $$A_n:=\overline{\{x_k : k \geq n\}}.$$ 
+	Es ist $A_n \supseteq A_{n+1}$ und $A_n \not= \emptyset$ abgeschlossen $\forall n\in\N \overset{(3)}{\df} \exists x_0 \in \cap_{n\in\N} A_n$. 
+	Deshalb ist 
+	$$\forall \varepsilon > 0 \;\forall n\in\N:U_\varepsilon (x_0) \cap \{x_k : k \geq n \} \not = \emptyset$$ 
+	$\df x_0$ ist Häufungspunkt der Folge $(x_n)$ und damit Grenzwert einer Teilfolge von $(x_n)$.
+	\item $(4) \df (5)$: Sei $(x_n)$ eine Cauchyfolge. Wegen $(4)$ hat $(x_n)$ eine konvergente Teilfolge mit Grenzwert $x\in X$. 
+	Dann ist $x_n\overset{n\to\infty}{\longrightarrow} x \df X$ vollständig.\par 
+	Angenommen $X$ sei nicht präkompakt 
+	$$\Rightarrow \exists
+	\varepsilon_0 > 0 : \forall\{x_1,\dots,x_n\}\subset X \;\exists x_{n+1} 
+	\in X \text{ mit }x_{n+1} \not \in \cup^n_{i=1} U_{\varepsilon_0}(x_i).$$
+	Konstruiere so eine Folge $(x_n)$ in $X$. Dann gilt 
+	$$\forall n\in\N: d(x_{n+1},x_j) \geq \varepsilon_0\quad \forall j \in \{1,\dots,n\}$$
+	$\df (x_n)$ hat keine Cauchy-Teilfolge $\df (x_n)$ hat keine konvergente Teilfolge.
+\end{enumerate}
+\end{proof}
 
 
 
@@ -675,14 +830,14 @@ klar!
 					Ein Beispiel ist $f(x) : = x\cdot \chi_\Q(x)$ und $\mu = \lambda$, da $f$ nur auf $\Q$ nicht null ist, und $\Q$ ist Lesbesgue-Nullmenge. 
 
 		\item \textbf{topologischer Raum} $(X,\tT)$ - Sei $X$ eine Menge und $\tT\subseteq P(X)$. Die Elemente von $\tT$ sind die \textit{offenen Mengen}. $\tT$ definiert eine \textit{Topologie}, wenn folgende Eigenschaften erfüllt sind:
-\begin{enumerate}[(i)]
-\item $\emptyset,\,X\in \tT$
+	\begin{enumerate}[(i)]
+	\item $\emptyset,\,X\in \tT$
 
 \item $A_i\in\tT$ für $i\in I$, $\N \supset I$ endlich $\df$ $\cap_{i\in I} A_i\in\tT$
 
 \item $A_i\in\tT$ für $i\in I$, $I$ bel. Indexmenge $\df$ $\cup_{i\in I}A_i \in \tT$
 \end{enumerate}
-$(X,\tT)$ ist der \textit{topologische Raum}.\par
+	$(X,\tT)$ ist der \textit{topologische Raum}.\par
 Ein Beispiel, für einen topologischen Raum sind die metrischen Räume $(X,d)$: $d$ induziert dann eine Topologie auf $X$, die offenen Mengen sind nämlich durch $d$ bestimmt.\par
 Sei $M:=\{1,2\},\dots$
 \begin{enumerate}[]
