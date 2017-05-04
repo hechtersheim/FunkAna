@@ -19,6 +19,8 @@
 \usepackage{marvosym} %some 
 \usepackage{paralist} %Adds more function to listing environments
 \usepackage{xstring} %If then 
+\usepackage{hyperref}
+
 
 \usepackage{marginnote} %allows to do some nice marinnotes
 %Headers and Footnotes
@@ -109,8 +111,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-\chapter{Funktionalanalysis}
-\section{Grundlagen}
+%\tableofcontents
+
+\chapter{Arbeit im Gange - Grundlagen}
+\section{is' klar 'ne?}
 
 \paragraph{Bekannt aus Analysis I-III}
 
@@ -762,7 +766,7 @@ klar! (Ja, selbst ohne eine Behauptung)
 	$$\df \overline{B} = X$$
 \end{cor}
 \begin{proof}
-	$X\setminus\overline{B} = X\cap (\cap_{n\in\N} B_n)^c = X \cap (\cup_{n\in\N} B_n^c)$ ist wegen Korollar 1.38 dicht in $X$.
+	$X\setminus{B} = X\cap (\cap_{n\in\N} B_n)^c = X \cap (\cup_{n\in\N} B_n^c)$ ist wegen Korollar 1.38 dicht in $X$.
 \end{proof}
 
 %Definition 1.40
@@ -821,10 +825,10 @@ klar! (Ja, selbst ohne eine Behauptung)
 	$\df (x_n)$ hat keine Cauchy-Teilfolge $\df (x_n)$ hat keine konvergente Teilfolge.
 
 			\item $(5) \df (1)$: Sei $(U_i)_{i\in I}$ eine offene Überdeckung von $X$.
-			Angenommen $\centernot\exists$ endliche Teilüberdeckung. Definiere induktiv Kugeln $K_n$, $n\in\N$, wie folgt:\\
-			Da $X$ präkompakt, gibt es zu $\varepsilon = 1$ endliche viele Kugeln $U_1(x_0,j)$ mit 
-			$X \subseteq \cap_{j=0}^{m_1} U_1(x_{0,j})$.
-			Dann gilt: Mindestens eine dieser Kugeln ist nicht durch endlich viele Mengen aus $(U_i)_{i\in I}$ überdeckbar.\par
+			Angenommen es existiere keine endliche Teilüberdeckung. Wir definieren induktiv Kugeln $K_n$, $n\in\N$, wie folgt:\\
+			Da $X$ präkompakt ist, gibt es zu $\varepsilon = 1$ endliche viele Kugeln $U_1(x_0,j)$ mit 
+			$$X \subseteq \cap_{j=0}^{m_1} U_1(x_{0,j}).$$
+			Dann ist mindestens eine dieser Kugeln nicht durch endlich viele Mengen aus $(U_i)_{i\in I}$ überdeckbar.\par
 			OBdA $U_1(x_{0,0})$, setze $x_0 := x_{0,0}$. \par
 			Konstruiere so eine Folge $(x_n)$, so dass $U_{\frac{1}{2^n}}(x_1)$ nicht durch endlich viele Mengen aus $(U_i)_{i\in I}$ überdeckt werden kann. \par
 			Sei $y \in U_{\frac{1}{2^{n-1}}}(x_{n-1}) \cap U_{\frac{1}{2^n}}(x_1) \neq \emptyset$ \par
@@ -846,7 +850,7 @@ klar! (Ja, selbst ohne eine Behauptung)
 		$(X,d)$ metrischer Raum
 			\begin{enumerate}[a)]
 				\item $(X,d)$ kompakt $\df$ $X$ vollständig
-				\item $M\subset X$, so dass jede Folge in M eine in M konvergente Teilfolge hat (\afs M folgenkomapkt\afs)
+				\item $M\subset X$, so dass jede Folge in M eine in M konvergente Teilfolge hat (\afs M folgenkompakt\afs)
 					$\Leftrightarrow$ $M \subset X$ kompakt (\afs M Überdeckungskompakt\afs)
 				\item $M\subset X$ kompakt $\df$ $M$ beschränkt und abgeschlossen.
 				\item $X$ kompakt, $A \subset X$ abgeschlossen $\df$ $A$ kompakt.
