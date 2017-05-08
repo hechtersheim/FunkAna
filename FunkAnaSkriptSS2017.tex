@@ -1084,6 +1084,112 @@ klar! (Ja, selbst ohne eine Behauptung)
 	\end{proof}
  Oben reinschieben: $V_0$ bestapproximation von $x$ in $V$ $Leftrightarrow$ $\norm{v_0 - x} = \inf_{v\in V}\norm{v-x}$
 
+ 	\begin{thm}
+		$X$ Skalarproduktraum. $\ff{u}{i}{I}$ ONS.\par
+		Betrachte folgende Aussagen
+			\begin{enumerate}
+				\item $\ff{u}{i}{I} ONB$
+				\item $x = \sum_{i\in I} (x, u_i)u$ $\forall x\in X$ (Fourierreihe)
+				\item $(x,y) = \sum_{i\in I}(x,u_i)(u_i,y)$ $\forall x,y \in X$ (Parseval-Identität)
+				\item $\norm{x}^2 = \sum_{i\in I}(x, u_i)(u_i,x)$ $\forall x\in X$ (Bessel-Gleichung)
+				\item $(span\ff{u}{i}{I})^\perp = \{0\}$
+			\end{enumerate}
+			Dann gilt $i \aq ii \aq iii \aq iv \df v$.\par
+			Wenn $X$ Hilbertraum, dann gilt auch $v\df iv$.
+	\end{thm}	
+
+	\begin{proof}
+		\begin{itemize}[]
+			\item $\qmarks{i\df ii}$: 
+				Sei $\varepsilon > 0$ $\df$ $\exists i_1,\dots,i_n \in I, x_1,\dots,x_n \in \K$\par
+					$\norm{x - \sum_{k=1}^n\alpha_k u_{i_k}} < \varepsilon$. Es gilt aber \par
+					$\norm{x - \sum_{k=1}^n(\alpha_k ,u_{i_k})u_{i_k}} \leq \norm{x - \sum_{k=1}^n\alpha_k u_{i_k}} < \varepsilon$
+			\item $ii\df iii$ Wende Skalarprodukt mit $y$ auf Fourierreihe an
+			\item $iii \df iv$ Wende $x=y$ an.
+			\item $iv \df i$ Mit Pythagoras gilt 
+			 $\norm{x}^2 = \sum_{i\in I}|(x,u_i)|^2 + \norm{x - \sum_{i\in I}(x,u_i) u)_i}^2$
+			 $\df x - \sum_{i\in I}(x,u_i) u)_i = 0 \df x\in spann\ff{u}{i}{I}$
+			%\item $i\df v$: $V = span\ff{u}{i}{I}, x\in V^\perp$ 
+			\item $i\df v$: Sei $x\in(span\ff{u}{i}{I})^\perp \df[Lemma 1.57] x\in \overline{span\ff{u}{i}{I}}^\perp = X^\perp = \{0\}$
+			\item $v \df i$: Sei $X$ Hilbertraum $\df \overline{span\ff{u}{i}{I}}$ vollständig
+			Sei $x\in X \df x = x_1 + x_2$, wobei 
+			$x_1 \overline{span\ff{u}{i}{I}}, x_2 \in \overline{span\ff{u}{i}{I}}^\perp = \overline{span\ff{u}{i}{I}}^\perp = \{0\}$
+			$\df x = x_1 \in \overline{span\ff{u}{i}{I}}$
+		\end{itemize}
+	\end{proof}
+
+	Nun zurück zu $L^2([0,2\pi]).$
+
+	\begin{thm} 
+		Die Familie $\ff{u}{k}{\Z}$ mit $u_k(x) = \frac{1}{2 \pi} e^{ikx}$ ist ONB von $L^2([0,2\pi])$ 
+		Wir beuntzen:	 
+			\begin{enumerate}
+				\item $\forall \varepsilon > 0, f\in L^2([0,2\pi]) \exists g\in C([0,2\pi])$ mit 
+				$g(0) = g(2\pi) = 0$ und $\norm{f-g}_2 < \varepsilon$.
+				\item Zu $g\in C([0,2\pi])$ mit $g(0) = g(2\pi), \varepsilon > 0 \exists h\in span\ff{u}{i}{\Z}: \norm{g-h}_\infty$
+			\end{enumerate}
+	\end{thm}
+	\begin{proof}
+		Sei $f\in L^2([0,2\pi]), \varepsilon > 0$,
+		Dann existiert $g\in C([0,2\pi])$ mit $g(0) = g(2\pi) = 0$ und $\norm{f-g}_2 < \frac{\varepsilon}{2}$.
+		Sei $h\in \overline{span\ff{u}{i}{I}}$, so dass $\norm{g-h} < \frac{\varepsilon}{2\sqrt{2\pi}}$
+		$\df \norm{f-h}_2 \leq \norm{f-g}_2 + \norm{g-h}_2 \leq \norm{f-g}_2 + \sqrt{2\pi} \norm{g-h}_\infty \leq \frac{\varepsilon}{2} + \sqrt{2\pi} \cdot \frac{\varepsilon}{2\sqrt{2\pi}} = \varepsilon$
+	\end{proof}
+
+	\begin{cor*}
+$f\in L^2([0,2\pi])$
+		\begin{enumerate}
+			\item $f_n(x) = \sum_{-n}^n c_k e^{ikx}$ ist bestapproximation triogno. Polynome vom Grad $K$ für $f$ (mit $c_k = \int_{0}^{2\pi} f(x) e^{-ikx} dx)$ 
+			\item $f = \sum_{k= -\infty}^{\infty} \sum_{-n}^n c_k e^{ik\cdot} $
+			\item $\ff{v}{i}{\Z}$ mit $v_0 = \frac{1}{\sqrt{2\pi}}, v_k = \cos(k\cdot)\cdot \frac{1}{\sqrt{\pi}} $ für $ k>0, v_k = sin(k\cdot) \frac{1}{\sqrt{\pi}} $ für $k< 0$
+		\end{enumerate}
+	\end{cor*}
+
+	\begin{definition}[Halbordnung, Totalordnung]
+		Sei $M$ eine Menge. Eine Relation $\leq \subset M\times M$, heißt \textit{Halbordnung}, wenn 
+			\begin{enumerate}
+				\item TODO 
+			\end{enumerate}
+		\begin{enumerate}
+			\item ?
+			\item $d \in M$ heißt \textit{obere Schranke}, wenn $a \leq d$ $\forall a\in M$ mit $a \leq d$ oder $b \leq a$.
+			\item Totalordnung, wenn es Halborndung ist und $\forall a,b \in M: a \leq b$ oder $b \leq a$.
+		\end{enumerate}
+	\end{definition}
+
+	\begin{lemma}[Lemma von Zorn]
+		$M$ halbgeordnete Menge. Besitzt jede totalgeordnete Teilmenge $Z \subset M$ eine obere Schranke in $M$, dann besitzt $M$ eine obere Schranke.	
+	\end{lemma}
+
+	\begin{thm}
+		$(X, \sp)$ Hilbertraum. Dann existiert eine ONB
+	\end{thm}
+
+	\begin{proof}
+		Sei $M = \{\ff{u}{i}{I} : \ff{u}{i}{I} ONS \}$ \par
+		Definiere Halbordnung $\ff{u}{i}{I} \subset \ff{y}{i}{J} :\aq I \subset J$ und $x_i = y_i \forall i \in I$.
+		Sei $Z \subset M$ totalgeordnete Teilmenge, $Z = \{(x)_{i\in I_j} : j\in J \}$
+		Betrachte $\ff{x}{i}{I}$ ist obere Schranke von $Z$. Nach Lemma von Zorn $\exists$ also eine obere Schranke $\ff{\hat{{x_i}}}{i}{J}$ von $M$. \par
+		Mit anderen Worten: $\centernot \exists$ ONS $\ff{\hat{{y}}}{i}{\hat{J}}$ mit $J \subsetneq \hat{J}$ und $\hat{x}_i = \hat{y}_i \forall i\in J.$\par
+		$\df \forall x\in X$ mit $x\perp \hat{x}_i \forall i \in I$ gilt $x= 0$ \par
+		$\df (span\ff{\hat{{x}}}{i}{I})^\perp = \{0\}$
+	\end{proof}
+ TODO ÜA \par 
+	\begin{thm}
+		$X$ Hilbertraum, $\ff{x}{i}{i}, \ff{y}{i}{j}$ ONBen. Dann haben $I$ und $J$ die gleichen Mächtikeiten.
+	\end{thm}
+	\begin{proof}
+		Bei $I$ endlich ist die Aussage klar. \par
+		Seien also $|I|$ und $|J|$ unendlich.  \par
+		Für $x\in X$, definiere $S_X = \{i\in I: (x,x_i) \neq 0\} \df |S_X| \leq |\N|$
+		sowie $\bigcup_{j\in J} S_{x_j} = I$ und $S_{x_j} \neq \emptyset$. Denn:
+		Ist $S_{y_j} = \emptyset$, dann $y_j \perp x_i \forall i \in I \df y_j =0$ Lightning! \par
+		Ist $i\in I$ mit $i \not \in \bigcup_{j\in J} S_{y_j}$, dann $x_i \perp y_j \forall j\in J \df x_i = 0$ Lightning! \par
+		Also $|I| = |\bigcup{j\in J} S_{x_j}| \subset |J| \cdot |\N| = |J|$. \par
+		Analog $|J| \subseteq |I|$
+
+
+	\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
