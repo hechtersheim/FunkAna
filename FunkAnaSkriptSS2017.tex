@@ -1191,8 +1191,146 @@ $f\in L^2([0,2\pi])$
 		Ist $i\in I$ mit $i \not \in \bigcup_{j\in J} S_{y_j}$, dann $x_i \perp y_j \forall j\in J \df x_i = 0$ Lightning! \par
 		Also $|I| = |\bigcup{j\in J} S_{x_j}| \subset |J| \cdot |\N| = |J|$. \par
 		Analog $|J| \subseteq |I|$
+	\end{proof}
 
+\chapter{Einige Hauptsätze aus der Funktionalanalysis}			
+	\section{Satz von der offenen Abbildung, Satz vom abgeschlossenen Graphen, Satz von der stetigen Inversen}
+	
+	\begin{definition}
+					$X,Y$ topologischer Räume $f: X\to Y$ heißt \textit{offen}, falls $f(U) \subset Y$ offen in $Y \forall$ offenen $U\subset X$
+	\end{definition}
 
+	\begin{thm}
+		$X,Y$ topologische Räume, $f: X\to Y$ injektiv. Dann sind äquivalent
+		\begin{enumerate}[(i)]
+			\item $f: X \to f(X)$ offen (Relativtopologie von $Y$ von $f(x)$)	
+			\item $\inv{f}: f(x) \to X$ stetig.
+		\end{enumerate}
+	\end{thm}
+	\begin{proof}
+		\begin{itemize}
+			\item \qmarks{$i \to ii$} Sei $U \subset X$ offen  $\df \inv{(\inv{f})}(U) = f(U)$ offen, also $\inf{f}$ stetig.
+		\item \qmarks{$ii \to i$} Sei $U \subset X$ offen, $\inv{f}$ stetig 
+			$\df f(U) = \inv{(\inv{f})}(U)$ offen $\df f $ offen.
+		\end{itemize}
+	\end{proof}
+
+	\begin{lemma}
+		$X,Y$ normierte Räume, $T: X\to Y$ lineare Operatoren. Dann sind äquivalent:
+			\begin{enumerate}
+				\item $T$ offen.
+				\item $\forall r > 0: T(U_r(0))$ Nullumgebung.
+				\item $\exists r > 0 : T(U_r(0))$ ist Nullumgebung.
+				\item $\exists r > 0 : T(U_1(0))$ ist Nullumgebung.
+
+			\end{enumerate}
+	\end{lemma}
+	\begin{proof}
+	 Vgl. ÜA3, Blatt 2.
+	\end{proof}
+
+	\begin{thm}[Satz von der offenen Abb., Satz von Banach-Schauder, Open-mapping theorem]
+		$X,Y$ Banachräume, $T\in \BS$ surjektiv. Dann ist $T$ offen.	
+	\end{thm}
+
+	\begin{proof}
+		Wir zeigen, dass $(ii)$ aus Lemma 2.3 gilt.
+
+		\begin{enumerate}[1. {Schritt}]
+			\item Wir zeigen $\exists \varepsilon_0 > 0$, so dass $U_{\varepsilon_0}(0) \subseteq \overline{T(U_1(0))}.$ Weil $T$ surjektiv gilt $Y = \bigcup_{n\in\N} T(U_n(0))$.
+			Da $Y$ Banachraum, so gilt nach Baire
+			$\exists N\in\N: \overline{T(U_N(0))} \neq \emptyset$
+			$\exists y_0 \in \overline{T(U_N(0))}, \varepsilon > 0$, so dass 
+			$\U{\varepsilon}{0} \subset \overline{T(U_N(0))}$.
+			Aus $\U{\varepsilon}{0} \subset \frac{1}{2} \U{\varepsilon}{y_0} + \frac{1}{2} \U{\varepsilon}{-y_0}$ und 
+			$\overline{T(U_N(0))} = \frac{1}{2} \overline{T(U_N(0))} + \frac{1}{2} \overline{T(U_N(0))} $		
+			folgt $ \U{\varepsilon}{0} \subset \overline{T(U_N(0))}$
+			$\df \U{\frac{\varepsilon}{N}}{0} \subset \overline{T(U_1(0))}$.
+			$\varepsilon_0 := \frac{\varepsilon}{N}$.
+			\item Wir zeigen $\U{\varepsilon_0}{0} \subset {T(U_1(0))}$
+			Sei $y\in \U{\varepsilon_0}{0}$. Wähle $\varepsilon > 0$ mit $ \norm{y} < \varepsilon < \varepsilon_0$, $\overline{y} : = \frac{\varepsilon_0}{\varepsilon} y$ 
+			$\df$ $\norm{\overline{y}} < \varepsilon_0$
+			$\df \overline{y} \in \overline{T(U_1(0))}$
+			$\df \exists y_0 = Tx_0 \in {T(U_1(0))}$ mit $\norm{\overline{y} - y_0} < \alpha \varepsilon_0$, wobei $0 < \alpha < 1$ mit $\frac{\varepsilon}{\varepsilon_0} \cdot \frac{1}{1-\alpha} < 1$
+			Betrachte nun $\frac{\overline{y} - y_0}{\alpha} \in \U{\varepsilon_0}{0}$
+			$\df \exists y_1 = Tx_1 \in {T(U_1(0))}$ mit $\norm{\frac{\overline{y}-y_0}{\alpha} - y_1} < \alpha \varepsilon_0
+			\df \norm{\overline{y} - (y_0 + \alpha y_1)} < \alpha^2 \varepsilon_0$
+			Behandle $\frac{\overline{y} - (y_0 +\alpha y_1)}{\alpha^2}$ mit derselben Methoden,
+			erhalte, $y_2 = Tx_2 \in {T(U_1(0))}$ mit $\norm{\overline{y} - (y_0 + \alpha y_1 + \alpha^2 y_2)} < \alpha^3 \varepsilon_0$
+			Erhalte so induktiv eine Folge $(x_n)$ in $\U{0}$ mit $\norm{\overline{y} - T(\sum_{k=0}^n \alpha^k x_k)} < \alpha^{n+1} \cdot \varepsilon_0$.
+			Weegen $\alpha < 1$ gilt $\overline{x} := \sum_{\alpha=0}^\infty \alpha^k x_k$ konver.
+			$\df[T beschränkt] T\overline{x} = \overline{y}$ Für $x = \frac{\varepsilon}{\varepsilon_0} \overline{x}$
+		gilt $Tx = y$ und  
+		$\norm{x} = \frac{\varepsilon}{\varepsilon_0} \norm{\overline{x}} \leq \frac{\varepsilon}{\varepsilon_0} \sum_{k=0}^\infty \alpha^k \underbrace{\norm{x_k}}_{< 1} < \frac{\varepsilon}{\varepsilon_0} \sum_{k=0}^\infty \alpha^k = \frac{\varepsilon}{\varepsilon_0} \cdot \frac{1}{1-\alpha} < 1$
+		$\df y\in T(U_1(0)).$ Also $\U{\varepsilon}{0} \subseteq T(U_1(0))$.
+		\end{enumerate}
+
+	\end{proof}
+
+	ÜA: $X,Y$ Banachräume, $T\in \BS$ ist offen (relativ in im$T$) $\Leftrightarrow imT$ abgeschlossen. TODO
+
+	\begin{thm}[Satz von der stetigen Inversen, inverse mapping theorem]
+	$X, Y$ Banachräume. $T\in\BS$ bijektiv $\df \inv{T}\in \B(Y,X)$	
+	\end{thm}
+	
+	\begin{proof}
+		Folgt aus open mapping thm und Satz 2.2 (wichtig Banachraum!)
+	\end{proof}
+
+	\begin{definition}[Graph]
+		$X,Y$ Mengen, $f: X\to Y$ Abbildung. Der \qmarks{Graph von $f$} ist 
+			$G(f) := \{(x,f(x)) : x\in X\} \subseteq X\times Y$
+	\end{definition}
+
+	\begin{definition}
+		$X,Y$ metrische Räume. Dann ist auf $X\times Y$ eine Metrik via 
+			$d((x_1,y_1),(x_2,y_2)) : (d(x_1,x_2)^2 + d(y_1,y_2)^2)^{\frac{1}{2}}$ definiert. (erhält Parallelogrammgleichung und damit Skalarproduktstruktur)
+	\end{definition}
+
+	Beachte 
+		\begin{enumerate}[(i)]
+			\item $X\times Y$ vollständig $\Leftrightarrow$ $X, Y$ vollständig
+			\item $X\times Y$ normierter Raum $\Leftrightarrow$ $X,Y$ nomierte Räume
+			\item $X\times Y$ Skalarproduktraum $\Leftrightarrow$ $X,Y$ SKP
+			\item abgeschlossene Metrik ist äquivalent zu $max\{d(x_1,x_2),d(y_1,y_2)\}$ und 
+			$(d(x_1,x_2)^p + d(y_1,y_2)^p)^{\frac{1}{p}}$, $p\in (1,\infty)$
+		\end{enumerate}
+
+	\begin{definition}[Graphenabgeschlossenheit]
+		$X,Y$ metrische Räume, $f: X\to Y$ heißt \textit{graphenabgeschlossen}, wenn $G(f) \subset X\times Y$ abgeschlossen ist.	
+	\end{definition}
+
+	\begin{bem}
+		\begin{enumerate}
+			\item $f$ graphenabgeschlossen $\aq$ $( (x_n)$ in $X$ mit $x_n \to x$ und $f(x_1) \to y$ 
+			$\df f(x) = y$)
+			\item $T: X\to Y$ lineare Operator $\df$ $G(T) \subseteq X\times Y$ UVR.
+			\item $f$ stetig $\df$ $f$ graphenabgeschlossen.
+			\item Umkehrung gilt nicht: Bspw: $f: \R \to \R$ 
+				$x\mapsto \begin{cases} 0& x=0\\ \frac{1}{x} & sonst \end{cases}$
+		\end{enumerate}
+	\end{bem}
+
+	\begin{thm}[Satz vom abgeschlossem Graphen, closed graph theorem]
+		$X,Y$ Banachräume, $T: X\to Y$, lineare Operatoren. Dann sind äquivalent:
+			\begin{enumerate}[(i)]
+				\item $T$ graphenabgeschlossen
+				\item $T\in \BS$
+			\end{enumerate}
+	\end{thm}
+
+	\begin{proof}
+		\begin{itemize}
+			\item \qmarks{$ii\df i$} Klar, TODO
+			\item Definiere Abbildung, $S: G(T) \to X, (x,Tx) \mapsto X$
+			$\df$ $S$ bijektiv und linear. Wegen 
+				$\norm{S(x,Tx)}_X = \norm{X} \leq (\norm{x}_X^2 + \norm{Tx}_Y^2)^{\frac{1}{2}})$
+				gilt $S\in \B(G(T),X)$ mit $\norm{S} \leq 1$ .
+				Weil $G(T) \subseteq X\times Y$ und $X,Y$ Banachräume, ist $G(T)$ Banachraum.
+				$\df[S2.4]$ $\inv{S} \in \B(X, G(T)) \df (\norm{x}_X^2 + \norm{Tx}_Y^2)^{\frac{1}{2}} = \norm{(x,Tx)}_{X\times Y} = \norm{\inv{S}(x)} \leq \norm{\inv{S}} \cdot \norm{x}_X$
+				$\df \norm{Tx}_Y \leq (\norm{x}_X^2 + \norm{Tx}_Y^2)^{\frac{1}{2}} \leq \norm{\inv{S}}\cdot\norm{x}_X$
+				$\df T\in\BS$
+		\end{itemize}
 	\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
