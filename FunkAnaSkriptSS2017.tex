@@ -4,6 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc} %provides a better way for westeuropean characters and such 
 \setlength{\parindent}{0cm} %noindent for all paragraphs
+\usepackage[english=british]{csquotes}
 
 %pdf page settings
 \usepackage[a4paper,top=30mm,bottom=40mm,inner=25mm,outer=35mm]{geometry} 
@@ -104,9 +105,15 @@
 	}
 } %sup_EK für die Operatornorm bzw mit Argumet auch Rand oder Abschluss von EK möglich
 \newcommand{\disp}{\displaystyle}
-\newcommand{\qmarks}[1]{"{}#1"{}}
+\newcommand{\qmarks}[1]{"#1"}
+%\newcommand{\qmarks}[1]{$"{}$ #1 $"${}}
 \newcommand{\afs}{"{}}
 \newcommand{\TODO}{\text{$\mathbb{TODO}$}}
+
+\newcommand{\ov}[1]{\overline{#1}}
+\newcommand{\xf}{(x_i)_{i\in I}}
+\newcommand{\ff}[3]{(#1_#2)_{#2\in#3}}
+\newcommand{\SP}{(\cdot,\cdot)}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -480,7 +487,7 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 	\end{bem}
 %% Satz 1.22
 	\begin{thm}[Fortsetzung von stetigen Operatoren]
-		$X,Y$ normierte $\K-VR$, $Y$ ein Banachraum, $Z\subset X$, $Z$ dichter UVR.
+		$X,Y$ normierte $\K-VR$, $Y$ ein Banachraum, $Z\subseteq X$, $Z$ dichter UVR.
 		$T\in \B(Z,Y)$. Dann existiert ein eindeutiger Operator $\tilde{T} \in \BS$, so dass
 		$T|_Z = T$.
 	\end{thm}
@@ -503,7 +510,7 @@ Die Negation dieser Aussage halten wir explizit fest mit folgendem
 		$\nearrow$ Erzeugnis: \underline{endliche} linear Kombination der Einheitsvektoren 
 		$\df \text{span} \{e_k\}_{k_\N} = \{(x_1,x_2,\dots,0,\dots)\}$ (Folgen, die irgendwann zu $0$ werden.)\par
 		Die Familie $B := (x_0,e_1,e_2,e_3,\dots)$ ist linear unabhängig.
-		$\df B_i$ lässt sich zu Basis $B = (b_i)_{i\in I}$ mit $\N_0 \subset I$ und $b_0 = x_0, b_i = e_i \; \forall i\in \N$ erweitern (überabzählbar).\par
+		$\df B_i$ lässt sich zu Basis $B = (b_i)_{i\in I}$ mit $\N_0 \subseteq I$ und $b_0 = x_0, b_i = e_i \; \forall i\in \N$ erweitern (überabzählbar).\par
 		Sei $x\in X= \ell^1 \df \exists$ eindeutige Darstellung 
 		$x = \alpha_0 x_0 +\sum_{\overset{n\in\N}{endlich}} \alpha_n e_n + \sum_{\overset{i\in I\backslash N_0}{endlich}}\alpha_i b_i$. \par
 		Definiere das Funktional: $f: \ell^1 \to \K \N?$ mit $x = \alpha_0 x_0 +\sum_{\overset{n\in\N}{endlich}} \alpha_n e_n + \sum_{\overset{i\in I\backslash N_0}{endlich}}\alpha_i b_i \mapsto \alpha_0$\par
@@ -554,40 +561,40 @@ Nun versuchen wir mit Erfolgt einer waghalsige Verallgemeinerung der geometrisch
 			\item $\disp \limes\sup\sqrt[n]{\norm{T^n}} <1$ ist nur hinreichend für Invertierbarkeit von $I-T$, wie das Gegenbeispiel $T = 2I$ zeigt.
 		\end{enumerate}
 	\end{bem}
-\begin{bsp}[Fredholmsche Integralgleichung]
-Sei $k\in C([a,b]^2)$.
-Der Fredholmsche Integraloperator $$K:C([a,b])\to C([a,b]),\; (Kx)(s):=\int^b_a K(s,t)x(t)dt$$ ist stetig, wenn x stetig ist.
-Die Fredholmsche Integralgleichung lautet: $$(I-K)x=y,\quad y\in C([a,b]).$$
-Und es gilt: $\displaystyle \|Kx\|_\infty \leq \max_{s\in[a,b]} \int^b_a |K(s,t)|dt\cdot\|x\|_\infty$.\\
-Wenn nun $\displaystyle \max_{s\in[a,b]} \int^b_a |K(s,t)|dt<1$, dann gilt für alle $ y\in C([a,b]):$
-Die Fredholmsche Integralgleichung $(I-K)x=y$ hat genau eine Lösung $x\in C([a,b])$. Diese hängt stetig von $y\in C[a,b]$ ab.
-\end{bsp}
+	\begin{bsp}[Fredholmsche Integralgleichung]
+		Sei $k\in C([a,b]^2)$.
+		Der Fredholmsche Integraloperator $$K:C([a,b])\to C([a,b]),\; (Kx)(s):=\int^b_a K(s,t)x(t)dt$$ ist stetig, wenn x stetig ist.
+		Die Fredholmsche Integralgleichung lautet: $$(I-K)x=y,\quad y\in C([a,b]).$$
+		Und es gilt: $\displaystyle \|Kx\|_\infty \leq \max_{s\in[a,b]} \int^b_a |K(s,t)|dt\cdot\|x\|_\infty$.\\
+		Wenn nun $\displaystyle \max_{s\in[a,b]} \int^b_a |K(s,t)|dt<1$, dann gilt für alle $ y\in C([a,b]):$
+		Die Fredholmsche Integralgleichung $(I-K)x=y$ hat genau eine Lösung $x\in C([a,b])$. Diese hängt stetig von $y\in C[a,b]$ ab.
+	\end{bsp}
 
 \section{Metrische und topologische Räume, Satz von Baire}
-% Bem 1.28
-\begin{bem}[Erinnerung]
-\begin{enumerate}[-]
-\item $(X,d)$ metrischer Raum mit Metrik $d$.
-
-\item Kompaktheit, Satz von Bolzano-Weierstraß
-\end{enumerate}
-\end{bem}
+	% Bem 1.28
+	\begin{bem}[Erinnerung]
+		\begin{enumerate}[-]
+			\item $(X,d)$ metrischer Raum mit Metrik $d$.
+			
+			\item Kompaktheit, Satz von Bolzano-Weierstraß
+		\end{enumerate}
+	\end{bem}
 
 %Lemma 1.29
-\begin{lemma}
-	Sei $(X,d)$ ein metrischer Raum. Dann gilt die Vierecksungleichung:
-	$$|d(x,y)-d(x_1,y_1)| \leq d(x,x_1) +d(y,y_1)\quad \forall x,x_1,y,y_1\in X$$
-\end{lemma}
-\begin{proof}
-	$d(x_1,y_1) \leq d(x_1,x)+d(x,y_1) \leq d(x_1,x)+d(x,y)+d(y,y_1)$\\$\df d(x_1,y_1)-		d(x,y) \leq d(x,x_1)+d(y,y_1)$. Analog: $d(x,y)-d(x_1,y_1) \leq d(x,x_1)+d(y,y_1)$\par
-	$\df |d(x,y) - d(x_1,y_1)| \leq d(x,x_1) +d(y,y_1)$
-\end{proof}
+	\begin{lemma}
+		Sei $(X,d)$ ein metrischer Raum. Dann gilt die Vierecksungleichung:
+		$$|d(x,y)-d(x_1,y_1)| \leq d(x,x_1) +d(y,y_1)\quad \forall x,x_1,y,y_1\in X$$
+	\end{lemma}
+	\begin{proof}
+		$d(x_1,y_1) \leq d(x_1,x)+d(x,y_1) \leq d(x_1,x)+d(x,y)+d(y,y_1)$\\$\df d(x_1,y_1)-		d(x,y) \leq d(x,x_1)+d(y,y_1)$. Analog: $d(x,y)-d(x_1,y_1) \leq d(x,x_1)+d(y,y_1)$\par
+		$\df |d(x,y) - d(x_1,y_1)| \leq d(x,x_1) +d(y,y_1)$
+	\end{proof}
 
 %Bem 1.30
-\begin{bem}Rekapitulieren Sie folgende Begriffe:
-	$U_r(x)$ Kugel mit Radius $r$,	$\overline{M}$ Abschluss,	$\mathring{M}$ Innere,	$\partial M$ Rand,	Kompakt,	offene Überdeckung.
-\end{bem}
-
+	\begin{bem}Rekapitulieren Sie folgende Begriffe:
+		$U_r(x)$ Kugel mit Radius $r$,	$\overline{M}$ Abschluss,	$\mathring{M}$ Innere,	$\partial M$ Rand,	Kompakt,	offene Überdeckung.
+	\end{bem}
+	
 %Definition 1.31
 \begin{definition} %Abstandserhaltung, Einbettung und Isometrie
 	Seien $(X,d_X),(Y,d_Y)$ metrische Räume. Eine Abbildung $f:X\to Y$ heißt
@@ -596,7 +603,7 @@ Die Fredholmsche Integralgleichung $(I-K)x=y$ hat genau eine Lösung $x\in C([a,
 		\item \textit{Isometrie} falls abstandserhaltend und surjektiv.
 	\end{enumerate}
 	Eine abstandserhaltende  Abbildung heißt auch \textit{Einbettung}. Eine Einbettung heißt \textit{dicht}, falls $f(X)$ dicht in Y ist.\par
-	Notation: Wir schreiben $X\subset Y$, falls X in Y eingebettet ist.
+	Notation: Wir schreiben $X\subseteq Y$, falls X in Y eingebettet ist.
 \end{definition}
 
 %Satz 1.32
@@ -677,10 +684,12 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 	Angenommen $\exists y\in \cap_{n\in\N} F_n$, mit $x_0 \not= y$
 	$$\df 0 < d(x_0,y) \leq d(x_0,x_n) + d(x_n,y_0) \leq 2\delta(F_n)\overset{n\to\infty}{\longrightarrow} 0 \text{  Widerspruch!}$$
 \end{proof}
-\begin{mbem*}
-Der Heuser beschreibt den folgenden Satz folgendermaßen:\par  
-Es gibt wohl keinen Satz in der Funktionalanalysis, der glanzloser und gleichzeitig kraftvoller wäre als der Bairesche Kategoriensatz. Von seiner Glanzlosigkeit wird sich der Leser \textit{sofort} überzeugen können; für seine Kraft müssen wir ihn auf die folgenden Nummern vertrösten.
-\end{mbem*}
+
+	\begin{mbem*}
+		Der Heuser beschreibt den folgenden Satz folgendermaßen:\par  
+		Es gibt wohl keinen Satz in der Funktionalanalysis, der glanzloser und gleichzeitig kraftvoller wäre als der Bairesche Kategoriensatz. Von seiner Glanzlosigkeit wird sich der Leser \textit{sofort} überzeugen können; für seine Kraft müssen wir ihn auf die folgenden Nummern vertrösten.
+	\end{mbem*}
+
 %Satz 1.35
 \begin{thm}[Bairescher Kategoriensatz]
 	Sei $(X,d)$ ein vollständiger metrischer Raum, $\cup^\infty_{n=1} F_n = X$, wobei $F_n \subseteq X$ abgeschlossen für alle $n\in\N$.\par
@@ -713,12 +722,12 @@ Es gibt wohl keinen Satz in der Funktionalanalysis, der glanzloser und gleichzei
 \end{proof}
 
 %Einschubskorollar ohne Nummerierung
-\begin{cor*}
-Hier kommt ziemlich fancy Zeug, von wegen der Polynomraum kann nicht vollständig sein, rein. TODO Behauptung und Beweis erstellen.
-\end{cor*}
-\begin{proof}
-klar! (Ja, selbst ohne eine Behauptung)
-\end{proof}
+	\begin{cor*}
+		Hier kommt ziemlich fancy Zeug, von wegen der Polynomraum kann nicht vollständig sein, rein. TODO Behauptung und Beweis erstellen.
+	\end{cor*}
+	\begin{proof}
+		klar! (Ja, selbst ohne eine Behauptung)
+	\end{proof}
 
 %Definition 1.36
 \begin{definition}
@@ -733,7 +742,7 @@ klar! (Ja, selbst ohne eine Behauptung)
 \end{definition}\par\bigskip
 
 %Eigene Bemerkung ohne Nummerierung.
-\begin{mbem*}[Trivia am Rande] Direkt aus der Definition folgt, das jede nirgends dichte Menge insbesondere von 1.Kategorie ist. Andersrum gilt dies nicht, was das Beispiel $\Q\subset \R$ zeigt. Ein Beispiel für eine nirgends dichte Menge ist die Cantor-Menge.\\
+\begin{mbem*}[Trivia am Rande] Direkt aus der Definition folgt, das jede nirgends dichte Menge insbesondere von 1.Kategorie ist. Andersrum gilt dies nicht, was das Beispiel $\Q\subseteq \R$ zeigt. Ein Beispiel für eine nirgends dichte Menge ist die Cantor-Menge.\\
 	 \qmarks{Anschaulich} bedeutet \textit{nirgends dicht}, wenn sie in keiner Teilmenge (mit nichtleeren Innerem) dicht liegt. \par\bigskip
 \end{mbem*}
 	Mithilfe dieser Definition können wir den Baireschen Kategoriensatz Umformulieren zu $$(X,d) \text{ ist ein vollständiger metrischer Raum } \df X \text{ ist von 2.Kategorie}$$ 
@@ -757,7 +766,7 @@ klar! (Ja, selbst ohne eine Behauptung)
 	Sei $M\subseteq X$ mager, angenommen $X\setminus M$ sei nicht dicht, also
 	$X\setminus \overline{(X\setminus M)}\not= \emptyset$\par 
 	$\df O:=X\setminus \overline{(X\setminus M)}$ ist (als Komplement einer abgeschlossenen Menge) offen und nichtleer.\par 
-	$\df O \subseteq M$ ist von 1. Kategorie, Widerspruch zu Korollar 1.37!
+	$\df O \subseteq M$ ist von 1. Kategorie, Widerspruch zu Korollar 1.37.
 \end{proof}
 
 %Korollar 1.39
@@ -783,96 +792,103 @@ klar! (Ja, selbst ohne eine Behauptung)
 \begin{thm}
 	Sei $(X,d)$ ein metrischer Raum. Dann ist äquivalent:
 	\begin{enumerate}[(1)]
-	\item $X$ kompakt.
-	
-	\item Jede abzählbare offene Überdeckung von $X$ enthält eine endliche Teilüberdeckung.
-	
-	\item Ist $(A_n)$ eine Folge von abgeschlossenen Teilmengen von $X$ mit $A_n \supseteq A_{n+1} \not = \emptyset\; \forall n\in\N$. Dann gilt: $\cap_{n\in\N}A_n \not = \emptyset$.
-	
-	\item Jede Folge in $X$ besitzt eine konvergente Teilfolge.
-	
-	\item $X$ ist vollständig und präkompakt.
+		\item $X$ kompakt.
+		\item Jede abzählbare offene Überdeckung von $X$ enthält eine endliche Teilüberdeckung.
+		\item 
+			Ist $(A_n)$ eine Folge von abgeschlossenen Teilmengen von $X$ mit $A_n \supseteq A_{n+1} \not = \emptyset\; \forall n\in\N$. Dann gilt: $\cap_{n\in\N}A_n \not = \emptyset$.
+		\item Jede Folge in $X$ besitzt eine konvergente Teilfolge.
+		\item $X$ ist vollständig und präkompakt.
 	\end{enumerate}
 \end{thm}
+
 \begin{proof}
 \begin{enumerate}[]
 	\item $(1) \df (2)$: Man nimmt nur weniger mögliche Vereinigungen.
 	
-	\item $(2) \df (3)$: Angenommen $\cap_{n\in\N}{A_n} = \emptyset,\;A_n = \overline{A_n},\;\emptyset \not = A_{n+1} \subseteq A_n$ $\forall n\in\N$\par
-	$$\df U_n := X\setminus A_n \text{ offen und }\cup_{n\in\N} U_n = X$$
-	\begin{equation*}
-	\begin{split}
-		\overset{(2)}{\df} \exists n_1,\dots,n_m\in\N : X = \cup^m_{i=1} U_{n_i} & = \cup^m_{i=1} (X\setminus A_{n_i}) 
-		\\ & = X \setminus (\cap^m_{i=1} A_{n_i})
-		\\ & = X \setminus A_k\qquad \text{ für } k := \max \{n_1,\dots,n_m\}
-		\\ & \df A_k = \emptyset \text{ Widerspruch!}
-	\end{split}
-	\end{equation*}
+	\item $(2) \df (3)$: 
+		Angenommen $\cap_{n\in\N}{A_n} = \emptyset,\;A_n = \overline{A_n},\;\emptyset \not = A_{n+1} \subseteq A_n$ $\forall n\in\N$\par
+			$$\df U_n := X\setminus A_n \text{ offen und }\cup_{n\in\N} U_n = X$$
+			\begin{equation*}
+			\begin{split}
+				\df[2] \exists n_1,\dots,n_m\in\N : X = \cup^m_{i=1} U_{n_i} & = \cup^m_{i=1} (X\setminus A_{n_i}) 
+				\\ & = X \setminus (\cap^m_{i=1} A_{n_i})
+				\\ & = X \setminus A_k\qquad \text{ für } k := \max \{n_1,\dots,n_m\}
+				\\ & \df A_k = \emptyset \text{ Widerspruch!}
+			\end{split}
+			\end{equation*}
 	
-	\item $(3) \df (4)$: Sei $(x_n)$ eine Folge in  $X$. Für $n\in\N$ sei $$A_n:=\overline{\{x_k : k \geq n\}}.$$ 
-	Es ist $A_n \supseteq A_{n+1}$ und $A_n \not= \emptyset$ abgeschlossen $\forall n\in\N \overset{(3)}{\df} \exists x_0 \in \cap_{n\in\N} A_n$. 
-	Deshalb ist 
-	$$\forall \varepsilon > 0 \;\forall n\in\N:U_\varepsilon (x_0) \cap \{x_k : k \geq n \} \not = \emptyset$$ 
-	$\df x_0$ ist Häufungspunkt der Folge $(x_n)$ und damit Grenzwert einer Teilfolge von $(x_n)$.
-	\item $(4) \df (5)$: Sei $(x_n)$ eine Cauchyfolge. Wegen $(4)$ hat $(x_n)$ eine konvergente Teilfolge mit Grenzwert $x\in X$. 
-	Dann ist $x_n\overset{n\to\infty}{\longrightarrow} x \df X$ vollständig.\par 
-	Angenommen $X$ sei nicht präkompakt 
-	$$\Rightarrow \exists
-	\varepsilon_0 > 0 : \forall\{x_1,\dots,x_n\}\subseteq X \;\exists x_{n+1} 
-	\in X \text{ mit }x_{n+1} \not \in \cup^n_{i=1} U_{\varepsilon_0}(x_i).$$
-	Konstruiere so eine Folge $(x_n)$ in $X$. Dann gilt 
-	$$\forall n\in\N: d(x_{n+1},x_j) \geq \varepsilon_0\quad \forall j \in \{1,\dots,n\}$$
-	$\df (x_n)$ hat keine Cauchy-Teilfolge $\df (x_n)$ hat keine konvergente Teilfolge.
+	\item $(3) \df (4)$:
+		Sei $(x_n)$ eine Folge in  $X$. Für $n\in\N$ sei $$A_n:=\overline{\{x_k : k \geq n\}}.$$ 
+		Es ist $A_n \supseteq A_{n+1}$ und $A_n \not= \emptyset$ abgeschlossen $\forall n\in\N \overset{(3)}{\df} \exists x_0 \in \cap_{n\in\N} A_n$. 
+		Deshalb ist 
+			$$\forall \varepsilon > 0 \;\forall n\in\N:U_\varepsilon (x_0) \cap \{x_k : k \geq n \} \not = \emptyset$$ 
+		$\df x_0$ ist Häufungspunkt der Folge $(x_n)$ und damit Grenzwert einer Teilfolge von $(x_n)$.
 
-			\item $(5) \df (1)$: Sei $(U_i)_{i\in I}$ eine offene Überdeckung von $X$.
+	\item $(4) \df (5)$: 
+		Sei $(x_n)$ eine Cauchyfolge. Wegen $(4)$ hat $(x_n)$ eine konvergente Teilfolge mit Grenzwert $x\in X$. 
+		Dann ist $x_n\overset{n\to\infty}{\longrightarrow} x \df X$ vollständig.\par 
+		Angenommen $X$ sei nicht präkompakt 
+		$$\Rightarrow \exists 
+			\varepsilon_0 > 0 : \forall\{x_1,\dots,x_n\}\subseteq X \;\exists x_{n+1} 
+			\in X \text{ mit }x_{n+1} \not \in \cup^n_{i=1} U_{\varepsilon_0}(x_i).$$
+		Konstruiere so eine Folge $(x_n)$ in $X$. Dann gilt 
+		$$\forall n\in\N: d(x_{n+1},x_j) \geq \varepsilon_0\quad \forall j \in \{1,\dots,n\}$$
+		$\df (x_n)$ hat keine Cauchy-Teilfolge $\df (x_n)$ hat keine konvergente Teilfolge.
+
+		\item $(5) \df (1)$: 
+			Sei $(U_i)_{i\in I}$ eine offene Überdeckung von $X$.
 			Angenommen es existiere keine endliche Teilüberdeckung. Wir definieren induktiv Kugeln $K_n$, $n\in\N$, wie folgt:\\
-			Da $X$ präkompakt ist, gibt es zu $\varepsilon = 1$ endliche viele Kugeln $U_1(x_0,j)$ mit 
-			$$X \subseteq \cap_{j=0}^{m_1} U_1(x_{0,j}).$$
+			Da $X$ präkompakt ist, gibt es zu $\varepsilon = 1$ endliche viele Kugeln $U_1(x_{0,j})$ mit 
+				$$X \subseteq \cap_{j=0}^{m_1} U_1(x_{0,j}).$$
 			Dann ist mindestens eine dieser Kugeln nicht durch endlich viele Mengen aus $(U_i)_{i\in I}$ überdeckbar.\par
-			OBdA $U_1(x_{0,0})$, setze $x_0 := x_{0,0}$. \par
-			Konstruiere so eine Folge $(x_n)$, so dass $U_{\frac{1}{2^n}}(x_1)$ nicht durch endlich viele Mengen aus $(U_i)_{i\in I}$ überdeckt werden kann. \par
-			Sei $y \in U_{\frac{1}{2^{n-1}}}(x_{n-1}) \cap U_{\frac{1}{2^n}}(x_1) \neq \emptyset$ \par
-			Dann gilt $d(x_{n-1},x_n) \leq d(x_{n-1},y) + d(y,x_1) \leq \frac{1}{2^{n-1}} + \frac{1}{2^n} \leq \frac{1}{2^{n-2}}$ \par
-			Für $n \leq p \leq q$ gilt dann $d(x_p,x_q) \leq d(x_p,x_{p+1}) + \dots + d(x_{q-1},x_{q})
-			\leq \frac{1}{2^{p-1}} + \dots + \frac{1}{2^{q-2}} < \frac{1}{2^{n-2}}$
-			$\df (x_n)$ ist eine Cauchyfolge in $X$ $\overset{X\text{ vollst.}}{\df}$ 
-			$\exists  \hat{x} \in X$, so dass $\limes d(x_n,\hat{x}) = 0$\par
-			Wegen $X = \cup_{i\in I} U_i$ gilt $\exists i_0\in I: \hat{x}\in U_{i_0}$\par
-			Weil $U_{i_0}$ offen: $\exists r>0$, so dass $U_r(\hat{x}) \subseteq U_{i_0}$\par
-			Sei  $n\in \N$, so dass $\frac{1}{2^n} < \frac{r}{2}$ und $d(\hat{x}, x_n) < \frac{r}{2}$\par
-			$\df U_{\frac{1}{2}} (x_n) \subseteq U_r(\hat{x}) \subseteq U_{i_0}$\par
+			OBdA sei $U_1(x_{0,0})$ und setze $x_0 := x_{0,0}$. 
+			Konstruiere so eine Folge $(x_n)$, so dass $U_{\frac{1}{2^n}}(x_1)$ nicht durch endlich viele Mengen aus $(U_i)_{i\in I}$ überdeckt werden kann. 
+			Sei 
+				$$y \in U_{\frac{1}{2^{n-1}}}(x_{n-1}) \cap U_{\frac{1}{2^n}}(x_1) \neq \emptyset$$ 
+			Dann gilt 
+				$$d(x_{n-1},x_n) \leq d(x_{n-1},y) + d(y,x_1) \leq \frac{1}{2^{n-1}} + \frac{1}{2^n} \leq \frac{1}{2^{n-2}}.$$
+			Für $n \leq p \leq q$ gilt dann 
+				$$d(x_p,x_q) \leq d(x_p,x_{p+1}) + \dots + d(x_{q-1},x_{q})
+				\leq \frac{1}{2^{p-1}} + \dots + \frac{1}{2^{q-2}} < \frac{1}{2^{n-2}}$$
+			Daraus folgt, $(x_n)$ ist eine Cauchyfolge in $X$ und wegen der Vollständigkeit von X 
+			gibt es ein $\hat{x} \in X$, so dass $\limes d(x_n,\hat{x}) = 0$. 
+			Wegen $X = \cup_{i\in I} U_i$ gilt $\exists i_0\in I: \hat{x}\in U_{i_0}$.
+			Weil $U_{i_0}$ offen ist: $\exists r>0$, so dass $U_r(\hat{x}) \subseteq U_{i_0}$.
+			Sei nun $n\in \N$, so dass $\frac{1}{2^n} < \frac{r}{2}$ und $d(\hat{x}, x_n) < \frac{r}{2}$.
+			$\df U_{\frac{1}{2}} (x_n) \subseteq U_r(\hat{x}) \subseteq U_{i_0}$. 
 			Das ist ein Widerspruch dazu, dass $U_{\frac{1}{2^n}}(x_n)$ nicht durch endliche viele $U_i$ überdeckt werden kann.
 		\end{enumerate}
 	\end{proof}
 
 %Korollar 1.42
 	\begin{cor}
-		$(X,d)$ metrischer Raum
+		$(X,d)$ metrischer Raum. Dann gelten folgende Aussage
 			\begin{enumerate}[a)]
 				\item $(X,d)$ kompakt $\df$ $X$ vollständig
-				\item $M\subset X$, so dass jede Folge in M eine in M konvergente Teilfolge hat (\afs M folgenkompakt\afs)
-					$\Leftrightarrow$ $M \subset X$ kompakt (\afs M Überdeckungskompakt\afs)
-				\item $M\subset X$ kompakt $\df$ $M$ beschränkt und abgeschlossen.
-				\item $X$ kompakt, $A \subset X$ abgeschlossen $\df$ $A$ kompakt.
+				\item $M\subseteq X$, so dass jede Folge in M eine in M konvergente Teilfolge hat (\qmarks{M folgenkompakt})
+					$\Leftrightarrow$ $M \subseteq X$ kompakt (\qmarks{M Überdeckungskompakt})
+				\item $M\subseteq X$ kompakt $\df$ $M$ beschränkt und abgeschlossen.
+				\item $X$ kompakt, $A \subseteq X$ abgeschlossen $\df$ $A$ kompakt.
 			\end{enumerate}
 	\end{cor}
 
 %Definition 1.43
 	\begin{definition}
-		$(X,d)$ metrischer Raum. $M\subset X$ heißt \qmarks{relativ kompakt}, wenn $\overline{M}$ kompakt ist.
+		Sei $(X,d)$ ein metrischer Raum. $M\subseteq X$ heißt \textit{relativ kompakt}, wenn $\overline{M}$ kompakt ist.
 	\end{definition}
 
 %Definition 1.44
 	\begin{definition}
-		$(X,d)$ vollständiger metrischer Raum, $M \subset X$ relativ kompakt. \par
+		$(X,d)$ vollständiger metrischer Raum, $M \subseteq X$ relativ kompakt. \par
+\marginpar{Was genau wird hier definiert?}
 			$\Leftrightarrow$ jede Folge in $M$ besitzt eine in $X$ konvergente Teilfolge.
 	\end{definition}
 
 %Satz 1.45
 	\begin{thm}
-		$(X,d)$ metrischer Raum. $M,N \subset X$ seien relativ kompakt (bzw. präkompakt). Dann gilt 
-			\begin{enumerate}
-				\item $S\subset M$ $\df$ $S$ relativ kompakt (bzw. präkompakt)
+		$(X,d)$ metrischer Raum. $M,N \subseteq X$ seien relativ kompakt (bzw. präkompakt). Dann gilt 
+			\begin{enumerate}[a)]
+				\item $S\subseteq M$ $\df$ $S$ relativ kompakt (bzw. präkompakt)
 				\item $M\cup N$ relativ kompakt (bzw präkompakt)
 				\item $M,N$ präkompakt
 				\item Ist $(X,d)$ vollständig, so gilt $M$ relativ kompakt $\Leftrightarrow M$ präkompakt
@@ -881,13 +897,12 @@ klar! (Ja, selbst ohne eine Behauptung)
 
 	\begin{proof}
 		\begin{itemize}[]
-			\item \qmarks{a) - c)}: mündlicher Beweis. TODO. folgt aus Definition.
-			\item d) $\qmarks{\df}$ folgt aus c) \par
-				$\qmarks{\Leftarrow}$ Sei $M$ präkompakt $\forall \varepsilon > 0\; \exists p\in\N, \{x_1,\dots,x_p\} \subset X$ mit $M \subset \cup_{j=1}^p \overline{ U_{\frac{\varepsilon}{2}}(x_j)}$. 
-				Wegen $\overline{U_{\frac{\varepsilon}{2}}(x_j)} \subset U_{{\varepsilon}}(x_j)$ gilt
-				$\overline{M} \subset \cup_{j=1}^p \overline{U_{\frac{\varepsilon}{2}}(x_j)} \subset \cup_{j=1}^p U_{\varepsilon}(x_j)$
+			\item $\qmarks{a) - c)}$: mündlicher Beweis. TODO. folgt aus Definition.
+			\item Zu $\qmarks{d)}$: Die Hinrichtung folgt aus c). 
+				Für $"{}\Leftarrow"$: Sei $M$ präkompakt $\forall \varepsilon > 0\; \exists p\in\N, \{x_1,\dots,x_p\} \subseteq X$ mit $M \subseteq \cup_{j=1}^p \overline{ U_{\frac{\varepsilon}{2}}(x_j)}$. 
+				Wegen $\overline{U_{\frac{\varepsilon}{2}}(x_j)} \subseteq U_{{\varepsilon}}(x_j)$ gilt
+				$\overline{M} \subseteq \cup_{j=1}^p \overline{U_{\frac{\varepsilon}{2}}(x_j)} \subseteq \cup_{j=1}^p U_{\varepsilon}(x_j)$
 				$\df$ $\overline{M}$ präkompakt. Da $(\overline{M},d)$ vollständig ist $\overline{M}$ kompakt. (Satz 1.41) $\df$ $M$ relativ kompakt.
-
 		\end{itemize}
 	\end{proof}
 
@@ -897,82 +912,97 @@ klar! (Ja, selbst ohne eine Behauptung)
 		\begin{enumerate}[a)]
 			\item Aussagen über metrischer Räume übertragen sich
 			\item Die Vervollständigung von $X$ ist ein Banachraum.
-			\item Wenn $dim X < \infty$, dann
+			\item Wenn $\dim X < \infty$, dann
 				\begin{enumerate}[i)]
 					\item $X$ Banachraum
-					\item $M\subset X$ kompakt $\aq$ $M$ beschränkt und abgeschlossen (Heine Borel)
-					\item $M\subset X$ relativ kompakt $\aq$ $M$ präkompakt  $\aq$ $M$ beschränkt
+					\item $M\subseteq X$ kompakt $\aq$ $M$ beschränkt und abgeschlossen (Heine-Borel)
+					\item $M\subseteq X$ relativ kompakt $\aq$ $M$ präkompakt  $\aq$ $M$ beschränkt
 				\end{enumerate}
 		\end{enumerate}
 	\end{bem}
 \newcommand{\xt}{x_\eta}%Eigentlich eta glaube ich
-:
+
 %Lemma 1.47 Lemma von Riesz
-	\begin{lemma}[Lemma von Riesz]%Lemmaumgebung gab es schon :O
-		\TODO: Beweis vervollständigen. $(X,\norm{\cdot})$ normierter Raum, $E\subset X$ abgeschlossener Unterraum mit $E \not = X$, $\eta\in (0,1)$. \par
+	\begin{lemma}[Lemma von Riesz]
+		$(X,\norm{\cdot})$ normierter Raum, $E\subseteq X$ abgeschlossener Unterraum mit $E \not = X$, $\eta\in (0,1)$. \par
 		Dann existiert ein $x_\eta \in X$ mit $\norm{\xt} = 1$ und $\norm{\xt - y} \geq \eta \; \forall y\in E.$
 	\end{lemma}
 	\begin{proof}
-		Sei $x_0 \in X\backslash E$. $\delta = \inf_{y\in E} \norm{x_0 - y}$ \par
-		E abgeschlossen $\df$ $\delta > 0$. Sei $(y_n)$ Folge in $E$ mit $\norm{x_0 - y_n} \to \delta$. Sei $\eta \in (0,1) \df \frac{\delta}{\eta} > \delta $\par
-		$\df \exists z\in E$ mit $\norm{x_0 - z} \leq \frac{\delta}{\eta}.$ Definiere $\xt := \frac{x_0-z}{\norm{x_0 - z}} \df \norm{\xt} = 1$
+		Sei $x_0 \in X\backslash E$. $\delta := \inf_{y\in E} \norm{x_0 - y}$.
+		Da $E$ abgeschlossen ist $\df$ $\delta > 0$. Sei $(y_n)$ Folge in $E$ mit $\norm{x_0 - y_n} \to \delta$. 
+		Sei $\eta \in (0,1) \df \frac{\delta}{\eta} > \delta $
+		$\df \exists z\in E$ mit $\norm{x_0 - z} \leq \frac{\delta}{\eta}.$ Definiere $\xt := \frac{x_0-z}{\norm{x_0 - z}} \df \norm{\xt} = 1$.\par	
 		Für $y\in E$ gilt 
+		%\begin{equation*} \begin{split}
 		$\norm{\xt - y} = \norm{y - \frac{x_0-z}{\norm{x_0 - z}}} 
-		= \norm{y + \frac{z}{\norm{x_0 - z}} - \frac{x_0}{\norm{x_0 - z}}} = \frac{1}{\norm{x_0 - z}} \norm{(\norm{x_0 - z}y + z) - x_0} 
-		\geq> \delta\cdot \frac{1}{\norm{x_0 - z}} \geq \frac{\eta}{\delta} \cdot \delta = \eta$
+		 = \norm{y + \frac{z}{\norm{x_0 - z}} - \frac{x_0}{\norm{x_0 - z}}} 
+		 = \frac{1}{\norm{x_0 - z}} \norm{(\underbrace{\norm{x_0 - z}y + z}_{\in E}) - x_0} 
+		\vspace{-1em}> \delta\cdot \frac{1}{\norm{x_0 - z}} \geq \frac{\eta}{\delta} \cdot \delta = \eta
+		$
+		%\end{split} \end{equation*}
 	\end{proof}	
 
+%Korollar 1.48
 	\begin{cor}
 		$(X,\norm{\cdot})$ normierter Raum.
-			\begin{enumerate}
-				\item $\overline{U_1(0)}$ $\aq$ $dimX < \infty$
-				\item Jede beschränkt Folge besitzt konvergente Teilfolge $\aq$ $dim X< \infty$
+			\begin{enumerate}[a)] 
+				\item $\overline{U_1(0)}$ kompakt $\aq$ $\dim X < \infty$
+				\item Jede beschränkt Folge besitzt konvergente Teilfolge $\aq$ $\dim X < \infty$
 			\end{enumerate}
 	\end{cor}
 
 	\begin{proof}
-		a) \afs $\Leftarrow$ \afs Folgt aus Heine-Borel\par
-		 \par
-		$\Rightarrow$ Angenommen, $dim X = \infty$ (Nicht endlichdimensional). Wähle $x_0 \in X$ mit $\norm{x_0} = 1$. Nach Lemma von Riesz, wähle $x_1 \in X$, so dass $\norm{x_1 - y} \geq \frac{1}{2} \forall y \in \aufspan\{x_0\}$. \par
-		Konstruiere so Folge $(x_n)$ mit $\norm{x_n} = 1$ und $\norm{x_n - y} \geq \frac{1}{2} \forall y\in \aufspan\{x_0,\dots,x_{n-1}\}\; \forall n\in\N.$ \par
-		$\df \norm{x_n - x_m} \geq \frac{1}{2}\; \forall n,m \in \N$  mit $n \not = m$. 
-		$\df (x_n)$ hat keine konvergente Teilfolge. \par
-		b) genauso.
+		 \begin{enumerate}[a)]
+			 \item $"\Leftarrow"$ Folgt aus Heine-Borel\par
+				$"\Rightarrow"$ Angenommen, $\dim X = \infty$ (Nicht endlichdimensional). 
+				Wähle $x_0 \in X$ mit $\norm{x_0} = 1$. Nach Lemma von Riesz, wähle $x_1 \in X$, so dass 
+				$\norm{x_1 - y} \geq \frac{1}{2} \; \forall y \in \aufspan\{x_0\}$. 
+				Konstruiere so Folge $(x_n)$ mit $\norm{x_n} = 1$ und $\norm{x_n - y} \geq \frac{1}{2} \; \forall y\in \aufspan\{x_0,\dots,x_{n-1}\}\; \forall n\in\N.$ \par
+				$\df \norm{x_n - x_m} \geq \frac{1}{2}\; \forall n,m \in \N$  mit $n \not = m$. 
+				$\df (x_n)$ hat keine konvergente Teilfolge. \par
+			\item genauso.
+		\end{enumerate}
 	\end{proof}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	\subsection{Skalarprodukträume}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Erinnerung:\\
+	Sei $X$ ein $\K$-VR. Ein \textit{Skalarprodukt} ist eine Abb $(\cdot,\cdot) \to \K$ mit 
+	\begin{enumerate}[(S1)]
+		\item $(\alpha x + \beta y, z) = \alpha (x,z) + \beta (y,z)$ $\forall x,y,z \in X$, $\alpha,\beta \in \K$
+		\item $(x,y) = \ov{(y,x)}$
+		\item $(x,x) > 0$  $\forall x\in X\backslash\{0\}$.
+	\end{enumerate}
 
-	Wiederholung: $X$ $\K-VR$. Ein \qmarks{Skalarprodukt} ist eine Abb $(\cdot,\cdot) \to \K$ mit (S1) $(\alpha x + \beta y, z) = \alpha (x,z) + \beta (y,z)$ $\forall x,y,z \in X, \alpha,\beta \in \K$
-	(S2) $(x,y) = (y,x)$
-	(S3) $(x,x) > 0 \forall x\in X\backslash{0}$.
-
+%Bemerkerung 1.49
 	\begin{bem}
-		\begin{enumerate}
+		\begin{enumerate}[a)]
 			\item $\norm{x} := \sqrt{(x,x)}$ ist Norm.
-			\item vollständig Skalarproduktraum heißt \qmarks{Hilbertraum}.
+			\item vollständig Skalarproduktraum heißt \textit{Hilbertraum}.
 			\item $\norm{x} \cdot \norm{y} \geq |(x,y)| \; \forall x,y \in X$ (Cauchy-Schwartz-Ungleichung)
-			\item Für $x,y \in X$ mit $(x,y) = 0$ (x und y orthogonal, $x orh y$)
+			\item Für $x,y \in X$ mit $(x,y) = 0$ (x und y orthogonal, $x \perp y$)
 			gilt $\norm{x + y}^2 = \norm{x}^2 + \norm{y}^2$ (Satz des Pythagoras)
 			\item Für $x,y \in X$ gilt die Parallelogrammgleichung: 
 				$\norm{x + y} ^2 + \norm{x - y}^2 = 2 \norm{x}^2 + 2\norm{y}^2$
 			\item	Für $(x_n), (y_n)$ mit $(x_n) \to x$, $(y_n) \to y$ gilt 
-				$(x_n, y_n) \to (x,y)$, da $|(x_n, y_n) - (x,y)| \leq \norm{x_n}\cdot \norm{y_n - y} + \norm{x_n - x}\norm{y}$ (Stetigkeit des Skalarprodukts)
+				$(x_n, y_n) \to (x,y)$, \par 
+				da $|(x_n, y_n) - (x,y)| \leq \norm{x_n}\cdot \norm{y_n - y} + \norm{x_n - x}\norm{y}$ (Stetigkeit des Skalarprodukts)
 		\end{enumerate}
 	\end{bem}
-
+%Satz 1.50
 	\begin{thm}
-		Sei $(X,\norm{})$ normierter Raum mit $\norm{x+y}^2 + \norm{x-y}^2 = 2... \forall x,y \in X$ 
-		Dann existiert Skalarprodukt auf $X$, welches $\norm{\cdot}$ induziert.
+		Sei $(X,\norm{})$ normierter Raum mit $\norm{x+y}^2 + \norm{x-y}^2 = 2 \norm{x}^2 + 2\norm{y}^2$ $\forall x,y \in X$. 
+		Dann existiert ein Skalarprodukt auf $X$, welche diese $\norm{\cdot}$ induziert.
 	\end{thm}
-	\begin{proof}
-		Skizze! a) $\K = \R$ $(x,y) := \frac{1}{4}(\norm{x + y}^2 - \norm{x-y}^2)$. b) $\K = \C$ 
 
+	\begin{proof}
+		Skizze! a) $\K = \R \quad$ $(x,y) := \frac{1}{4}(\norm{x + y}^2 - \norm{x-y}^2)$. 
+			b) $\K = \C \quad $ $\frac{1}{4}(\norm{x + y}^2 - \norm{x-y}^2 + i\norm{x + iy}^2 - i\norm{x-iy}^2)$
 	\end{proof}
-\newcommand{\xf}{(x_i)_{i\in I}}
-	\newcommand{\ff}[3]{(#1_#2)_{#2\in#3}}
-	\newcommand{\SP}{(\cdot,\cdot)}
+
+% Definition 1.51
 	\begin{definition}
-		$(X,\SP)$ Skalarprodukt, $x,y\in X$. $M,N \subset X$, $(x_i)_{i\in I}$ Famile.
+		$(X,\SP)$ Skalarprodukt, $x,y\in X$. $M,N \subseteq X$, $(x_i)_{i\in I}$ Famile.
 		\begin{enumerate}
 			\item $x$ orthogonoal zu $y$ (x $\perp$ y), wenn $(x,y) = 0$.
 			\item $x$ orthogonoal zu $N$ (x $\perp$ M), wenn $x \perp y \forall x\in N$
@@ -1150,7 +1180,7 @@ $f\in L^2([0,2\pi])$
 	\end{cor*}
 
 	\begin{definition}[Halbordnung, Totalordnung]
-		Sei $M$ eine Menge. Eine Relation $\leq \subset M\times M$, heißt \textit{Halbordnung}, wenn 
+		Sei $M$ eine Menge. Eine Relation $\leq \subseteq M\times M$, heißt \textit{Halbordnung}, wenn 
 			\begin{enumerate}
 				\item TODO 
 			\end{enumerate}
@@ -1162,7 +1192,7 @@ $f\in L^2([0,2\pi])$
 	\end{definition}
 
 	\begin{lemma}[Lemma von Zorn]
-		$M$ halbgeordnete Menge. Besitzt jede totalgeordnete Teilmenge $Z \subset M$ eine obere Schranke in $M$, dann besitzt $M$ eine obere Schranke.	
+		$M$ halbgeordnete Menge. Besitzt jede totalgeordnete Teilmenge $Z \subseteq M$ eine obere Schranke in $M$, dann besitzt $M$ eine obere Schranke.	
 	\end{lemma}
 
 	\begin{thm}
@@ -1171,8 +1201,8 @@ $f\in L^2([0,2\pi])$
 
 	\begin{proof}
 		Sei $M = \{\ff{u}{i}{I} : \ff{u}{i}{I} ONS \}$ \par
-		Definiere Halbordnung $\ff{u}{i}{I} \subset \ff{y}{i}{J} :\aq I \subset J$ und $x_i = y_i \forall i \in I$.
-		Sei $Z \subset M$ totalgeordnete Teilmenge, $Z = \{(x)_{i\in I_j} : j\in J \}$
+		Definiere Halbordnung $\ff{u}{i}{I} \subseteq \ff{y}{i}{J} :\aq I \subseteq J$ und $x_i = y_i \forall i \in I$.
+		Sei $Z \subseteq M$ totalgeordnete Teilmenge, $Z = \{(x)_{i\in I_j} : j\in J \}$
 		Betrachte $\ff{x}{i}{I}$ ist obere Schranke von $Z$. Nach Lemma von Zorn $\exists$ also eine obere Schranke $\ff{\hat{{x_i}}}{i}{J}$ von $M$. \par
 		Mit anderen Worten: $\centernot \exists$ ONS $\ff{\hat{{y}}}{i}{\hat{J}}$ mit $J \subsetneq \hat{J}$ und $\hat{x}_i = \hat{y}_i \forall i\in J.$\par
 		$\df \forall x\in X$ mit $x\perp \hat{x}_i \forall i \in I$ gilt $x= 0$ \par
@@ -1189,7 +1219,7 @@ $f\in L^2([0,2\pi])$
 		sowie $\bigcup_{j\in J} S_{x_j} = I$ und $S_{x_j} \neq \emptyset$. Denn:
 		Ist $S_{y_j} = \emptyset$, dann $y_j \perp x_i \forall i \in I \df y_j =0$ Lightning! \par
 		Ist $i\in I$ mit $i \not \in \bigcup_{j\in J} S_{y_j}$, dann $x_i \perp y_j \forall j\in J \df x_i = 0$ Lightning! \par
-		Also $|I| = |\bigcup{j\in J} S_{x_j}| \subset |J| \cdot |\N| = |J|$. \par
+		Also $|I| = |\bigcup{j\in J} S_{x_j}| \subseteq |J| \cdot |\N| = |J|$. \par
 		Analog $|J| \subseteq |I|$
 	\end{proof}
 
@@ -1197,7 +1227,7 @@ $f\in L^2([0,2\pi])$
 	\section{Satz von der offenen Abbildung, Satz vom abgeschlossenen Graphen, Satz von der stetigen Inversen}
 	
 	\begin{definition}
-					$X,Y$ topologischer Räume $f: X\to Y$ heißt \textit{offen}, falls $f(U) \subset Y$ offen in $Y \forall$ offenen $U\subset X$
+					$X,Y$ topologischer Räume $f: X\to Y$ heißt \textit{offen}, falls $f(U) \subseteq Y$ offen in $Y \forall$ offenen $U\subseteq X$
 	\end{definition}
 
 	\begin{thm}
@@ -1209,8 +1239,8 @@ $f\in L^2([0,2\pi])$
 	\end{thm}
 	\begin{proof}
 		\begin{itemize}
-			\item \qmarks{$i \to ii$} Sei $U \subset X$ offen  $\df \inv{(\inv{f})}(U) = f(U)$ offen, also $\inf{f}$ stetig.
-		\item \qmarks{$ii \to i$} Sei $U \subset X$ offen, $\inv{f}$ stetig 
+			\item \qmarks{$i \to ii$} Sei $U \subseteq X$ offen  $\df \inv{(\inv{f})}(U) = f(U)$ offen, also $\inf{f}$ stetig.
+		\item \qmarks{$ii \to i$} Sei $U \subseteq X$ offen, $\inv{f}$ stetig 
 			$\df f(U) = \inv{(\inv{f})}(U)$ offen $\df f $ offen.
 		\end{itemize}
 	\end{proof}
@@ -1241,13 +1271,13 @@ $f\in L^2([0,2\pi])$
 			Da $Y$ Banachraum, so gilt nach Baire
 			$\exists N\in\N: \overline{T(U_N(0))} \neq \emptyset$
 			$\exists y_0 \in \overline{T(U_N(0))}, \varepsilon > 0$, so dass 
-			$\U{\varepsilon}{0} \subset \overline{T(U_N(0))}$.
-			Aus $\U{\varepsilon}{0} \subset \frac{1}{2} \U{\varepsilon}{y_0} + \frac{1}{2} \U{\varepsilon}{-y_0}$ und 
+			$\U{\varepsilon}{0} \subseteq \overline{T(U_N(0))}$.
+			Aus $\U{\varepsilon}{0} \subseteq \frac{1}{2} \U{\varepsilon}{y_0} + \frac{1}{2} \U{\varepsilon}{-y_0}$ und 
 			$\overline{T(U_N(0))} = \frac{1}{2} \overline{T(U_N(0))} + \frac{1}{2} \overline{T(U_N(0))} $		
-			folgt $ \U{\varepsilon}{0} \subset \overline{T(U_N(0))}$
-			$\df \U{\frac{\varepsilon}{N}}{0} \subset \overline{T(U_1(0))}$.
+			folgt $ \U{\varepsilon}{0} \subseteq \overline{T(U_N(0))}$
+			$\df \U{\frac{\varepsilon}{N}}{0} \subseteq \overline{T(U_1(0))}$.
 			$\varepsilon_0 := \frac{\varepsilon}{N}$.
-			\item Wir zeigen $\U{\varepsilon_0}{0} \subset {T(U_1(0))}$
+			\item Wir zeigen $\U{\varepsilon_0}{0} \subseteq {T(U_1(0))}$
 			Sei $y\in \U{\varepsilon_0}{0}$. Wähle $\varepsilon > 0$ mit $ \norm{y} < \varepsilon < \varepsilon_0$, $\overline{y} : = \frac{\varepsilon_0}{\varepsilon} y$ 
 			$\df$ $\norm{\overline{y}} < \varepsilon_0$
 			$\df \overline{y} \in \overline{T(U_1(0))}$
@@ -1297,7 +1327,7 @@ $f\in L^2([0,2\pi])$
 		\end{enumerate}
 
 	\begin{definition}[Graphenabgeschlossenheit]
-		$X,Y$ metrische Räume, $f: X\to Y$ heißt \textit{graphenabgeschlossen}, wenn $G(f) \subset X\times Y$ abgeschlossen ist.	
+		$X,Y$ metrische Räume, $f: X\to Y$ heißt \textit{graphenabgeschlossen}, wenn $G(f) \subseteq X\times Y$ abgeschlossen ist.	
 	\end{definition}
 
 	\begin{bem}
