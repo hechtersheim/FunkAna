@@ -1362,6 +1362,112 @@ $f\in L^2([0,2\pi])$
 				$\df T\in\BS$
 		\end{itemize}
 	\end{proof}
+
+	\begin{bem}
+		Ein paar Anwednungenj
+		\begin{enumerate}
+			\item Aus Inverse mapping thm folgt: $(X,\norm{\cdot}_1$, $(X,\norm{\cdot}_2)$ BRe, $\norm{\cdot}_1$ stärker als $\norm{\cdot}_2$ $\df$
+				 $\norm{\cdot}_2$ stärker $\norm{\cdot}_1.$
+				 \begin{proof}
+				 TODO
+				 \end{proof}
+			\item Betrachte $X = C([a,b])$, $Y = C^1([a,b])$ mit Normen $\norm{x}_X = \max_{t\in[a,b]} |x(t) | = \norm{x}_\infty$, $\norm{x}_Y = \norm{x}_\infty + \norm{x'}_\infty$, $X,Y$ Banachräume.\par
+			Ist $T\in \B(C([a,b]))$ mit $imT \subset C^1([a,b])$. Dann ist $T\in \B(C([a,b]), C^1([a,b]))$
+				\begin{proof}
+					$x, x_n \in X y\in Y$ mit $\norm{x_n - x}_X \to 0$, $\norm{Tx_n - y}_Y \to 0$
+					$\df \norm{x_n - x}_X \to 0$ und $\norm{Tx_n - y}_X \to 0$, da $\norm{z}_X \leq \norm{z}_Y \; \forall z\in Y$. $\df[T\in\B(X)]$ $\limes \norm{Tx_n - Tx} = 0 \df y = Tx$
+					$\df T$ graphenabgeschlossen $\df[X,Y \; BRe]$ $T\in \BS$.
+				\end{proof}
+		\end{enumerate}
+
+	\end{bem}
+
+	\begin{bem}
+		$T: X\to Y$ lineare Operatoren. Dann sind äquivalent:
+			\begin{enumerate}[(i)]
+				\item $T$ graphenabgeschlossen 
+				\item $\forall (x_n)$ in $X$ mit $x_n \to 0$, $y\in Y$ mit $ (Tx_1) \to y$ folgt $y=0$ 
+			\end{enumerate}
+
+		\begin{proof}
+				TODO
+		\end{proof}
+
+	\end{bem}
+
+	\section{Das Prinzip der gleichmäßigen Beschränkheit, Satz von Banach-Steinhaus}
+\newcommand{\F}{\mathcal{F}}
+	\begin{thm}[Satz von Osgood]
+		$X$ normierte Raum, $E \subset X$ Teilmenge von 2. Kategorie.	Sei $\mathcal{F} = \{f_\alpha: X\to \R$ stetig, $\alpha \in A\}$ eine Menge von FUnktionen. $\F$ sei auf $E$ punktweise beschränkt, d.h. $\forall x\in E$ $\exists M_x > 0$, so dass $f_\alpha (x) \leq M_x$ $\forall \alpha \in A$. Dann existiert abgeschlossene Kugel $K\subseteq X$, auf der $\F$ glm nach oben beschränkt ist. D.h.
+		$$\exists M > 0 \text{ s.d } f_\alpha (x) \leq M \; \forall \alpha \in A, x\in K.$$
+	\end{thm}
+	
+	\begin{proof}
+		Für $n\in \N$, def $E_n : \{x\in X: f_\alpha(x) \leq n \forall \alpha \in A\}$
+		$= \bigcap_{\alpha\in A} \underbrace{\{ x\in X: f_\alpha (x) \leq n\}}_{\text{abgeschlossen, da f stetig}}$
+		$\df E_n$ abgeschlossen. Ferne gilt $E\subset \cup_{n\in\N} E_n$ wegen Annahme (punktweise Beschränkt). $\df[2. Kate] \cup_{n\in\N} E_n$ von 2. Kategoriere 
+		$\df$ $\exists n_0 \in \N$ so, dass $\circ E_{n_0} = \circ \overline{E_{n_0}} \neq \emptyset.$
+		$\df$ Für $U = \circ E_{n_o} :\sup_{\alpha \in A, x \in U} f_\alpha (x) \leq n_0 =: M$
+		Insbesondere $\exists x_0 \in U, \delta > 0$, so dass $K:= \overline{U_\delta(x_0)} \subseteq U$. Dann gilt $\forall \alpha \in A, x\in \overline{U_\delta(x_0)}: f_\alpha (x) \leq M.$
+	\end{proof}
+
+	\begin{cor}[Prinzip der glm Beschränkheit]
+		$X,Y$ normierter Räume, $E\subset X$ von 2. Kategorie, 
+			$\F \subseteq \BS$ mit $\forall x \in $ $\exists M_x > 0$ so dass $\norm{Tx} \leq M_x \forall T \in \F$.
+			Dann gilt: $$\exists M > 0 \text{ so dass } \norm{T} \leq M \forall T \in \F$$
+	\end{cor}
+
+	\begin{proof}
+		TODO
+	\end{proof}
+
+	\begin{cor}
+		$X$ Banachraum, $Y$ normierter Raum. Sei $\F \subseteq \BS$, so dass $\forall x \in X$ $\exists M_x > 0: \norm{T_x} \leq M_x \; \forall T\in \F$. Dann existiert ein $M > 0$, so dass $\norm{T} \leq M$ $\forall T \in \F$.
+	\end{cor}
+
+	\begin{proof}
+		$X$ Banachraum $\df[Baire]$ $X$ von 2. Kategorier. Resultat folgt aus Kor. 2.14.
+	\end{proof}
+
+	\begin{cor}
+		$X$ Banachraum, $Y$ normierter Raum, $\F \subseteq \BS$, so dass 
+			$$ \sup_{T\in\F} \norm{T} = \infty \vspace{-1em} $$. 
+		Dann gilt 
+			\begin{enumerate}[(i)]
+				\item $\exists x_0 \in X$: $\sup_{T\in \F} \norm{Tx_0} = \infty$
+				\item Die Menge $\{x_0 \in X: \sup_{T\in \F} \norm{Tx_0} = \infty\}$ ist dicht.
+					\begin{proof}
+						Angenommen $Z \subseteq X$ nicht dicht $ \df \exists r>0, x\in X: $
+							$$ \overline{\U[r]{x_0}} \subseteq X \backslash Z \df \forall x \in \overline{\U[r]{x_0}} : \sup_{T\in\F} \norm{Tx} < \infty$$
+							$\df[2.14] \sup{T\in \F} \norm{T} < \infty$ Widerspruch!
+					\end{proof}
+			\end{enumerate}
+
+	\end{cor}
+TODO: Ein Beispiel für starke Konvergenz aber keine Konvergenz von Operatoren oder sowas.
+
+	\begin{thm}
+		$X$ Banachraum, $Y$ normierter Raum. $(T_n)$ Folge in $\BS$, so dass 
+			$$ Tx = \limes T_n x \; \forall x\in X$$. 
+		Dann gilt $T\in \BS$, $\{\norm{T_n} : n\in \N\}$ beschränkt und $\norm{T} \leq \limes\inf \norm{T_n}$.
+	\end{thm}
+
+	\begin{proof}
+		Linearität von $T$ klar. \par
+TODO
+	\end{proof}
+
+	\begin{thm}[Satz von Banach-Steinhaus]
+		$X,Y$ Banachräume, $(T_n)$ Folge in $\BS$. Dann konvergiert $(T_n)$ punktweise gegen ein $T\in \BS$, genau dann wenn folgende beiden Bedingungen erfüllt sind:
+			\begin{enumerate}[(1)]
+				\item $\exists M > 0$, so dass $\norm{T_n} \leq M \; \forall n\in \N$
+				\item $\exists D \subset X$ dicht, so dass $(T_n x)$ CF $\forall x\in D$.
+			\end{enumerate}
+	\end{thm}
+
+	\begin{proof}
+		TODO
+	\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
