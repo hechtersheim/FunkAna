@@ -16,6 +16,7 @@
 \usepackage{amsmath}
 \usepackage[nothm]{thmbox} %Decorate theorem statements
 %more features for environments and other stuff
+\usepackage{tikz}
 \usepackage{centernot} %nicer looking not
 \usepackage{marvosym} %some 
 \usepackage{paralist} %Adds more function to listing environments
@@ -69,7 +70,7 @@
 \newcommand{\hL}{\mathcal{L}}
 \newcommand{\tT}{\mathcal{T}} %topologisches T
 \newcommand{\B}{\mathcal{B}} %Raum der beschränkten Funktion
-\newcommand{\BS}[1][X,Y]{\mathcal{B}(#1)} %"standardraum" der beschränkten Funktion
+\newcommand{\BS}[1][X,Y]{\mathcal{B}(#1)} %"Standardraum" der beschränkten Funktion
 %Für (mind.) ein Beweis notwendig:
 \newcommand{\dX}{\hat{X}}%Dach X
 \newcommand{\dd}{\hat{d}}%Dach d
@@ -114,6 +115,14 @@
 \newcommand{\xf}{(x_i)_{i\in I}}
 \newcommand{\ff}[3]{(#1_#2)_{#2\in#3}}
 \newcommand{\SP}{(\cdot,\cdot)}
+
+
+%Commands für tikz:
+\newcommand*{\rechterWinkel}[3]{% #1 = point, #2 = start angle, #3 = radius
+\draw[shift={(#2:#3)}] (#1) arc[start angle=#2, delta angle=90, radius = #3];
+\fill[shift={(#2+45:#3/2)}] (#1) circle[radius=1.25\pgflinewidth];
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -862,11 +871,13 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 
 %Korollar 1.42
 	\begin{cor}
-		$(X,d)$ metrischer Raum. Dann gelten folgende Aussage
+		$(X,d)$ sei ein metrischer Raum. Dann gilt:
+
 			\begin{enumerate}[a)]
 				\item $(X,d)$ kompakt $\df$ $X$ vollständig
 				\item $M\subseteq X$, so dass jede Folge in M eine in M konvergente Teilfolge hat (\qmarks{M folgenkompakt})
 					$\Leftrightarrow$ $M \subseteq X$ kompakt (\qmarks{M Überdeckungskompakt})
+
 				\item $M\subseteq X$ kompakt $\df$ $M$ beschränkt und abgeschlossen.
 				\item $X$ kompakt, $A \subseteq X$ abgeschlossen $\df$ $A$ kompakt.
 			\end{enumerate}
@@ -886,23 +897,37 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 
 %Satz 1.45
 	\begin{thm}
-		$(X,d)$ metrischer Raum. $M,N \subseteq X$ seien relativ kompakt (bzw. präkompakt). Dann gilt 
-			\begin{enumerate}[a)]
+		Sei $(X,d)$ ein metrischer Raum. $M,N \subseteq X$ seien relativ kompakt (bzw. präkompakt). Dann gilt 
+			\begin{enumerate} [(a)]
 				\item $S\subseteq M$ $\df$ $S$ relativ kompakt (bzw. präkompakt)
 				\item $M\cup N$ relativ kompakt (bzw präkompakt)
-				\item $M,N$ präkompakt
+				\item $M$ relativ kompakt $\df$ M präkompakt
 				\item Ist $(X,d)$ vollständig, so gilt $M$ relativ kompakt $\Leftrightarrow M$ präkompakt
 			\end{enumerate}
 	\end{thm}
 
 	\begin{proof}
 		\begin{itemize}[]
-			\item $\qmarks{a) - c)}$: mündlicher Beweis. TODO. folgt aus Definition.
-			\item Zu $\qmarks{d)}$: Die Hinrichtung folgt aus c). 
-				Für $"{}\Leftarrow"$: Sei $M$ präkompakt $\forall \varepsilon > 0\; \exists p\in\N, \{x_1,\dots,x_p\} \subseteq X$ mit $M \subseteq \cup_{j=1}^p \overline{ U_{\frac{\varepsilon}{2}}(x_j)}$. 
-				Wegen $\overline{U_{\frac{\varepsilon}{2}}(x_j)} \subseteq U_{{\varepsilon}}(x_j)$ gilt
-				$\overline{M} \subseteq \cup_{j=1}^p \overline{U_{\frac{\varepsilon}{2}}(x_j)} \subseteq \cup_{j=1}^p U_{\varepsilon}(x_j)$
-				$\df$ $\overline{M}$ präkompakt. Da $(\overline{M},d)$ vollständig ist $\overline{M}$ kompakt. (Satz 1.41) $\df$ $M$ relativ kompakt.
+%			\item $\qmarks{a) - c)}$: mündlicher Beweis. TODO. folgt aus Definition.
+%			\item Zu $\qmarks{d)}$: Die Hinrichtung folgt aus c). 
+%				Für $"{}\Leftarrow"$: Sei $M$ präkompakt $\forall \varepsilon > 0\; \exists p\in\N, \{x_1,\dots,x_p\} \subseteq X$ mit $M \subseteq \cup_{j=1}^p \overline{ U_{\frac{\varepsilon}{2}}(x_j)}$. 
+%				Wegen $\overline{U_{\frac{\varepsilon}{2}}(x_j)} \subseteq U_{{\varepsilon}}(x_j)$ gilt
+%				$\overline{M} \subseteq \cup_{j=1}^p \overline{U_{\frac{\varepsilon}{2}}(x_j)} \subseteq \cup_{j=1}^p U_{\varepsilon}(x_j)$
+%				$\df$ $\overline{M}$ präkompakt. Da $(\overline{M},d)$ vollständig ist $\overline{M}$ kompakt. (Satz 1.41) $\df$ $M$ relativ kompakt.
+
+			\item a) relativ kompakt: Sei $(x_n)$ eine Folge aus $S$. Da $(x_n)$ ein Folge in M ist, hat es eine konvergente Teilfolge, dessen Grenzwert in $\overline{M}$ ist. Dann ist der Grenzwert auch in $\overline{S}$. Also ist S relativ kompakt. 
+				präkompakt: Sei $\varepsilon>0$ gegeben. Dann gibt es eine endliche Menge $\{x_1,\dots,x_n\}\subseteq M$, so dass $S\subseteq M = \bigcup^n_{i=0}U_\varepsilon(x_i)$. Also ist auch S präkompakt.
+			
+			\item b) relativ kompakt: Ist $(x_n)$ eine Folge aus $M\cup N$, so gibt es eine Teilfolge, die nur in $M$ oder $N$ ist. Dann hat diese Teilfolge noch eine konvergente Teilfolge.
+				präkompakt: $M$ und $N$ haben jeweils ein $\varepsilon$-Netz. Die Vereinigung ist dann auch ein $\varepsilon$-Netz.
+				
+			\item c) Angenommen M sei nicht präkompakt, dann gibt es ein $\varepsilon>0$, so dass sich $M$ nicht durch endlich viele $\varepsilon$-Kugeln überdecken lässt. Wählen wir aus jedem dieser  (mindestens abzählbar vielen) Kugeln ein Element aus, entsteht eine Folge, dessen Folgenglieder alle Mindestabstand $\frac{\varepsilon}{2}$ zueinander haben. $\df$ Es gibt keine konvergente Teilfolge $\df$ $M$ nicht relativ kompakt.
+			
+			\item d) $\qmarks{\df}$ folgt aus c) \par
+				$\qmarks{\Leftarrow}$ Sei $M$ präkompakt $\df \forall \varepsilon > 0\; \exists p\in\N, \{x_1,\dots,x_p\} \subset X$ mit $M \subset \cup_{j=1}^p \overline{ U_{\frac{\varepsilon}{2}}(x_j)}$. 
+				Wegen $\overline{U_{\frac{\varepsilon}{2}}(x_j)} \subset U_{{\varepsilon}}(x_j)$ gilt
+				$\overline{M} \subset \cup_{j=1}^p \overline{U_{\frac{\varepsilon}{2}}(x_j)} \subset \cup_{j=1}^r U_{\varepsilon}(x_j)$
+				$\df$ $\overline{M}$ präkompakt. Da $(\overline{M},d)$ vollständig ist, ist $\overline{M}$ kompakt. (Satz 1.41) $\df$ $M$ relativ kompakt.
 		\end{itemize}
 	\end{proof}
 
@@ -923,23 +948,55 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 \newcommand{\xt}{x_\eta}%Eigentlich eta glaube ich
 
 %Lemma 1.47 Lemma von Riesz
-	\begin{lemma}[Lemma von Riesz]
-		$(X,\norm{\cdot})$ normierter Raum, $E\subseteq X$ abgeschlossener Unterraum mit $E \not = X$, $\eta\in (0,1)$. \par
+
+%	\begin{lemma}[Lemma von Riesz]
+%		$(X,\norm{\cdot})$ normierter Raum, $E\subseteq X$ abgeschlossener Unterraum mit $E \not = X$, $\eta\in (0,1)$. \par
+%		Dann existiert ein $x_\eta \in X$ mit $\norm{\xt} = 1$ und $\norm{\xt - y} \geq \eta \; \forall y\in E.$
+%	\end{lemma}
+%	\begin{proof}
+%		Sei $x_0 \in X\backslash E$. $\delta := \inf_{y\in E} \norm{x_0 - y}$.
+%		Da $E$ abgeschlossen ist $\df$ $\delta > 0$. Sei $(y_n)$ Folge in $E$ mit $\norm{x_0 - y_n} \to \delta$. 
+%		Sei $\eta \in (0,1) \df \frac{\delta}{\eta} > \delta $
+%		$\df \exists z\in E$ mit $\norm{x_0 - z} \leq \frac{\delta}{\eta}.$ Definiere $\xt := \frac{x_0-z}{\norm{x_0 - z}} \df \norm{\xt} = 1$.\par	
+%		Für $y\in E$ gilt 
+%		%\begin{equation*} \begin{split}
+%		$\norm{\xt - y} = \norm{y - \frac{x_0-z}{\norm{x_0 - z}}} 
+%		 = \norm{y + \frac{z}{\norm{x_0 - z}} - \frac{x_0}{\norm{x_0 - z}}} 
+%		 = \frac{1}{\norm{x_0 - z}} \norm{(\underbrace{\norm{x_0 - z}y + z}_{\in E}) - x_0} 
+%		\vspace{-1em}> \delta\cdot \frac{1}{\norm{x_0 - z}} \geq \frac{\eta}{\delta} \cdot \delta = \eta
+%		$
+%		%\end{split} \end{equation*}
+
+	\begin{lemma}[Lemma von Riesz]%Lemmaumgebung gab es schon :O
+		$(X,\norm{\cdot})$ normierter Raum, $E\subset X$ abgeschlossener Unterraum mit $E \not = X$, $\eta\in (0,1)$. \par
 		Dann existiert ein $x_\eta \in X$ mit $\norm{\xt} = 1$ und $\norm{\xt - y} \geq \eta \; \forall y\in E.$
 	\end{lemma}
 	\begin{proof}
-		Sei $x_0 \in X\backslash E$. $\delta := \inf_{y\in E} \norm{x_0 - y}$.
-		Da $E$ abgeschlossen ist $\df$ $\delta > 0$. Sei $(y_n)$ Folge in $E$ mit $\norm{x_0 - y_n} \to \delta$. 
-		Sei $\eta \in (0,1) \df \frac{\delta}{\eta} > \delta $
-		$\df \exists z\in E$ mit $\norm{x_0 - z} \leq \frac{\delta}{\eta}.$ Definiere $\xt := \frac{x_0-z}{\norm{x_0 - z}} \df \norm{\xt} = 1$.\par	
+		Sei $x_0 \in X\backslash E$. $\delta := \inf_{y\in E} \norm{x_0 - y}$, da E abgeschlossen ist, ist $\delta > 0$. Sei $\eta \in (0,1) \df \frac{\delta}{\eta} > \delta $ $\df \exists z\in E$ mit $\norm{x_0 - z} \leq \frac{\delta}{\eta}.$ Definiere $\xt := \frac{x_0-z}{\norm{x_0 - z}} \df \norm{\xt} = 1$
 		Für $y\in E$ gilt 
-		%\begin{equation*} \begin{split}
-		$\norm{\xt - y} = \norm{y - \frac{x_0-z}{\norm{x_0 - z}}} 
-		 = \norm{y + \frac{z}{\norm{x_0 - z}} - \frac{x_0}{\norm{x_0 - z}}} 
-		 = \frac{1}{\norm{x_0 - z}} \norm{(\underbrace{\norm{x_0 - z}y + z}_{\in E}) - x_0} 
-		\vspace{-1em}> \delta\cdot \frac{1}{\norm{x_0 - z}} \geq \frac{\eta}{\delta} \cdot \delta = \eta
-		$
-		%\end{split} \end{equation*}
+		$$\norm{\xt - y} = \norm{y - \frac{x_0-z}{\norm{x_0 - z}}} 
+		= \norm{y + \frac{z}{\norm{x_0 - z}} - \frac{x_0}{\norm{x_0 - z}}} 
+		= \frac{\norm{\overbrace{(\norm{x_0 - z}y + z)}^{\in E} - x_0}}{\norm{x_0 - z}}  
+		\geq \delta\cdot \frac{1}{\norm{x_0 - z}} \geq \frac{\eta}{\delta} \cdot \delta = \eta$$
+
+%	\begin{lemma}[Lemma von Riesz]
+%		$(X,\norm{\cdot})$ normierter Raum, $E\subseteq X$ abgeschlossener Unterraum mit $E \not = X$, $\eta\in (0,1)$. \par
+%		Dann existiert ein $x_\eta \in X$ mit $\norm{\xt} = 1$ und $\norm{\xt - y} \geq \eta \; \forall y\in E.$
+%	\end{lemma}
+%	\begin{proof}
+%		Sei $x_0 \in X\backslash E$. $\delta := \inf_{y\in E} \norm{x_0 - y}$.
+%		Da $E$ abgeschlossen ist $\df$ $\delta > 0$. Sei $(y_n)$ Folge in $E$ mit $\norm{x_0 - y_n} \to \delta$. 
+%		Sei $\eta \in (0,1) \df \frac{\delta}{\eta} > \delta $
+%		$\df \exists z\in E$ mit $\norm{x_0 - z} \leq \frac{\delta}{\eta}.$ Definiere $\xt := \frac{x_0-z}{\norm{x_0 - z}} \df \norm{\xt} = 1$.\par	
+%		Für $y\in E$ gilt 
+%		%\begin{equation*} \begin{split}
+%		$\norm{\xt - y} = \norm{y - \frac{x_0-z}{\norm{x_0 - z}}} 
+%		 = \norm{y + \frac{z}{\norm{x_0 - z}} - \frac{x_0}{\norm{x_0 - z}}} 
+%		 = \frac{1}{\norm{x_0 - z}} \norm{(\underbrace{\norm{x_0 - z}y + z}_{\in E}) - x_0} 
+%		\vspace{-1em}> \delta\cdot \frac{1}{\norm{x_0 - z}} \geq \frac{\eta}{\delta} \cdot \delta = \eta
+%		$
+%		%\end{split} \end{equation*}
+
 	\end{proof}	
 
 %Korollar 1.48
@@ -974,30 +1031,33 @@ Erinnerung:\\
 		\item $(x,x) > 0$  $\forall x\in X\backslash\{0\}$.
 	\end{enumerate}
 
+	Wiederholung: $X$ $\K-$Vektorraum. Ein \qmarks{Skalarprodukt} ist eine Abb $(\cdot,\cdot) \to \K$ mit (S1) $(\alpha x + \beta y, z) = \alpha (x,z) + \beta (y,z)$ $\forall x,y,z \in X, \alpha,\beta \in \K$
+	(S2) $(x,y) = (y,x)$
+	(S3) $(x,x) > 0 \forall x\in X\backslash{0}$.
+
 %Bemerkerung 1.49
 	\begin{bem}
 		\begin{enumerate}[a)]
-			\item $\norm{x} := \sqrt{(x,x)}$ ist Norm.
-			\item vollständig Skalarproduktraum heißt \textit{Hilbertraum}.
-			\item $\norm{x} \cdot \norm{y} \geq |(x,y)| \; \forall x,y \in X$ (Cauchy-Schwartz-Ungleichung)
+			\item $\norm{x} := \sqrt{(x,x)}$ ist eine Norm.
+			\item ein vollständiger Skalarproduktraum heißt \textit{Hilbertraum}.
+			\item $\norm{x} \cdot \norm{y} \geq |(x,y)| \; \forall x,y \in X$ (Cauchy-Schwarz-Ungleichung)
+
 			\item Für $x,y \in X$ mit $(x,y) = 0$ (x und y orthogonal, $x \perp y$)
 			gilt $\norm{x + y}^2 = \norm{x}^2 + \norm{y}^2$ (Satz des Pythagoras)
 			\item Für $x,y \in X$ gilt die Parallelogrammgleichung: 
 				$\norm{x + y} ^2 + \norm{x - y}^2 = 2 \norm{x}^2 + 2\norm{y}^2$
 			\item	Für $(x_n), (y_n)$ mit $(x_n) \to x$, $(y_n) \to y$ gilt 
-				$(x_n, y_n) \to (x,y)$, \par 
-				da $|(x_n, y_n) - (x,y)| \leq \norm{x_n}\cdot \norm{y_n - y} + \norm{x_n - x}\norm{y}$ (Stetigkeit des Skalarprodukts)
+				$(x_n, y_n) \to (x,y)$, da\\ 
+				$|(x_n, y_n) - (x,y)| \leq \norm{x_n}\cdot \norm{y_n - y} + \norm{x_n - x}\norm{y}$ (Stetigkeit des Skalarprodukts)
 		\end{enumerate}
 	\end{bem}
 %Satz 1.50
 	\begin{thm}
-		Sei $(X,\norm{})$ normierter Raum mit $\norm{x+y}^2 + \norm{x-y}^2 = 2 \norm{x}^2 + 2\norm{y}^2$ $\forall x,y \in X$. 
-		Dann existiert ein Skalarprodukt auf $X$, welche diese $\norm{\cdot}$ induziert.
+		Sei $(X,\norm{\cdot})$ normierter Raum mit $\norm{x+y}^2 + \norm{x-y}^2 = 2... \forall x,y \in X$ 
+		Dann existiert ein Skalarprodukt auf $X$, welches $\norm{\cdot}$ induziert.
 	\end{thm}
-
 	\begin{proof}
-		Skizze! a) $\K = \R \quad$ $(x,y) := \frac{1}{4}(\norm{x + y}^2 - \norm{x-y}^2)$. 
-			b) $\K = \C \quad $ $\frac{1}{4}(\norm{x + y}^2 - \norm{x-y}^2 + i\norm{x + iy}^2 - i\norm{x-iy}^2)$
+		Skizze! a) $\K = \R$ $(x,y) := \frac{1}{4}(\norm{x + y}^2 - \norm{x-y}^2)$.\\ b) $\K = \C$ $(x,y) := \frac{1}{4}(\| x+y\|^2 - \|x-y\|^2 + i(\|x+iy\|^2 + \|x-iy\|^2)$
 	\end{proof}
 
 % Definition 1.51
@@ -1005,215 +1065,269 @@ Erinnerung:\\
 		$(X,\SP)$ Skalarprodukt, $x,y\in X$. $M,N \subseteq X$, $(x_i)_{i\in I}$ Famile.
 		\begin{enumerate}
 			\item $x$ orthogonoal zu $y$ (x $\perp$ y), wenn $(x,y) = 0$.
-			\item $x$ orthogonoal zu $N$ (x $\perp$ M), wenn $x \perp y \forall x\in N$
-			\item $M$ orthogonal zu $N$ (N $\perp$ M), wenn $x \perp M \forall x\in N$.
+			\item $x$ orthogonoal zu $N$ (x $\perp$ M), wenn $x \perp y\quad \forall y\in N$
+			\item $M$ orthogonal zu $N$ (N $\perp$ M), wenn $x \perp M\quad \forall x\in N$.
 			\item $M^\perp = \{x\in X: x\perp M\}$ \qmarks{Orthogonalraum zu M}
-			\item $\xf$ heißt Orthogonalsystem, wenn $x \perp y, \forall i,j \in I, i\neq j$
-			\item $\xf$ heißt Orthonormalsystem, wenn 
-			\item $\xf$ heißt Orthogonalbasis, wenn es linear unabhängig OGS ist und $\overline{span(\xf)} = X$.
+			\item $\xf$ heißt Orthogonalsystem (OGS), wenn $x \perp y, \forall i,j \in I, i\neq j$
+			\item $\xf$ heißt Orthonormalsystem (ONS), wenn es OGS mit $\|x_i \| = 1 \; \forall i \in I$ ist. 
+			\item $\xf$ heißt Orthogonalbasis (OGB), wenn es linear unabhängiges OGS ist und $\overline{span(\xf)} = X$.
 			\item $\xf$ heißt Orthonomalbais (ONB), wenn es OGB und ONS ist.	
 		\end{enumerate}
 	\end{definition}
-
+%Beispiel 1.52
 	\begin{bsp}
 		\begin{enumerate}[a)]
 			\item $e_n = (\delta_{in})_{i\in I} \in \ell^2$ $(e_n)_{n\in \N}$ ist ONS
 			Es ist auch ONB.\par
 			Sei $x = (a_n)_{n\in \N}$, $\varepsilon > 0. \df \exists N \in \N. \sum_{k=N+1}^\infty |a_k| < \varepsilon^2$.
 			Für $v = a_1e_1 + \dots + a_Ne_N \in span(e_n)_{n\in\N}$ \par
-			$\norm{v - x }_2 = (\sum_{k = N +1}^ \infty |a_k|^2)^{\frac{1}{2}} < \varepsilon$
+			$\norm{v - x }_2 = \left( \sum_{k = N +1}^\infty |a_k|^2\right)^{\frac{1}{2}} < \varepsilon$
 
 			\item $\ff{u}{k}{\Z}$ mit $u_k(x) = \frac{1}{\sqrt{2\pi}} e^{ikx}$ \par
-			$u_k \in L^2([0,2\pi])$ ist ONS, da $\int_0^{2\pi} u_k(x) \overline{u_j(x)} dx = \delta_{kj}$ Auch ONB? \par
-			Beachte: $V^\perp$ immer abgeschlossen, da für eine Folge $(v_i)$ in $V^\perp$ mit $v_i \to V$ gilt $(x,v) \leftarrow (x,v_i) = 0 \; \forall x\in V$
+			$u_k \in L^2([0,2\pi])$ ist ONS, da $\int_0^{2\pi} u_k(x) \overline{u_j(x)} dx = \delta_{kj}$ Auch ONB?
 		\end{enumerate}
+		Beachte: $V^\perp$ ist immer abgeschlossen, da für eine Folge $(v_i)$ in $V^\perp$ mit $v_i \to v$ gilt\\ $(x,v) \leftarrow (x,v_i) = 0 \; \forall x\in V$ $\df v \in V^\perp$
+
 	\end{bsp}
 
+%Satz 1.53 (Besselsche Ungleichung)
 	\begin{thm}[Besselsche Ungleichung]
-		$X$ Skalarproduktraum, $\ff{u}{i}{I}$ ONS, $x\in X$, $i_1,\dots,i_n \in I$. Dann $\norm{x}^2 \geq \sum_{k=1}^n |(x,u_{ik})|^2$
+		Sei $X$ ein Skalarproduktraum, $\ff{u}{i}{I}$ ein Orthonormalsystem, $x\in X$, $i_1,\dots,i_n \in I$. Dann ist $\sum_{k=1}^n |(x,u_{i_k})|^2 \leq\norm{x}^2 $
 	\end{thm}
-
 	\begin{proof}
-		$x_n := x - \sum_{k=1}^n (x,u_{ik}) u_{ik}$ $j\in \{1,\dots,n\}$\par
-		$(x_n, u_{ij}) = (x,u_{ij} - \sum (x,u_{i_k}) \underbrace{(u_{i_k},u_{i_j}}_{\delta_{kj}}
-		= (x, u_{i_j} - (x, u_{i_j}) = 0$\par
-		$\df \sum (x, u_{i_k}) \cdot u_{i_k} \perp x_n$
-	$\df \norm{x}^2 = \TODO$
+		$x_n := x - \sum_{k=1}^n (x,u_{ik}) u_{ik}$, $j\in \{1,\dots,n\}$\par
+		$(x_n, u_{ij}) = (x,u_{ij}) - \sum^n_{k=1} (x,u_{i_k}) \underbrace{(u_{i_k},u_{i_j})}_{\delta_{kj}}
+		= (x, u_{i_j}) - (x, u_{i_j}) = 0$\par
+		$\df \sum^n_{k=1} (x, u_{i_k}) u_{i_k} \perp x_n$\par
+		Und mit dem Satz des Pythagoras folgt nun
+	$$\norm{x}^2 = \norm{x_n}^2+\|\sum^n_{k=1} (x,u_{i_j})u_k\|^2 = \|x_n\|^2 + \sum^n_{k=1}|(x,u_{i_k})|^2 \geq \sum^n_{k=1} |(x,u_{i_k})|^2$$
 	\end{proof}
-
+	
+%Korollar 1.54
 	\begin{cor}
-		Voraussetzung wie vorhin.\par
-		\begin{enumerate}
+		Voraussetzungen wie oben. Dann gilt\par
+		\begin{enumerate}[(a)]
 			\item $(x, u_i) \neq 0$ für höchstens abzählbar viele $i\in I$.
 			\item $\sum_{i\in I} |(x, u_i)|^2 \leq \norm{x}^2$ (Besselsche Ungleichung II)
-			\item Die Reihe $\sum_{i\in I} (x,u_i)u_i$ (Fourierreihe) ist CF in $X$.
+			\item Die Reihe $\sum_{i\in I} (x,u_i)u_i$ (Fourierreihe) ist eine Cauchyfolge in $X$.
 		\end{enumerate}
 	\end{cor}
 
 	\begin{proof}
-		\begin{enumerate}
-			\item Für $n\in\N$ gilt nach Bessel (I), dass für $S_{x,n} = \{ i\in I: |(x, u_i)| ^2 > \frac{1}{n} \}$ 
+		\begin{enumerate}[(a)]
+			\item Für $n\in\N$ gilt nach Bessel (I), dass für $S_{x,n} := \{ i\in I: |(x, u_i)| ^2 > \frac{1}{n} \}$ 
 			gilt $|S_{x.n}| \leq n \norm{x}^2$, also endlich. \par
-			Dann gilt $\{i \in I: (x,u_i) \neq 0\} = \cup_{n\in\N} S_{x,n}$ abzählbar, als Vereinigung abzählbarer Mengen.
+			Dann ist $\{i \in I: (x,u_i) \neq 0\} = \cup_{n\in\N} S_{x,n}$ abzählbar, als abzählbare Vereinigung abzählbarer Mengen.
 			\item Seien $\ff{i}{n}{\N}$ paarweise disjunkt mit $\{i_n : n\in \N\} = \{i\in I: (x,u_i) \neq 0\}$.
-			Dann gilt $forall n\in \N: \norm{x}^2 \geq \sum_{k=1}^n |(x,u_{i_k})|^2.$
-			$\df$ Mit Grenzübergang $n\to \infty \sum_{k=1}^\infty |(x,u_{i_k})|^2 = \sum_{i\in I} |(x,u_i)|^2.$
+			Dann gilt $\forall n\in \N:$\\
+			$\norm{x}^2 \geq \sum_{k=1}^n |(x,u_{i_k})|^2$
+			$\overset{n\to \infty}{\df}\; \sum_{k=1}^\infty |(x,u_{i_k})|^2 = \sum_{i\in I} |(x,u_i)|^2.$
 			\item $(i_n)$ wie oben, $\varepsilon > 0$ 
-			$\df[b)]$ $\exists N\in\N$, so dass $\forall n\geq m N$ gilt 
-			$\sum_{k = m+1}^n |(x,u_k)|^2 < \varepsilon^2$
-			$\df \norm{\sum (x,u_{i_k})u_{i_k} - \sum (x,u_{i_k}) u_{i_k}}^2
-			= \norm{ \sum_{k= m+1} ^ n (x, u_{i_k} u_{i_k}}^2 = Pyth \sum_{k=m+1}^n |(x,u_{i_k})|^2 < \varepsilon^2$
-			$\df \sum^\infty (x,u_{i_k})u_{i_k} $ CF.
+			$\df[b)]$ $\exists N\in\N$, so dass $\forall n\geq m \geq N$ gilt 
+			$\sum_{k = m+1}^n |(x,u_k)|^2 < \varepsilon^2$\\
+			$\df \norm{\sum^n_{k=1} (x,u_{i_k})u_{i_k} - \sum^m_{k=1} (x,u_{i_k}) u_{i_k}}^2
+			= \norm{ \sum_{k= m+1} ^ n (x, u_{i_k} u_{i_k}}^2 \overset{Pyth.}{=} \sum_{k=m+1}^n |(x,u_{i_k})|^2 < \varepsilon^2$\\
+			$\df \sum^\infty_{k=1} (x,u_{i_k})u_{i_k} $ ist eine Cauchyfolge.
 		\end{enumerate}
 	\end{proof}
 
+%Satz 1.55 (Projektionssatz)
 	\begin{thm}[Projektionssatz]
 		$X$ Skalarproduktraum, $V$ vollständig UVR, $x\in X$. Dann existiert ein eindeutiges $v_0 \in V$, so dass $\norm{x - v_0} = \inf_{v\in U} \norm{x - v}$. Dieses $v_0$ erfüllt $x - v_0 \in V^\perp$	
 	\end{thm}
+	\begin{center}
+		\begin{tikzpicture}
+			\draw [->] (0,0) -- (3,0);
+			\draw [->] (0,0) -- (0,3);
+			\draw [thick](0,0) -- (2,3) node [above right] {$V$};
+			\draw [fill=black](1,1.5) circle(1pt) node [left] {$v_0$};
+			\draw (1,1.5) -- (2,5/6);
+			\draw [fill=black](2,5/6) circle(1pt) node [right] {$x$};
+			\rechterWinkel{1,3/2}{236}{0.5};
+		\end{tikzpicture}
+	\end{center}
+%	\begin{proof}
+%		Sei $(v_n)$ Folge in $V$ mit $\underbrace{\norm{x-v_n}}_{=: d_n} \to \underbrace{\inf_{v\in V}\norm{x-v}}_{=: d}.$
+%		$\df[Parallelogrammgleichung!] \norm{x - \frac{v_n+v_m}{2}}^2 + \norm{\frac{v_n+v_m}{2}}^2
+%		= \frac{1}{2}\norm{x- v_n}^2 + \frac{1}{2}\norm{x-v_n}^2 = \frac{1}{2} d_n^2 + \frac{1}{2} d_m^2$
+%	$\frac{v_n+v_m}{2} \leq \frac{1}{2} (d_n^2 + d_m^2) - d^2$ $\to 0$, wenn $n,m \to \infty$.
+%	$\df (v_n) CF \df (v_n)$ konvergiert gegen ein $v_0 \in V$.
+%	Es gilt $\norm{x-v_0} = \inf_{v\in V}\norm{x-V}$ \par
+%	Eindeutigkeit: $\norm{x - v_{01}} = \norm{x - v_{02}}	= d$
+%	$\df \norm{v_{01} - v_{02}}^2 = 2(\norm{x - v_{01}}^2 + \norm{x - v_{02}} $
+%	$\df v_{01} = v_{02}$\par
+%	noch zu zeigen: $x-v_0 \in V^\perp:$\par
+%	Sei $\lambda\in \K, v\in V$. Dann $\norm{x - v_{0}}^2 \leq \norm{x - v_{0} + \lambda v}^2
+%	= \norm{x - v_{0}}^2 - \overline{\lambda}(x-v_0,v)$.
+%	Wähle $\lambda = \frac{(x-v_0,v}{\norm{v}^2}$ $-\lambda(v,x-v_0) + |\lambda|^2\norm{v}^2$
+%	$\df \norm{x - v_{0}}^2 \leq \norm{x - v_{0}}^2 - \frac{(x-v_0,v}{\norm{v}^2} \leq \norm{x - v_{0}}^2$	
+%	$\df (x-v_0,v) = 0 \df x-v_0 \perp v$
+%	\end{proof}
 	\begin{proof}
-		Sei $(v_n)$ Folge in $V$ mit $\underbrace{\norm{x-v_n}}_{=: d_n} \to \underbrace{\inf_{v\in V}\norm{x-v}}_{=: d}.$
-		$\df[Parallelogrammgleichung!] \norm{x - \frac{v_n+v_m}{2}}^2 + \norm{\frac{v_n+v_m}{2}}^2
-		= \frac{1}{2}\norm{x- v_n}^2 + \frac{1}{2}\norm{x-v_n}^2 = \frac{1}{2} d_n^2 + \frac{1}{2} d_m^2$
-	$\frac{v_n+v_m}{2} \leq \frac{1}{2} (d_n^2 + d_m^2) - d^2$ $\to 0$, wenn $n,m \to \infty$.
-	$\df (v_n) CF \df (v_n)$ konvergiert gegen ein $v_0 \in V$.
-	Es gilt $\norm{x-v_0} = \inf_{v\in V}\norm{x-V}$ \par
-	Eindeutigkeit: $\norm{x - v_{01}} = \norm{x - v_{02}}	= d$
-	$\df \norm{v_{01} - v_{02}}^2 = 2(\norm{x - v_{01}}^2 + \norm{x - v_{02}} $
-	$\df v_{01} = v_{02}$\par
-	noch zu zeigen: $x-v_0 \in V^\perp:$\par
-	Sei $\lambda\in \K, v\in V$. Dann $\norm{x - v_{0}}^2 \leq \norm{x - v_{0} + \lambda v}^2
-	= \norm{x - v_{0}}^2 - \overline{\lambda}(x-v_0,v)$.
-	Wähle $\lambda = \frac{(x-v_0,v}{\norm{v}^2}$ $-\lambda(v,x-v_0) + |\lambda|^2\norm{v}^2$
-	$\df \norm{x - v_{0}}^2 \leq \norm{x - v_{0}}^2 - \frac{(x-v_0,v}{\norm{v}^2} \leq \norm{x - v_{0}}^2$	
-	$\df (x-v_0,v) = 0 \df x-v_0 \perp v$
-	\end{proof}
+		Sei $(v_n)$ eine Folge in $V$ mit $d_n:=\|x-v_n\| \to \inf_{v\in V}\|x-v\| =:d$. Wegen der Parallelogrammgleichung ist
+		$$\underbrace{\|x-\frac{v_n+v_m}{2}\|^2}_{\geq d^2}+\|\frac{v_n-v_m}{2}\|^2 = \frac{1}{2}\|x-v_n\|^2+\frac{1}{2}\|x-v_m\|^2 = \frac{1}{2}d_n^2+\frac{1}{2}d_m^2$$
+		$$\df \|\frac{v_n-v_m}{2}\|^2 \leq \frac{1}{2}(d_n^2+d_m^2)-d^2 \to 0 \text{ für } n,m \to \infty$$
+		$\df (v_n)$ ist eine Cauchyfolge und wegen der Vollständigkeit von $V$ konvergiert sie gegen ein $v_0\in V \df \|x-v_0\| = \inf_{v\in V} \|x-v\|$\par 
+		\qmarks{Eindeutigkeit:} Sei $v_1\in V$ ein weiterer Vektor mit $\|x-v_1\|=\|x-v_0\|= d = \inf_{v\in V} \|x-v\|$. Mit der Parallelogrammgleichung ist $$\|v_1 -v_0\|^2 = 2\left( \| x - v_0\|^2 + \|x-v_1\|^2 - 2d^2\right) = 0 \df v_0 = v_1.$$
+		Es bleibt noch zu zeigen: $x-v_0\in V^\perp$.\par 
+		Für $\lambda \in \K,\;v\in V$ ist 
+		$$\|x-v_0\|^2 \leq \|x-(v_0 +\lambda v) \|^2 = ((x-v_0)-\lambda v,(x-v_0)-\lambda v) = \| x-v_0\|^2 - \overline{\lambda}(x-v_0,v)-\lambda (v,x-v_0)+|\lambda|^2\|v\|^2.$$
+		Sei also $\lambda := \frac{(x-v_0,v)}{\|v\|^2}$ 
+		$$\df \|x-v_0\|^2 \leq \|x-v_0\|^2 - \underbrace{\frac{|(x-v_0,v)|^2}{\|v\|^2}}_{\leq 0}\leq \|x-v_0 \|^2 \df |(x-v_0,v)|^2=0 \df x-v_0 \perp v.$$
+	\end{proof}		
 	
+%Korollar 1.56
 	\begin{cor}
-		$X$ Hilbertraum, $V$ abgeschlossen UVR. Dann gilt 
+		Sei $X$ ein Hilbertraum und $V$ ein abgeschlossener Unterraum. Dann gilt 
 			\begin{enumerate}
-				\item $X = V \perp V^\perp$, also $ V\perp V^\perp$ und $X = V + V^\perp$\par
-				Insbesondere gilt wegen $V\cap V^\perp = \{0\}$, dass $\forall x\in X$ die Zerlegung $x = v + w$ eindeutig ist.
-				\item Sei $\ff{u}{i}{I}$ ONB von $V, x\in X$. Dann gilt 
-				$v = \sum_{i\in I} (x,u_i) u_i$ ist Bestapproximation von $x$ in $V$.
+				\item $X = V \perp V^\perp$, also $ V\perp V^\perp$ und $X = V \oplus V^\perp$\par
+				Insbesondere gilt wegen $V\cap V^\perp = \{0\}$, dass $\forall x\in X$ die Zerlegung $x = v + w$ mit $v\in V,\;w\in V^\perp$ eindeutig ist.
+				\item Sei $\ff{u}{i}{I}$ eine Orthonormalbasis von $V, x\in X$. Dann ist 
+				$v := \sum_{i\in I} (x,u_i) u_i$ die Bestapproximation von $x$ in $V$.
 			\end{enumerate}
 	\end{cor}
-
 	\begin{proof}
 		\begin{enumerate}
 			\item $x\in X$. Sei $v\in V$, so dass, $\norm{x-v} = \inf_{u\in V}\norm{x-u}$
-			$\df x = v \in v+ (x-v) \in v^\perp$
-			\item Es gilt für $v = \sum_{i\in I} (x, u_i) u_i$ (konvergiert), dass $x -v \in V^\perp$
+			$\df x = v + (x-v)$ und $v\in V,\;x-v \in V^\perp$
+			\item Für $v := \sum_{i\in I} (x, u_i) u_i$ (konvergent) ist $x -v \in V^\perp$
 			(wie im Beweis der Besselschen Ungleichung)
 			$\df v$ ist Bestapproximation von $x$ in $V$.
 		\end{enumerate}
 	\end{proof}
 
+%Lemma 1.57
 	\begin{lemma}
-		$X$ Skalaproduktraum. $V$ UVR. Dann $V^\perp = \overline{V}^\perp$
+		Sei $X$ ein Skalarproduktraum, $V$ ein Unterraum. Dann ist $V^\perp = \overline{V}^\perp$
 	\end{lemma}
 	\begin{proof}
-		$\supset$ klar \par
-		$\subset$ $x\in V^\perp, v\in V \df \exists$ Folge $(v_i)$ in $V$ mit $v_n \to v$
+		\qmarks{$\supseteq$}  Da $V\subseteq \overline{V} \df \overline{V}^\perp \subseteq V^\perp$ \par
+		\qmarks{$\subseteq$} Sei $x\in V^\perp, v\in V \df \exists$ Folge $(v_n)$ in $V$ mit $v_n \to v$
 		$\df (x,v) \leftarrow (x,v_n) = 0$
 	\end{proof}
- Oben reinschieben: $V_0$ bestapproximation von $x$ in $V$ $Leftrightarrow$ $\norm{v_0 - x} = \inf_{v\in V}\norm{v-x}$
 
+%Satz 1.58
  	\begin{thm}
 		$X$ Skalarproduktraum. $\ff{u}{i}{I}$ ONS.\par
 		Betrachte folgende Aussagen
-			\begin{enumerate}
-				\item $\ff{u}{i}{I} ONB$
+			\begin{enumerate}[(i)]
+				\item $\ff{u}{i}{I}$ ist eine Orthonormalbasis
 				\item $x = \sum_{i\in I} (x, u_i)u$ $\forall x\in X$ (Fourierreihe)
 				\item $(x,y) = \sum_{i\in I}(x,u_i)(u_i,y)$ $\forall x,y \in X$ (Parseval-Identität)
-				\item $\norm{x}^2 = \sum_{i\in I}(x, u_i)(u_i,x)$ $\forall x\in X$ (Bessel-Gleichung)
+				\item $\norm{x}^2 = \sum_{i\in I}|(x,u_i)|^2$ $\forall x\in X$ (Bessel-Gleichung)
 				\item $(span\ff{u}{i}{I})^\perp = \{0\}$
 			\end{enumerate}
 			Dann gilt $i \aq ii \aq iii \aq iv \df v$.\par
-			Wenn $X$ Hilbertraum, dann gilt auch $v\df iv$.
+			Wenn $X$ zusätzlich noch ein Hilbertraum ist, dann gilt auch $v\df iv$.
 	\end{thm}	
-
 	\begin{proof}
 		\begin{itemize}[]
-			\item $\qmarks{i\df ii}$: 
-				Sei $\varepsilon > 0$ $\df$ $\exists i_1,\dots,i_n \in I, x_1,\dots,x_n \in \K$\par
-					$\norm{x - \sum_{k=1}^n\alpha_k u_{i_k}} < \varepsilon$. Es gilt aber \par
-					$\norm{x - \sum_{k=1}^n(\alpha_k ,u_{i_k})u_{i_k}} \leq \norm{x - \sum_{k=1}^n\alpha_k u_{i_k}} < \varepsilon$
-			\item $ii\df iii$ Wende Skalarprodukt mit $y$ auf Fourierreihe an
-			\item $iii \df iv$ Wende $x=y$ an.
-			\item $iv \df i$ Mit Pythagoras gilt 
-			 $\norm{x}^2 = \sum_{i\in I}|(x,u_i)|^2 + \norm{x - \sum_{i\in I}(x,u_i) u)_i}^2$
-			 $\df x - \sum_{i\in I}(x,u_i) u)_i = 0 \df x\in spann\ff{u}{i}{I}$
-			%\item $i\df v$: $V = span\ff{u}{i}{I}, x\in V^\perp$ 
-			\item $i\df v$: Sei $x\in(span\ff{u}{i}{I})^\perp \df[Lemma 1.57] x\in \overline{span\ff{u}{i}{I}}^\perp = X^\perp = \{0\}$
-			\item $v \df i$: Sei $X$ Hilbertraum $\df \overline{span\ff{u}{i}{I}}$ vollständig
-			Sei $x\in X \df x = x_1 + x_2$, wobei 
-			$x_1 \overline{span\ff{u}{i}{I}}, x_2 \in \overline{span\ff{u}{i}{I}}^\perp = \overline{span\ff{u}{i}{I}}^\perp = \{0\}$
-			$\df x = x_1 \in \overline{span\ff{u}{i}{I}}$
+		\item \qmarks{(i)$\df$(ii)}: Sei $\varepsilon > 0$ gegeben. Da $(u_i)_{i\in I}$ eine ONB ist, gibt es $i_1,\dots,i_n\in I,\;\alpha_1,\dots \alpha_n \in \K$ so dass $\|x- \sum^n_{k=1} \alpha_k u_{i_k}\| < \varepsilon$ wegen Korollar 1.56 ist
+		\marginpar{nochmal anschauen!}
+		$$\|x- \sum^n_{k=1} (x, u_{i_k})\| \leq \|x-\sum^n_{k=1} \alpha_k u_{i_k}\| < \varepsilon$$
+		\item \qmarks{(ii) $\df$ (iii)}: Es ist:
+		$$x = \sum_{i\in I} (x, u_i)u \overset{(\cdot, y)}{\df} (x,y)=\left(\sum_{i\in I} (x, u_i)u_i,y\right)=\sum_{i\in I} (x,u_i)(u_i,y)\quad \forall x,y\in X$$
+		\item \qmarks{(iii) $\df$ (iv)}: Setze in die Formel $y=x$ ein.
+		\item \qmarks{(iv) $\df$ (i)}: Mit Pythagoras und Korollar 1.56 gilt:
+		$$\|x\|^2 = \sum_{i\in I} |(x_i,u_i)|^2 + \|x- \sum_{i\in I} (x,u_i)u_i\|^2 \df x- \sum_{i\in I} (x,u_i)u_i = 0 \df x \in \overline{\aufspan (u_i)_{i\in I}}.$$
+		\item \qmarks{(i) $\df$ (v)}: Wegen Lemma 1.57 ist $(\aufspan (u_i)_{i\in I})^\perp =\overline{\aufspan (u_i)_{i\in I}}^\perp = X^\perp = \{0\}$.
+		\item \qmarks{(v)$\df$(i)}: Sei $X$ ein Hilbertraum $\df \overline{\aufspan (u_i)_{i\in I}}$ ist vollständig. Sei $x\in X$ mit $x = x_1+x_2$, wobei $x_1 \in \overline{\aufspan (u_i)_{i\in I}},\;x_2\in \overline{\aufspan (u_i)_{i\in I}}^\perp =  \aufspan (u_i)_{i\in I}^\perp = \{0\} \df x = x_1$.
 		\end{itemize}
 	\end{proof}
+%	\begin{proof}
+%		\begin{itemize}[]
+%			\item $\qmarks{i\df ii}$: 
+%				Sei $\varepsilon > 0$ $\df$ $\exists i_1,\dots,i_n \in I, x_1,\dots,x_n \in \K$\par
+%					$\norm{x - \sum_{k=1}^n\alpha_k u_{i_k}} < \varepsilon$. Es gilt aber \par
+%					$\norm{x - \sum_{k=1}^n(\alpha_k ,u_{i_k})u_{i_k}} \leq \norm{x - \sum_{k=1}^n\alpha_k u_{i_k}} < \varepsilon$
+%			\item $ii\df iii$ Wende Skalarprodukt mit $y$ auf Fourierreihe an
+%			\item $iii \df iv$ Wende $x=y$ an.
+%			\item $iv \df i$ Mit Pythagoras gilt 
+%			 $\norm{x}^2 = \sum_{i\in I}|(x,u_i)|^2 + \norm{x - \sum_{i\in I}(x,u_i) u)_i}^2$
+%			 $\df x - \sum_{i\in I}(x,u_i) u)_i = 0 \df x\in spann\ff{u}{i}{I}$
+%			%\item $i\df v$: $V = span\ff{u}{i}{I}, x\in V^\perp$ 
+%			\item $i\df v$: Sei $x\in(span\ff{u}{i}{I})^\perp \df[Lemma 1.57] x\in \overline{span\ff{u}{i}{I}}^\perp = X^\perp = \{0\}$
+%			\item $v \df i$: Sei $X$ Hilbertraum $\df \overline{span\ff{u}{i}{I}}$ vollständig
+%			Sei $x\in X \df x = x_1 + x_2$, wobei 
+%			$x_1 \overline{span\ff{u}{i}{I}}, x_2 \in \overline{span\ff{u}{i}{I}}^\perp = \overline{span\ff{u}{i}{I}}^\perp = \{0\}$
+%			$\df x = x_1 \in \overline{span\ff{u}{i}{I}}$
+%		\end{itemize}
+%	\end{proof}
 
 	Nun zurück zu $L^2([0,2\pi]).$
-
-	\begin{thm} 
-		Die Familie $\ff{u}{k}{\Z}$ mit $u_k(x) = \frac{1}{2 \pi} e^{ikx}$ ist ONB von $L^2([0,2\pi])$ 
-		Wir beuntzen:	 
+	Wir erinnern uns vorerst:	 
 			\begin{enumerate}
-				\item $\forall \varepsilon > 0, f\in L^2([0,2\pi]) \exists g\in C([0,2\pi])$ mit 
+				\item Der Raum der stetigen Funktionen liegt dicht in $L^2([0,2\pi])$\\
+				 $\Leftrightarrow \forall \varepsilon > 0, f\in L^2([0,2\pi])\; \exists g\in C([0,2\pi])$ mit 
 				$g(0) = g(2\pi) = 0$ und $\norm{f-g}_2 < \varepsilon$.
-				\item Zu $g\in C([0,2\pi])$ mit $g(0) = g(2\pi), \varepsilon > 0 \exists h\in span\ff{u}{i}{\Z}: \norm{g-h}_\infty$
+				\item Zu $g\in C([0,2\pi])$ mit $g(0) = g(2\pi), \varepsilon > 0 \;\exists h\in \aufspan\ff{u}{i}{\Z}: \norm{g-h}_\infty$
 			\end{enumerate}
+%Satz 1.59
+	\begin{thm} 
+		Die Familie $\ff{u}{k}{\Z}$ mit $u_k(x) = \frac{1}{2 \pi} e^{ikx}$ ist eine Orthonormalbasis von $L^2([0,2\pi])$ 
+		
 	\end{thm}
 	\begin{proof}
-		Sei $f\in L^2([0,2\pi]), \varepsilon > 0$,
+		Sei $f\in L^2([0,2\pi]), \varepsilon > 0$.
 		Dann existiert $g\in C([0,2\pi])$ mit $g(0) = g(2\pi) = 0$ und $\norm{f-g}_2 < \frac{\varepsilon}{2}$.
 		Sei $h\in \overline{span\ff{u}{i}{I}}$, so dass $\norm{g-h} < \frac{\varepsilon}{2\sqrt{2\pi}}$
-		$\df \norm{f-h}_2 \leq \norm{f-g}_2 + \norm{g-h}_2 \leq \norm{f-g}_2 + \sqrt{2\pi} \norm{g-h}_\infty \leq \frac{\varepsilon}{2} + \sqrt{2\pi} \cdot \frac{\varepsilon}{2\sqrt{2\pi}} = \varepsilon$
+		$$\df \norm{f-h}_2 \leq \norm{f-g}_2 + \norm{g-h}_2 \leq \norm{f-g}_2 + \sqrt{2\pi} \norm{g-h}_\infty < \frac{\varepsilon}{2} + \sqrt{2\pi} \cdot \frac{\varepsilon}{2\sqrt{2\pi}} = \varepsilon$$
+		wobei wir $\|f\|^2_2 = \int_I |f|^2 d\lambda \leq \int_I {\ess \sup}_{x\in I} |f(x)|^2 d\lambda = \|f\|^2_\infty \int_I d\lambda = \|f\|^2_\infty \lambda(I)$ für $f\in L^2(I)$ genutzt haben.
 	\end{proof}
 
+%Korollar, Folgerungen ohne Nummerierung.
 	\begin{cor*}
-$f\in L^2([0,2\pi])$
+Sei $f\in L^2([0,2\pi])$
 		\begin{enumerate}
-			\item $f_n(x) = \sum_{-n}^n c_k e^{ikx}$ ist bestapproximation triogno. Polynome vom Grad $K$ für $f$ (mit $c_k = \int_{0}^{2\pi} f(x) e^{-ikx} dx)$ 
+			\item $f_n(x) = \sum_{k=-n}^n c_k e^{ikx}$ ist bestapprox. trig. Polynom vom Grad $n$ für $f$ (mit $c_k = (f,e^{ik\cdot })=\int_{0}^{2\pi} f(x) e^{-ikx} dx)$ 
 			\item $f = \sum_{k= -\infty}^{\infty} \sum_{-n}^n c_k e^{ik\cdot} $
-			\item $\ff{v}{i}{\Z}$ mit $v_0 = \frac{1}{\sqrt{2\pi}}, v_k = \cos(k\cdot)\cdot \frac{1}{\sqrt{\pi}} $ für $ k>0, v_k = sin(k\cdot) \frac{1}{\sqrt{\pi}} $ für $k< 0$
+			\item $\ff{v}{i}{\Z}$ mit $v_0 = \frac{1}{\sqrt{2\pi}}, v_k = \cos(k\cdot) \frac{1}{\sqrt{\pi}} $ für $ k>0, v_k = sin(k\cdot) \frac{1}{\sqrt{\pi}} $ für $k< 0$
 		\end{enumerate}
 	\end{cor*}
 
+%Definition 1.60 (Halbordnung, Totalordnung)
 	\begin{definition}[Halbordnung, Totalordnung]
-		Sei $M$ eine Menge. Eine Relation $\leq \subseteq M\times M$, heißt \textit{Halbordnung}, wenn 
-			\begin{enumerate}
-				\item TODO 
+		Sei $M$ eine Menge. Eine Relation $\leq\; \subseteq M\times M$, heißt \textit{Halbordnung}, wenn folgende Eigenschaften erfüllt sind:
+
+			\begin{enumerate}[(i)]
+				\item $a\leq b \land b\leq c \df a \leq c\quad \forall a,b,c \in M$
+				\item $ a \leq a \quad\forall a\in M$
+				\item $ a \leq b \land b\leq a \df a = b\quad \forall a,b\in M$
 			\end{enumerate}
-		\begin{enumerate}
-			\item ?
-			\item $d \in M$ heißt \textit{obere Schranke}, wenn $a \leq d$ $\forall a\in M$ mit $a \leq d$ oder $b \leq a$.
-			\item Totalordnung, wenn es Halborndung ist und $\forall a,b \in M: a \leq b$ oder $b \leq a$.
-		\end{enumerate}
+		
+
+			\item $d \in M$ heißt \textit{obere Schranke}, wenn $a \leq d$ $\forall a\in M$% mit $a \leq d$ oder $b \leq a$.
+			\item Die Relation heißt \textit{Totalordnung}, wenn sie eine Halbordnung ist und $\forall a,b \in M: a \leq b$ oder $b \leq a$ gilt.
+
 	\end{definition}
 
+%Lemma 1.61 (Lemma von Zorn)
 	\begin{lemma}[Lemma von Zorn]
-		$M$ halbgeordnete Menge. Besitzt jede totalgeordnete Teilmenge $Z \subseteq M$ eine obere Schranke in $M$, dann besitzt $M$ eine obere Schranke.	
+		$M$ sei eine halbgeordnete Menge. Besitzt jede totalgeordnete Teilmenge $Z \subseteq M$ eine obere Schranke in $M$, dann besitzt $M$ eine obere Schranke.	
 	\end{lemma}
 
+%Satz 1.62
 	\begin{thm}
-		$(X, \sp)$ Hilbertraum. Dann existiert eine ONB
+		$(X, (\cdot,\cdot))$ sei ein Hilbertraum. Dann existiert eine Orthonormalbasis.
 	\end{thm}
 
 	\begin{proof}
-		Sei $M = \{\ff{u}{i}{I} : \ff{u}{i}{I} ONS \}$ \par
-		Definiere Halbordnung $\ff{u}{i}{I} \subseteq \ff{y}{i}{J} :\aq I \subseteq J$ und $x_i = y_i \forall i \in I$.
-		Sei $Z \subseteq M$ totalgeordnete Teilmenge, $Z = \{(x)_{i\in I_j} : j\in J \}$
-		Betrachte $\ff{x}{i}{I}$ ist obere Schranke von $Z$. Nach Lemma von Zorn $\exists$ also eine obere Schranke $\ff{\hat{{x_i}}}{i}{J}$ von $M$. \par
-		Mit anderen Worten: $\centernot \exists$ ONS $\ff{\hat{{y}}}{i}{\hat{J}}$ mit $J \subsetneq \hat{J}$ und $\hat{x}_i = \hat{y}_i \forall i\in J.$\par
-		$\df \forall x\in X$ mit $x\perp \hat{x}_i \forall i \in I$ gilt $x= 0$ \par
+		Sei $M = \{\ff{u}{i}{I} : \ff{u}{i}{I} \text{ ist Orthonormalsystem} \}$ \par
+		Wir definieren die Halbordnung $\ff{u}{i}{I} \subseteq \ff{y}{i}{J} :\aq I \subseteq J$ und $x_i = y_i\; \forall i \in I$.\par
+		Sei $Z := \{(x)_{i\in I_j} : j\in J \} \subseteq M$ eine totalgeordnete Teilmenge, 
+		$\ff{x}{i}{I}$ ist eine obere Schranke von $Z$. Nach dem Lemma von Zorn gibt es also eine obere Schranke $(\hat{x}_i)_{i\in J}$ von $M$. \par
+		Mit anderen Worten: $\centernot \exists$ ONS $\ff{\hat{{y}}}{i}{\hat{J}}$ mit $J \subsetneq \hat{J}$ und $\hat{x}_i = \hat{y}_i\; \forall i\in J.$\par
+		$\df \forall x\in X$ mit $x\perp \hat{x}_i \;\forall i \in I$ gilt $x= 0$ \par
 		$\df (span\ff{\hat{{x}}}{i}{I})^\perp = \{0\}$
 	\end{proof}
  TODO ÜA \par 
+ 
+%Satz 1.63
 	\begin{thm}
-		$X$ Hilbertraum, $\ff{x}{i}{i}, \ff{y}{i}{j}$ ONBen. Dann haben $I$ und $J$ die gleichen Mächtikeiten.
+		Seien $X$ ein Hilbertraum, $\ff{x}{i}{i}, \ff{y}{i}{j}$ Orthonormalbasen. Dann haben $I$ und $J$ die gleiche Mächtigkeit.
 	\end{thm}
 	\begin{proof}
-		Bei $I$ endlich ist die Aussage klar. \par
+		Für endliches $I$ ist die Aussage klar. \par
 		Seien also $|I|$ und $|J|$ unendlich.  \par
 		Für $x\in X$, definiere $S_X = \{i\in I: (x,x_i) \neq 0\} \df |S_X| \leq |\N|$
 		sowie $\bigcup_{j\in J} S_{x_j} = I$ und $S_{x_j} \neq \emptyset$. Denn:
@@ -1538,7 +1652,7 @@ TODO
 		Falls $x_0 = 0$ ist die Aussage schon mal richtig. Sei $E := span{x_0}$ und 
 		$$f: E \to \K : cx_0 \mapsto c\norm{x_0} \; x\in \K$$ 
 		$$f(x_0) = \norm{x_0}, \norm{f} = \sup_{...}|f(x)| = 1 \quad (UE)$$
-		$$\df[Satz 3.3] \exists
+		$$\df[Satz 3.3] \exists$$
 	\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
@@ -1577,4 +1691,4 @@ Sei $M:=\{1,2\},\dots$
 	\end{enumerate} 
  
 \end{document}
-%TODO: -Layout. -Eigene Kommentare innerhalb des Skripts? 
+%TODO: -Layout! -Eigene Kommentare innerhalb des Skripts? 
