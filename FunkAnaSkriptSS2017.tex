@@ -1468,6 +1468,78 @@ TODO
 	\begin{proof}
 		TODO
 	\end{proof}
+
+	\newcommand{\BKK}{\B(X,\K)}
+	\chapter{Lineare Funktionale und duale Abbildungen}
+	$X$ normierteri $\K$-VR.\par
+	Erinnerung: $X' = \B(X,\K)$ $x' \in X'$ $\norm{x'} = \norm{x'}_{\B(X,\K)} = \sup_{x\in \EK \leq X}|x'(x)| = \sup_{x\in X, \norm{x} = 1} |x'(x)| = \sup_{x\in \overline{\EK}}|x'(x)|.$
+	Notation: Anstelle von $x'(x) =: \langle x,x' \rangle _{X,X'}$, $x' \in X', x\in X$.
+
+	\section{Fortsetzungssätze von Hahn-Banach}
+	Thema: $X$ normierter Raum, $f: E \to \K$ lineare, $E$ UVR. \\
+	Frage: Kann ich $f$ auf $X$ fortsetzen ? (so dass $f$ linear)
+
+	\begin{lemma}
+		Sei $X$ $\R$-VR, $p : X \to \R$ mit 
+			\begin{enumerate}[1)]
+							\item $p(\lambda x) = \lambda p(x)$ $\; \forall \lambda \geq 0, x\in X$
+							\item $p(x + y) \leq p(x) + p(y)$ $\; \forall x,y \in X$
+			\end{enumerate}
+ Weiters sei $E \subseteq X$ UVR und $f: E \to \R$ linear, $f(x) \leq p(x) \; \forall x \in E$. 
+ Dann existiert $F: X\to \R$ linear und $F|_{E} = f$ und $F(x) \leq p(x) \; \forall x \in X$
+	\end{lemma}
+
+	\begin{proof}
+		Falls $E = X$ $\df$ klar. $(F = f)$.	Angenommen $E \subsetneq X \df x_0 \in X\backslash E, x_0 \neq 0.$
+
+		\begin{enumerate}[1 {Schritt:}]
+			\item Zunächst Forsetztung auf eindimensional größeren Raum. TODO 
+			\item Definiere Menge von Abbildungen und Unterräume, definiere und zeige Halbordnung, und prüfe dann Voraussetzung vom Lemma von Zorn. Das liefert ein maximales Element, dass dann schon der ganze Raum sein muss. Sonst fände mein mit Schritt eins einen größeren Raum, was aber ein Widerspruch zur Annahme bereits das maximale Element benutzt zu haben. 	
+		\end{enumerate}
+	\end{proof}
+
+	\begin{thm}[Satz von Hahn-Banach]
+		$X$ ein $\K$-VR, $p: X \to \R$ Halbnorm, $E$ UVR, $f: E \to \K$ linear und
+			$$ f(x) \leq p(x) \; \forall x \in E$$
+	Dann existiert $F: X \to \K$, so dass 
+		\begin{enumerate}[(i)]
+			\item $F|_E = f$
+			\item $|F(x)| \leq p(x) \; \forall x \in X$
+		\end{enumerate}
+	\end{thm}
+
+	\begin{proof}
+		\begin{enumerate}[{Fall} 1]
+			\item $\K = \R$: Nutze wesentliche Lemma 3.1, dann sind $i)$, $ii)$ Konsequenzen, weil TODO
+			\item $\K = \C$: Setze $f(x) = f_1(x) + i f_2(x)$ Etwas rechnen ergibt mit der $\R$-Linearität 
+				$f(x) = f_1(x) - i f_1(ix)$. Damit ist auch dieser Fall wesentlich auf den reellen Fall zurückgeführt. Und Lemma 3.1 rechtfertig folgendes :
+				Definiere dann $F(x) := F_1(x) - i F_1(ix)$. Prüfe daran alle Eigenschaften \textit{leicht nach}.
+				TODO
+		\end{enumerate}
+	\end{proof}
+
+	\begin{thm}[topologische Verssion von Satz 5.2]
+		$X$ normierter $\K-VR$, $E$ UVR, $f: E\to \K$ stetig und linear. Dann exisitiert $F : X\to \K$ linear stetig mit 
+				\begin{enumerate}[(i)]
+					\item $\norm{F} = \norm{f}$
+					\item $F|_E = f$
+				\end{enumerate}
+	\end{thm}
+	
+	\begin{proof}
+		Betrache $p(x) := \norm{f}\cdot \norm{x}$. Stetigkeit zeigt man über die Beschränktheit von $F$. Das liefert auch bereits $\norm{F} \leq \norm{f}$. Die andere Ungleichung folgt, da $f$ eine Einschränkung von $F$ ist. TODO.
+	\end{proof}
+
+	\begin{cor}
+		$X$ normierter $\K-VR$, $x_0 \in X$. Dann existiert $x' \in X'$, so dass $\norm{x'} =1$ und $\langle x_0, x' \rangle = \norm{x_0}$.
+	\end{cor}
+
+	\begin{proof}
+		Falls $x_0 = 0$ ist die Aussage schon mal richtig. Sei $E := span{x_0}$ und 
+		$$f: E \to \K : cx_0 \mapsto c\norm{x_0} \; x\in \K$$ 
+		$$f(x_0) = \norm{x_0}, \norm{f} = \sup_{...}|f(x)| = 1 \quad (UE)$$
+		$$\df[Satz 3.3] \exists
+	\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
