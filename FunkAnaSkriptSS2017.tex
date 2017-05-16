@@ -116,12 +116,12 @@
 \newcommand{\ff}[3]{(#1_#2)_{#2\in#3}}
 \newcommand{\SP}{(\cdot,\cdot)}
 
+
 %Commands für tikz:
 \newcommand*{\rechterWinkel}[3]{% #1 = point, #2 = start angle, #3 = radius
 \draw[shift={(#2:#3)}] (#1) arc[start angle=#2, delta angle=90, radius = #3];
 \fill[shift={(#2+45:#3/2)}] (#1) circle[radius=1.25\pgflinewidth];
 }
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -872,6 +872,7 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 %Korollar 1.42
 	\begin{cor}
 		$(X,d)$ sei ein metrischer Raum. Dann gilt:
+
 			\begin{enumerate}[a)]
 				\item $(X,d)$ kompakt $\df$ $X$ vollständig
 				\item $M\subseteq X$, so dass jede Folge in M eine in M konvergente Teilfolge hat (\qmarks{M folgenkompakt})
@@ -896,7 +897,6 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 
 %Satz 1.45
 	\begin{thm}
-
 		Sei $(X,d)$ ein metrischer Raum. $M,N \subseteq X$ seien relativ kompakt (bzw. präkompakt). Dann gilt 
 			\begin{enumerate} [(a)]
 				\item $S\subseteq M$ $\df$ $S$ relativ kompakt (bzw. präkompakt)
@@ -908,7 +908,6 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 
 	\begin{proof}
 		\begin{itemize}[]
-
 %			\item $\qmarks{a) - c)}$: mündlicher Beweis. TODO. folgt aus Definition.
 %			\item Zu $\qmarks{d)}$: Die Hinrichtung folgt aus c). 
 %				Für $"{}\Leftarrow"$: Sei $M$ präkompakt $\forall \varepsilon > 0\; \exists p\in\N, \{x_1,\dots,x_p\} \subseteq X$ mit $M \subseteq \cup_{j=1}^p \overline{ U_{\frac{\varepsilon}{2}}(x_j)}$. 
@@ -949,6 +948,7 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 \newcommand{\xt}{x_\eta}%Eigentlich eta glaube ich
 
 %Lemma 1.47 Lemma von Riesz
+
 %	\begin{lemma}[Lemma von Riesz]
 %		$(X,\norm{\cdot})$ normierter Raum, $E\subseteq X$ abgeschlossener Unterraum mit $E \not = X$, $\eta\in (0,1)$. \par
 %		Dann existiert ein $x_\eta \in X$ mit $\norm{\xt} = 1$ und $\norm{\xt - y} \geq \eta \; \forall y\in E.$
@@ -979,6 +979,24 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 		= \frac{\norm{\overbrace{(\norm{x_0 - z}y + z)}^{\in E} - x_0}}{\norm{x_0 - z}}  
 		\geq \delta\cdot \frac{1}{\norm{x_0 - z}} \geq \frac{\eta}{\delta} \cdot \delta = \eta$$
 
+%	\begin{lemma}[Lemma von Riesz]
+%		$(X,\norm{\cdot})$ normierter Raum, $E\subseteq X$ abgeschlossener Unterraum mit $E \not = X$, $\eta\in (0,1)$. \par
+%		Dann existiert ein $x_\eta \in X$ mit $\norm{\xt} = 1$ und $\norm{\xt - y} \geq \eta \; \forall y\in E.$
+%	\end{lemma}
+%	\begin{proof}
+%		Sei $x_0 \in X\backslash E$. $\delta := \inf_{y\in E} \norm{x_0 - y}$.
+%		Da $E$ abgeschlossen ist $\df$ $\delta > 0$. Sei $(y_n)$ Folge in $E$ mit $\norm{x_0 - y_n} \to \delta$. 
+%		Sei $\eta \in (0,1) \df \frac{\delta}{\eta} > \delta $
+%		$\df \exists z\in E$ mit $\norm{x_0 - z} \leq \frac{\delta}{\eta}.$ Definiere $\xt := \frac{x_0-z}{\norm{x_0 - z}} \df \norm{\xt} = 1$.\par	
+%		Für $y\in E$ gilt 
+%		%\begin{equation*} \begin{split}
+%		$\norm{\xt - y} = \norm{y - \frac{x_0-z}{\norm{x_0 - z}}} 
+%		 = \norm{y + \frac{z}{\norm{x_0 - z}} - \frac{x_0}{\norm{x_0 - z}}} 
+%		 = \frac{1}{\norm{x_0 - z}} \norm{(\underbrace{\norm{x_0 - z}y + z}_{\in E}) - x_0} 
+%		\vspace{-1em}> \delta\cdot \frac{1}{\norm{x_0 - z}} \geq \frac{\eta}{\delta} \cdot \delta = \eta
+%		$
+%		%\end{split} \end{equation*}
+
 	\end{proof}	
 
 %Korollar 1.48
@@ -991,7 +1009,6 @@ Der folgende Satz ist eine Verallgemeinerung des Intervallschachtelungsprinzips 
 	\end{cor}
 
 	\begin{proof}
-
 		 \begin{enumerate}[a)]
 			 \item $"\Leftarrow"$ Folgt aus Heine-Borel\par
 				$"\Rightarrow"$ Angenommen, $\dim X = \infty$ (Nicht endlichdimensional). 
@@ -1014,15 +1031,17 @@ Erinnerung:\\
 		\item $(x,x) > 0$  $\forall x\in X\backslash\{0\}$.
 	\end{enumerate}
 
-
 	Wiederholung: $X$ $\K-$Vektorraum. Ein \qmarks{Skalarprodukt} ist eine Abb $(\cdot,\cdot) \to \K$ mit (S1) $(\alpha x + \beta y, z) = \alpha (x,z) + \beta (y,z)$ $\forall x,y,z \in X, \alpha,\beta \in \K$
 	(S2) $(x,y) = (y,x)$
 	(S3) $(x,x) > 0 \forall x\in X\backslash{0}$.
+
+%Bemerkerung 1.49
 	\begin{bem}
 		\begin{enumerate}[a)]
-			\item $\norm{x} := \sqrt{(x,x)}$ ist Norm.
-			\item vollständig Skalarproduktraum heißt \textit{Hilbertraum}.
+			\item $\norm{x} := \sqrt{(x,x)}$ ist eine Norm.
+			\item ein vollständiger Skalarproduktraum heißt \textit{Hilbertraum}.
 			\item $\norm{x} \cdot \norm{y} \geq |(x,y)| \; \forall x,y \in X$ (Cauchy-Schwarz-Ungleichung)
+
 			\item Für $x,y \in X$ mit $(x,y) = 0$ (x und y orthogonal, $x \perp y$)
 			gilt $\norm{x + y}^2 = \norm{x}^2 + \norm{y}^2$ (Satz des Pythagoras)
 			\item Für $x,y \in X$ gilt die Parallelogrammgleichung: 
@@ -1043,7 +1062,6 @@ Erinnerung:\\
 
 % Definition 1.51
 	\begin{definition}
-
 		$(X,\SP)$ Skalarprodukt, $x,y\in X$. $M,N \subseteq X$, $(x_i)_{i\in I}$ Famile.
 		\begin{enumerate}
 			\item $x$ orthogonoal zu $y$ (x $\perp$ y), wenn $(x,y) = 0$.
