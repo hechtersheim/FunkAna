@@ -1324,13 +1324,13 @@ Sei $f\in L^2([0,2\pi])$
  
 %Satz 1.63
 	\begin{thm}
-		Seien $X$ ein Hilbertraum, $\ff{x}{i}{i}, \ff{y}{i}{j}$ Orthonormalbasen. Dann haben $I$ und $J$ die gleiche Mächtigkeit.
+		Seien $X$ ein Hilbertraum, $\ff{x}{i}{I}, \ff{y}{i}{J}$ Orthonormalbasen. Dann haben $I$ und $J$ die gleiche Mächtigkeit.
 	\end{thm}
 	\begin{proof}
 		Für endliches $I$ ist die Aussage klar. \par
 		Seien also $|I|$ und $|J|$ unendlich.  \par
-		Für $x\in X$, definiere $S_X = \{i\in I: (x,x_i) \neq 0\} \df |S_X| \leq |\N|$
-		sowie $\bigcup_{j\in J} S_{x_j} = I$ und $S_{x_j} \neq \emptyset$. Denn:
+		Für $x\in X$, definiere $S_x = \{i\in I: (x,x_i) \neq 0\} \df |S_X| \leq |\N|$
+		sowie $\bigcup_{j\in J} S_{y_j} = I$ und $S_{y_j} \neq \emptyset$. Denn:
 		Ist $S_{y_j} = \emptyset$, dann $y_j \perp x_i \forall i \in I \df y_j =0$ Lightning! \par
 		Ist $i\in I$ mit $i \not \in \bigcup_{j\in J} S_{y_j}$, dann $x_i \perp y_j \forall j\in J \df x_i = 0$ Lightning! \par
 		Also $|I| = |\bigcup{j\in J} S_{x_j}| \subseteq |J| \cdot |\N| = |J|$. \par
