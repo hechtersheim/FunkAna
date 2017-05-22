@@ -116,8 +116,6 @@
 \newcommand{\ff}[3]{(#1_#2)_{#2\in#3}}
 \newcommand{\SP}{(\cdot,\cdot)}
 
-\newcommand{\set}[1]{\{#1\}}
-\newcommand{\fop}[1]{\langle #1 \rangle}
 
 %Commands für tikz:
 \newcommand*{\rechterWinkel}[3]{% #1 = point, #2 = start angle, #3 = radius
@@ -1326,13 +1324,13 @@ Sei $f\in L^2([0,2\pi])$
  
 %Satz 1.63
 	\begin{thm}
-		Seien $X$ ein Hilbertraum, $\ff{x}{i}{I}, \ff{y}{i}{J}$ Orthonormalbasen. Dann haben $I$ und $J$ die gleiche Mächtigkeit.
+		Seien $X$ ein Hilbertraum, $\ff{x}{i}{i}, \ff{y}{i}{j}$ Orthonormalbasen. Dann haben $I$ und $J$ die gleiche Mächtigkeit.
 	\end{thm}
 	\begin{proof}
 		Für endliches $I$ ist die Aussage klar. \par
 		Seien also $|I|$ und $|J|$ unendlich.  \par
-		Für $x\in X$, definiere $S_x = \{i\in I: (x,x_i) \neq 0\} \df |S_X| \leq |\N|$
-		sowie $\bigcup_{j\in J} S_{y_j} = I$ und $S_{y_j} \neq \emptyset$. Denn:
+		Für $x\in X$, definiere $S_X = \{i\in I: (x,x_i) \neq 0\} \df |S_X| \leq |\N|$
+		sowie $\bigcup_{j\in J} S_{x_j} = I$ und $S_{x_j} \neq \emptyset$. Denn:
 		Ist $S_{y_j} = \emptyset$, dann $y_j \perp x_i \forall i \in I \df y_j =0$ Lightning! \par
 		Ist $i\in I$ mit $i \not \in \bigcup_{j\in J} S_{y_j}$, dann $x_i \perp y_j \forall j\in J \df x_i = 0$ Lightning! \par
 		Also $|I| = |\bigcup{j\in J} S_{x_j}| \subseteq |J| \cdot |\N| = |J|$. \par
@@ -1468,9 +1466,9 @@ Sei $f\in L^2([0,2\pi])$
 	\begin{proof}
 		\begin{itemize}
 			\item \qmarks{$ii\df i$} Klar, TODO
-			\item Definiere Abbildung, $S: G(T) \to X, (x,Tx) \mapsto X$
+			\item Definiere Abbildung, $S: G(T) \to X, (x,Tx) \mapsto x$
 			$\df$ $S$ bijektiv und linear. Wegen 
-				$\norm{S(x,Tx)}_X = \norm{X} \leq (\norm{x}_X^2 + \norm{Tx}_Y^2)^{\frac{1}{2}})$
+				$\norm{S(x,Tx)}_X = \norm{x}_X \leq (\norm{x}_X^2 + \norm{Tx}_Y^2)^{\frac{1}{2}})$
 				gilt $S\in \B(G(T),X)$ mit $\norm{S} \leq 1$ .
 				Weil $G(T) \subseteq X\times Y$ und $X,Y$ Banachräume, ist $G(T)$ Banachraum.
 				$\df[S2.4]$ $\inv{S} \in \B(X, G(T)) \df (\norm{x}_X^2 + \norm{Tx}_Y^2)^{\frac{1}{2}} = \norm{(x,Tx)}_{X\times Y} = \norm{\inv{S}(x)} \leq \norm{\inv{S}} \cdot \norm{x}_X$
@@ -1480,7 +1478,7 @@ Sei $f\in L^2([0,2\pi])$
 	\end{proof}
 
 	\begin{bem}
-		Ein paar Anwednungenj
+		Ein paar Anwednungen
 		\begin{enumerate}
 			\item Aus Inverse mapping thm folgt: $(X,\norm{\cdot}_1$, $(X,\norm{\cdot}_2)$ BRe, $\norm{\cdot}_1$ stärker als $\norm{\cdot}_2$ $\df$
 				 $\norm{\cdot}_2$ stärker $\norm{\cdot}_1.$
@@ -1490,7 +1488,7 @@ Sei $f\in L^2([0,2\pi])$
 			\item Betrachte $X = C([a,b])$, $Y = C^1([a,b])$ mit Normen $\norm{x}_X = \max_{t\in[a,b]} |x(t) | = \norm{x}_\infty$, $\norm{x}_Y = \norm{x}_\infty + \norm{x'}_\infty$, $X,Y$ Banachräume.\par
 			Ist $T\in \B(C([a,b]))$ mit $imT \subset C^1([a,b])$. Dann ist $T\in \B(C([a,b]), C^1([a,b]))$
 				\begin{proof}
-					$x, x_n \in X y\in Y$ mit $\norm{x_n - x}_X \to 0$, $\norm{Tx_n - y}_Y \to 0$
+					Seien $x, x_n \in X, y\in Y$ mit $\norm{x_n - x}_X \to 0$, $\norm{Tx_n - y}_Y \to 0$
 					$\df \norm{x_n - x}_X \to 0$ und $\norm{Tx_n - y}_X \to 0$, da $\norm{z}_X \leq \norm{z}_Y \; \forall z\in Y$. $\df[T\in\B(X)]$ $\limes \norm{Tx_n - Tx} = 0 \df y = Tx$
 					$\df T$ graphenabgeschlossen $\df[X,Y \; BRe]$ $T\in \BS$.
 				\end{proof}
@@ -1514,7 +1512,7 @@ Sei $f\in L^2([0,2\pi])$
 	\section{Das Prinzip der gleichmäßigen Beschränkheit, Satz von Banach-Steinhaus}
 \newcommand{\F}{\mathcal{F}}
 	\begin{thm}[Satz von Osgood]
-		$X$ normierte Raum, $E \subset X$ Teilmenge von 2. Kategorie.	Sei $\mathcal{F} = \{f_\alpha: X\to \R$ stetig, $\alpha \in A\}$ eine Menge von FUnktionen. $\F$ sei auf $E$ punktweise beschränkt, d.h. $\forall x\in E$ $\exists M_x > 0$, so dass $f_\alpha (x) \leq M_x$ $\forall \alpha \in A$. Dann existiert abgeschlossene Kugel $K\subseteq X$, auf der $\F$ glm nach oben beschränkt ist. D.h.
+		$X$ normierte Raum, $E \subset X$ Teilmenge von 2. Kategorie.	Sei $\mathcal{F} = \{f_\alpha: X\to \R$ stetig, $\alpha \in A\}$ eine Menge von Funktionen. $\F$ sei auf $E$ punktweise beschränkt, d.h. $\forall x\in E$ $\exists M_x > 0$, so dass $f_\alpha (x) \leq M_x$ $\forall \alpha \in A$. Dann existiert abgeschlossene Kugel $K\subseteq X$, auf der $\F$ gleichmäßig nach oben beschränkt ist. D.h.
 		$$\exists M > 0 \text{ s.d } f_\alpha (x) \leq M \; \forall \alpha \in A, x\in K.$$
 	\end{thm}
 	
@@ -1655,96 +1653,6 @@ TODO
 		$$f: E \to \K : cx_0 \mapsto c\norm{x_0} \; x\in \K$$ 
 		$$f(x_0) = \norm{x_0}, \norm{f} = \sup_{...}|f(x)| = 1 \quad (UE)$$
 		$$\df[Satz 3.3] \exists$$
-	\end{proof}
-
-	\begin{cor}
-		$X$ normierter VR, $x_0 \in X$. Dann gilt, dass $\norm{x_0} = \sup_{x' \in X, \norm{x'} \leq 1}|\langle x_0, x' \rangle | = \sup_{x' \in X, \norm{x'} = 1}|\langle x_0, x' \rangle |$
-	\end{cor}		
-
-	\begin{proof}
-	 $\geq ... \geq :$ nicht so schwer, da $x' \in X$ mit  \\
-		Andere Ungleichung mit Korollar 3.4.	
-	\end{proof}
-
-	\begin{thm}
-	$X$ normierteri $\K-VR$. $X'$ separabel $\df$ $X$ separabel.
-	\end{thm}
-
-	\begin{proof}
-		\begin{enumerate}[(i)]
-			\item $X'$ seperabel $\df$ $S := \set{x' \in X': \norm{x'} = 1}$ ist separabel.
-			\item Schreibe S als Abschluss einer abzählbaren Mengen. Alle Element haben Norm 1 und damit exisitieren Werte von den Operatoren die größer sind als $\frac{1}{2}$. Die Elemente aus S aufgespannt über eine abzählbare Menge von K ist abzählbare. Nun muss der Abschluss dieses Spannes schon X selber sein. 
-			Wäre dies nicht so, dann gäbe es ein Element das weder im Abschluss des Spannes noch X ist.
-			\item ÜA: $\exists x' \in X'$ mit $\norm{x'} = 1,$ $ker x' > E$, $\langle x_0, x' \rangle \neq 0$ \\
-			Dann null der Operatoren dieser Operator als Elemente in E. Wegen der Norm 1 ist dieser Operator in S und hat wegen einer Ungleichungskette echten Abstand von allen anderen Elementen in S. Dies ist ein Widerspruch zur Dichtheit von S. 
-		\end{enumerate}
-
-	\end{proof}
-
-\section{Dualraum und Reflexivität}
-
-		\begin{definition}
-			$X'' = (X')' $ heißt Bidualraum. \\
-			Bemerkung: $X = \R^{n\times 1}$ und $X' = \R^{1 \times n}$ \\
-			Frage: $X'' = X$	
-		\end{definition}
-
-		\begin{bem}
-		Vorüberlegung: Sei $x_0 \in X$ betrachte $f_{x_0}: X' \to \K, y' \mapsto \langle x_0, y' \rangle$. 
-		$f_{x_0} \in (X')'$ ?, Ja, weil $\norm{f_{x_0}} = \norm{f_{x_0}}_{\B(X',\K)} = \sup_{}|\langle  x_0, x' \rangle| = \norm{x_0}$. $f_0$ linear klar. \\
-		$\df \mathcal{J}_{X}: X \to X'': x \mapsto f_X = \langle x, \cdot \rangle$ ist linear, isometrisch. \\ 
-		$\df \mathcal{J}_X \subset X''$ auf diese Art kann $X$ als Teilraum von $X''$ aufgefasst werden.
-		\end{bem}
-
-	\begin{definition}
-		$X$ normierte Vr heißt reflexiv, falls $\mathcal{J}_X(X) = X''$. In diesem Fall ist $J_X :X \to X''$ ein Isomorphismus.
-	\end{definition}
-
-	\begin{lemma}
-		$X$ normierter VK. Dann gilt : $X$ reflexiv $\df$ $X$ vollständig.
-	\end{lemma}
-
-	\begin{proof}
-		Man gehe den Beweis einmal im Kopf durch.	
-	\end{proof}
-
-	Zunächst Charakterisierung des HR-Falls
-	
-	\begin{thm}[Darstellungssatz Frächet-Riesz]
-		Sei $X$ Hilbertraum. Dann ist 
-			$$R_X : X \to X', \; x \mapsto \sp{\cdot, x} = (y \mapsto \SP{y,x})$$
-			anti-linear, isometrische Bijektion. D.h.
-						\begin{enumerate}[(i)]
-							\item $y \mapsto \SP{y,x} \in X' \forall x\in X$
-							\item $\forall x' \in X' \exists ! \in X \fop{y,x'} = \SP{y,x} \forall y \in X$
-						\end{enumerate}
-	\end{thm}
-
-	\begin{proof}
-			\begin{enumerate}[(i)]
-				\item $R_x$ wohldefiniert, isometrisch, anti-linear: nachrechnen !
-				\item $R_x$ surjektiv: Wenn wir nicht das Nullfunktional haben, denn finden wir ein $z \neq 0$ im orthogonalen Komplement des Kerns. Konstruiere für dieses z ein Funktional durch $x' = (\cdot, x z)$ mit $c \in \C$. Diese Konstruktion gilt dann auch für Elemente im Kern.
-			\end{enumerate}
-
-	\end{proof}
-
-	\begin{cor*}
-		Beschränkte lineare Abbildung $L^2(\Omega, \mu) \to \K)$. Dann wird diese beschrieben durch ein Element aus $L^2(\Omega, \mu) \to \K)$.
-	\end{cor*}
-
-	\begin{thm}
-		$X$ Hilbertraum $\df$ $X$ relfexiv ($J_X X = X''$)
-	\end{thm}
-
-	\begin{proof}
-		Zu zeigen: $J_x$ surjektiv.
-		\begin{enumerate}[(i)]
-			\item Z.z.: $X'$ Hilbertraum. Nutze bijektivität von $R_x$ und Isometrie.\\ 
-			Wende dann als nächstes Satz 5.11 zweimal an, das liefert einen Kanditaten für $x$ und $x''$.
-			Dann bleibt zu zeigen, dass $J_x x = x''$ erfüllt.
-			Dies sind zwei Funktionale und ihre Gleichheit zeigt man durch nachrechnen, dass sie punktweise gleich sind.
-		\end{enumerate}
-
 	\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
