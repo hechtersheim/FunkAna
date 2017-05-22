@@ -116,6 +116,8 @@
 \newcommand{\ff}[3]{(#1_#2)_{#2\in#3}}
 \newcommand{\SP}{(\cdot,\cdot)}
 
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\fop}[1]{\langle #1 \rangle}
 
 %Commands für tikz:
 \newcommand*{\rechterWinkel}[3]{% #1 = point, #2 = start angle, #3 = radius
@@ -1653,6 +1655,96 @@ TODO
 		$$f: E \to \K : cx_0 \mapsto c\norm{x_0} \; x\in \K$$ 
 		$$f(x_0) = \norm{x_0}, \norm{f} = \sup_{...}|f(x)| = 1 \quad (UE)$$
 		$$\df[Satz 3.3] \exists$$
+	\end{proof}
+
+	\begin{cor}
+		$X$ normierter VR, $x_0 \in X$. Dann gilt, dass $\norm{x_0} = \sup_{x' \in X, \norm{x'} \leq 1}|\langle x_0, x' \rangle | = \sup_{x' \in X, \norm{x'} = 1}|\langle x_0, x' \rangle |$
+	\end{cor}		
+
+	\begin{proof}
+	 $\geq ... \geq :$ nicht so schwer, da $x' \in X$ mit  \\
+		Andere Ungleichung mit Korollar 3.4.	
+	\end{proof}
+
+	\begin{thm}
+	$X$ normierteri $\K-VR$. $X'$ separabel $\df$ $X$ separabel.
+	\end{thm}
+
+	\begin{proof}
+		\begin{enumerate}[(i)]
+			\item $X'$ seperabel $\df$ $S := \set{x' \in X': \norm{x'} = 1}$ ist separabel.
+			\item Schreibe S als Abschluss einer abzählbaren Mengen. Alle Element haben Norm 1 und damit exisitieren Werte von den Operatoren die größer sind als $\frac{1}{2}$. Die Elemente aus S aufgespannt über eine abzählbare Menge von K ist abzählbare. Nun muss der Abschluss dieses Spannes schon X selber sein. 
+			Wäre dies nicht so, dann gäbe es ein Element das weder im Abschluss des Spannes noch X ist.
+			\item ÜA: $\exists x' \in X'$ mit $\norm{x'} = 1,$ $ker x' > E$, $\langle x_0, x' \rangle \neq 0$ \\
+			Dann null der Operatoren dieser Operator als Elemente in E. Wegen der Norm 1 ist dieser Operator in S und hat wegen einer Ungleichungskette echten Abstand von allen anderen Elementen in S. Dies ist ein Widerspruch zur Dichtheit von S. 
+		\end{enumerate}
+
+	\end{proof}
+
+\section{Dualraum und Reflexivität}
+
+		\begin{definition}
+			$X'' = (X')' $ heißt Bidualraum. \\
+			Bemerkung: $X = \R^{n\times 1}$ und $X' = \R^{1 \times n}$ \\
+			Frage: $X'' = X$	
+		\end{definition}
+
+		\begin{bem}
+		Vorüberlegung: Sei $x_0 \in X$ betrachte $f_{x_0}: X' \to \K, y' \mapsto \langle x_0, y' \rangle$. 
+		$f_{x_0} \in (X')'$ ?, Ja, weil $\norm{f_{x_0}} = \norm{f_{x_0}}_{\B(X',\K)} = \sup_{}|\langle  x_0, x' \rangle| = \norm{x_0}$. $f_0$ linear klar. \\
+		$\df \mathcal{J}_{X}: X \to X'': x \mapsto f_X = \langle x, \cdot \rangle$ ist linear, isometrisch. \\ 
+		$\df \mathcal{J}_X \subset X''$ auf diese Art kann $X$ als Teilraum von $X''$ aufgefasst werden.
+		\end{bem}
+
+	\begin{definition}
+		$X$ normierte Vr heißt reflexiv, falls $\mathcal{J}_X(X) = X''$. In diesem Fall ist $J_X :X \to X''$ ein Isomorphismus.
+	\end{definition}
+
+	\begin{lemma}
+		$X$ normierter VK. Dann gilt : $X$ reflexiv $\df$ $X$ vollständig.
+	\end{lemma}
+
+	\begin{proof}
+		Man gehe den Beweis einmal im Kopf durch.	
+	\end{proof}
+
+	Zunächst Charakterisierung des HR-Falls
+	
+	\begin{thm}[Darstellungssatz Frächet-Riesz]
+		Sei $X$ Hilbertraum. Dann ist 
+			$$R_X : X \to X', \; x \mapsto \sp{\cdot, x} = (y \mapsto \SP{y,x})$$
+			anti-linear, isometrische Bijektion. D.h.
+						\begin{enumerate}[(i)]
+							\item $y \mapsto \SP{y,x} \in X' \forall x\in X$
+							\item $\forall x' \in X' \exists ! \in X \fop{y,x'} = \SP{y,x} \forall y \in X$
+						\end{enumerate}
+	\end{thm}
+
+	\begin{proof}
+			\begin{enumerate}[(i)]
+				\item $R_x$ wohldefiniert, isometrisch, anti-linear: nachrechnen !
+				\item $R_x$ surjektiv: Wenn wir nicht das Nullfunktional haben, denn finden wir ein $z \neq 0$ im orthogonalen Komplement des Kerns. Konstruiere für dieses z ein Funktional durch $x' = (\cdot, x z)$ mit $c \in \C$. Diese Konstruktion gilt dann auch für Elemente im Kern.
+			\end{enumerate}
+
+	\end{proof}
+
+	\begin{cor*}
+		Beschränkte lineare Abbildung $L^2(\Omega, \mu) \to \K)$. Dann wird diese beschrieben durch ein Element aus $L^2(\Omega, \mu) \to \K)$.
+	\end{cor*}
+
+	\begin{thm}
+		$X$ Hilbertraum $\df$ $X$ relfexiv ($J_X X = X''$)
+	\end{thm}
+
+	\begin{proof}
+		Zu zeigen: $J_x$ surjektiv.
+		\begin{enumerate}[(i)]
+			\item Z.z.: $X'$ Hilbertraum. Nutze bijektivität von $R_x$ und Isometrie.\\ 
+			Wende dann als nächstes Satz 5.11 zweimal an, das liefert einen Kanditaten für $x$ und $x''$.
+			Dann bleibt zu zeigen, dass $J_x x = x''$ erfüllt.
+			Dies sind zwei Funktionale und ihre Gleichheit zeigt man durch nachrechnen, dass sie punktweise gleich sind.
+		\end{enumerate}
+
 	\end{proof}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Zusätze. Alles was man noch definieren, erklären, beweisen, oder erwähnen möchte.
